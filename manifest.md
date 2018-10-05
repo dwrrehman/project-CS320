@@ -3,10 +3,11 @@
 #### Members: Jake, Daniel, Andew,
 
 ## Project Ideas:
-- make a projectile motion simulator
+- x:make a projectile motion simulator;
 - x:make a robot controller connector system;
-- make a sandbox game
+- x:make a sandbox game;
 
+- selected:a unit conversion utility;
 
 ## Libraries:
 - WebGL

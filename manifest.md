@@ -4,7 +4,7 @@
 
 ## Project Ideas:
 - make a projectile motion simulator
-- make a robot controller connector system
+- x:make a robot controller connector system;
 - make a sandbox game
 
 

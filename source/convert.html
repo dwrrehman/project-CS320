@@ -1,0 +1,138 @@
+<script src="base.js"></script>
+
+<style type="text/css">	
+
+	#list_button {
+		align-self: right;
+		font-size: 20px;
+	}
+
+	#add_button {
+		align-self: left;
+		font-size: 20px;
+	}
+
+	#from {
+		background-color: #ffcccc;
+		border: solid;
+		border-top-color: #990000;
+		border-left-color: #990000;
+		border-right-color: #990000;		
+		border-bottom-color: #990000;
+
+		width: 250px;	
+		height: 80px;
+
+		display: inline-block;	
+		vertical-align: top;	
+	}
+
+	#to {
+		background-color: #ccffff;
+		border: solid;
+		border-top-color: #009999;
+		border-left-color: #009999;
+		border-right-color: #009999;		
+		border-bottom-color: #009999;	
+
+		width: 250px;	
+		height: 80px;
+		
+		display: inline-block;
+		vertical-align: top;
+		
+	}
+
+	#result {
+		background-color: #ffffcc;
+		border: solid;
+		border-top-color: #999900;
+		border-left-color: #999900;
+		border-right-color: #999900;		
+		border-bottom-color: #999900;	
+
+		align-content: center;
+		align-items: center;
+		text-align: center;
+
+		width: 150px;	
+		height: 70px;
+
+		padding: 5px;
+		
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	#arrow {
+		font-size: 30px;
+	}
+
+	#equals {
+		font-size: 30px;
+	}
+
+	p {
+		display: inline-block;
+	}
+
+	#section {
+		width: 1500px;
+		
+	}
+
+	input {
+		text-align: right;
+	}
+
+</style>
+<div id="section"> 
+
+	<button id="add_button" style="font-family: Courier;" onclick="displaymode = add_displaymode; draw();">Add New Unit</button>	
+	<button id="list_button" style="font-family: Courier;" onclick="displaymode = list_displaymode; draw();">List All Units</button>
+	
+	<hr>
+
+	<div id="from">
+		<p style="font-family: Courier;">from: </p>		
+		<input type="text" name="from" style="font-family: Courier;" oninput="reset();">
+		<br>
+		<select id="unit" style="font-family: Courier;" name="unit">
+  			<option value="meters">meters</option>
+  			<option value="kilograms">kilograms</option>
+  			<option value="seconds">seconds</option>
+		</select>
+	</div>
+	
+	<p>&nbsp;&nbsp;&nbsp;</p>
+	<p>&nbsp;&nbsp;&nbsp;</p>
+	<p id="arrow"><b>&rarr;</b></p>
+	<p>&nbsp;&nbsp;&nbsp;</p>
+	<p>&nbsp;&nbsp;&nbsp;</p>
+
+	<div id="to">
+		<p style="font-family: Courier;">to: </p>
+		<input type="text" name="to" style="font-family: Courier;" oninput="reset();">
+		<br>
+		<select id="unit" style="font-family: Courier;" name="unit">
+  			<option value="meters">meters</option>
+  			<option value="kilograms">kilograms</option>
+  			<option value="seconds">seconds</option>
+		</select>
+	</div>
+
+	<p>&nbsp;&nbsp;&nbsp;</p>
+	<p>&nbsp;&nbsp;&nbsp;</p>
+	<p id="equals"><b>=</b></p>
+	<p>&nbsp;&nbsp;&nbsp;</p>
+	<p>&nbsp;&nbsp;&nbsp;</p>
+
+	<div id="result">
+		<p align="center" id="value"></p>		
+	</div>	
+
+	<p></p>
+
+	<hr>
+
+</div>

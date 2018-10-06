@@ -1,0 +1,30 @@
+<script src="base.js"></script>
+
+<style type="text/css">
+
+	#submit_button {		
+		font-size: 20px;
+	}
+	
+	#formula {
+		width: 300px;	
+		height: 100px;
+	}
+
+	p {
+		display: inline-block;
+	}
+</style>
+
+<div id="section"> 	
+	<div id="form">
+		<p style="font-family: Courier;">Name: </p>
+		<input id="name" style="font-family: Courier;" type="text">
+		<hr>
+		<p align="left" style="font-family: Courier;">Definition: </p>
+		<br>
+		<textarea id="formula" style="font-family: Courier;" placeholder="Insert unit definition here..."></textarea>
+	<div>
+	<br>
+	<button id="submit_button" style="font-family: Courier;" onclick="submit_new_unit();">Done</button>	
+</div>

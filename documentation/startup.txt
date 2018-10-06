@@ -1,0 +1,16 @@
+How to Start up the application:
+----------------------------------------
+
+this application preferentially uses a node.js package called http-server to start up the server. 
+
+if you dont have this package already, use this command:
+
+    "npm install -g http-server"
+
+(dont forget to use sudo if you are on Mac...)
+
+once you have cd'd into the project-CS32/source directory, run the command "http-server -c-1". 
+
+then just point your browser to the ip and port provided by the command, and marvel at our amazing UI. :P
+
+

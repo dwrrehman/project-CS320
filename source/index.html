@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html>
+
+<!--
+	contains the main webpage, which will be manipulated by the view-switching code.
+-->
+
 <head>
 	<title>A Unit Conversion Utility</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 	<script src="base.js"></script>
-	<script type="text/javascript">				
-		function do_stuff() {alert("you cliked me!");}
+
+	<script type="text/javascript">					
 		window.onload = function() {
-			console.log(on_load_message);
+			displaymode = convert_displaymode; draw(); 		
 		}		
 	</script>
-
 	<style type="text/css">
 		body {
 			background-color: gray;
-		}
-		#mydiv {
+		}	
+		#section {
 			background-color: white;
 			border: solid;
 			border-top-color: black;
 			border-bottom-color: black;	
-			width: 450px;		
+			width: 500px;
+			height: auto;
+			padding: 5px;
+			align-content: center;
+			align-self: center;
+			align-items: center;
+			text-align: center;
+			vertical-align: center;
 		}
-	</style>
-	
+	</style>	
 </head>
-
-
-
-
-<body>
-	<h1>A Unit Conversion Utility</h1>
-
-	<div id="mydiv" onclick="do_stuff();">		
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-		<p>click me!</p>
-	</div>
-
+<body>	
+	<div id="content" align="center"></div>
 </body>
 </html>

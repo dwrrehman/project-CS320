@@ -1,3 +1,10 @@
+SRS temporary textfile.
+
+Project Name: Calculation Utility.
+Project Members: Daniel, Jake, and Andrew.
+Date: 2018, Oct 6.
+
+
 Introduction: ------------------------------------------------------------
 
 This project is a Calculation Utility, which allows the user to calculate numbers using a calculator, graph user defined functions, convert existing units to other units, define new units, visualize the unit conversion using graphics, as well as list all current units defined. It is a web appllication written in HTML, CSS, and Javascript.
@@ -13,7 +20,7 @@ section 1.2: ------------------------------------------------------------
 
 section 1.3: ------------------------------------------------------------
 
-The Users of this document are the professor, and the clients who use the Caclulation Utility web application, as well as the developers of this application, which include the members of this project.
+The Users of this document are the professor, and the web clients who use the Calculation Utility web application, as well as the developers of this application, which include the members of this project.
 
 section 1.4: ------------------------------------------------------------
 
@@ -31,9 +38,9 @@ The Calulation Utility is a new, standalone web application. It can be used by a
 
 section 2.2 ------------------------------------------------------------
 
-The product, calculation utility must be able to convert units, define additional units for converting, and list available units already defined. 
+The product, Calculation Utility, must be able to convert units, define additional units for converting, and list available units already defined. As it contains a calculator, this product must also be able to perform basic arithematic on numbers given by the user, as well as perform calulations using user defined functions, and make a tumb-nail graph these user defined functions in a list format, when the user views these functions.
 
-As it contains a calculator, this product must also be able to perform basic arithematic on numbers given by the user, as well as perform calulations using user defined functions, and make a tumb-nail graph these user defined functions in a list format, when the user views these functions. It should also be able to store any values returned by either the converter or the calculator in a set of variables and constants, that can be loaded from at any time.
+It should also be able to store any values returned by either the converter or the calculator in a set of variables and constants, that can be loaded from at any time.
 
 [todo: insert image: IMG_8563]
 

@@ -65,27 +65,53 @@ It should also be able to store any values returned by either the converter or t
 
 section 2.3 ------------------------------------------------------------
 
-
-
+:Prompt:
+Users and Characteristics
+<Identify the various users that you anticipate will use this product. Users may be differentiated based on frequency of use, subset of product functions used, technical expertise, security or privilege levels, educational level, or experience. 
+TO DO: 
+1. Describe the pertinent characteristics of each user. Certain requirements may pertain only to certain users. 
+3. Distinguish the most important users for this product from those who are less important to satisfy.>
+:Prompt:
 
 
 
 section 2.4 ------------------------------------------------------------
 
 
+:Prompt:
+Operating Environment
+<Describe the environment in which the software will operate, including the hardware platform, operating system and versions, and any other software components or applications with which it must peacefully coexist. In this part, make sure to include a simple diagram that shows the major components of the overall system, subsystem interconnections, and external interface
+TO DO: As stated above, in at least one paragraph, describe the environment your system will have to operate in. Make sure to include the minimum platform requirements for your system. >
+:Prompt:
+
+
+
+
 
 
 section 2.5 ------------------------------------------------------------
 
+:Prompt:Design and Implementation Constraints
+<Describe any items or issues that will limit the options available to the developers. These might include: hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).
+TO DO: In this section you need to consider all of the information you gathered so far, analyze it and correctly identify relevant constraints.>
+:Prompt:
 
 
 section 2.6 ------------------------------------------------------------
 
 
+:Prompt:
+User Documentation
+<List the user documentation components (such as user manuals, on-line help, and tutorials) that will be delivered along with the software. Identify any known user documentation delivery formats or standards. 
+TO DO: You will not actually develop any user-manuals, but you need to describe what kind of manuals and what kind of help is needed for the software you will be developing. One paragraph should be sufficient for this section.>
+:Prompt:
+
 
 section 2.7 ------------------------------------------------------------
 
 :Prompt:
+<Describe the environment in which the software will operate, including the hardware platform, operating system and versions, and any other software components or applications with which it must peacefully coexist. In this part, make sure to include a simple diagram that shows the major components of the overall system, subsystem interconnections, and external interface
+TO DO: As stated above, in at least one paragraph, describe the environment your system will have to operate in. Make sure to include the minimum platform requirements for your system. >
 :Prompt:
 
 

@@ -53,10 +53,12 @@ section 2.4 ------------------------------------------------------------
 
 section 2.5 ------------------------------------------------------------
 
+The primary constraints on this product are the required programming languages and development schedule. To meet the project requirements, the program must be created using HTML, CSS, and Javascript. Development must also follow a strict schedule, and be completed by the end of the Fall 2018 school semester. These constraints will limit the number of features that can be implemented.
 
 section 2.6 ------------------------------------------------------------
 
+User documentation will exist solely on the website as part of the UI. The product is fairly simple, so simple directions placed directly in the website should be sufficient to guide the user.
 
 section 2.7 ------------------------------------------------------------
 
-
+This product will use the Javascript Underscore Library

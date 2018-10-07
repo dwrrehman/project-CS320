@@ -103,10 +103,7 @@ The primary constraints on this product are the required programming languages a
 In terms of functionality constraints, the product must be able to deal with numerical user input, and perform computations on that input which might have units. it must also be able to convert between units accurately.
 
 
-
 section 2.6 ------------------------------------------------------------
-
-User documentation will exist solely on the website as part of the UI. The product is fairly simple, so simple directions placed directly in the website should be sufficient to guide the user.
 
 :Prompt:
 User Documentation
@@ -114,9 +111,10 @@ User Documentation
 TO DO: You will not actually develop any user-manuals, but you need to describe what kind of manuals and what kind of help is needed for the software you will be developing. One paragraph should be sufficient for this section.>
 :Prompt:
 
+User documentation will exist solely on the website as part of the UI. The product is fairly simple, so simple directions placed directly in the website should be sufficient to guide the user.
+
 
 section 2.7 ------------------------------------------------------------
-
 
 :Prompt:
 Assumptions and Dependencies
@@ -127,7 +125,6 @@ TO DO: As stated above, in at least one paragraph, describe the environment your
 This product will use the Javascript Underscore Library.
 
 
-
 section 3.1.1: ------------------------------------------------------------
 
 
@@ -136,6 +133,8 @@ User Interfaces
 <Describe the logical characteristics of each interface between the software product and the users. This may include sample screen images, any GUI standards or product family style guides that are to be followed, screen layout constraints, standard buttons and functions (e.g., Cancel) that will appear on every screen, error message display standards, and so on. Define the software components for which a user interface is needed.
 TO DO: The least you can do for this section is to describe in words the different User Interfaces and the different screens that will be available to the user. Optional: You may also provide an initial Graphical User Interface design (does not have to be final).>
 :Prompt:
+
+
 
 
 
@@ -158,3 +157,74 @@ TO DO: The previous part illustrates some of the information you would usually i
 
 section 3.1.4: ------------------------------------------------------------
 
+:Prompt:
+Communications Interfaces
+<Describe the requirements associated with any communications functions required by this product, including e-mail, web browser, network server communications protocols, electronic forms, and so on. Define any pertinent message formatting. Identify any communication standards that will be used, such as FTP or HTTP. Specify any communication security or encryption issues, data transfer rates, and synchronization mechanisms.
+
+TO DO: Do not go into too much detail, but provide 1-2 paragraphs were you will outline the major communication standards. For example, if you decide to use encryption there is no need to specify the exact encryption standards, but rather, specify the fact that the data will be encrypted and name what standards you consider using. >
+:Prompt:
+
+
+section 3.2: ------------------------------------------------------------
+
+:Prompt:
+Functional Requirements
+< Functional requirements capture the intended behavior of the system. This behavior may be expressed as services, tasks or functions the system is required to perform. This section is the direct continuation of section 2.2 where you have specified the general functional requirements. Here, you should list in detail the different product functions with specific explanations regarding every function. 
+TO DO: Break the functional requirements to several functional areas and divide this section into subsections accordingly. Provide a detailed list of all product operations related to these functional areas. 
+:Prompt:
+
+
+
+
+
+section 3.3.1: ------------------------------------------------------------
+
+:Prompt:
+Behaviour Requirements:
+Use Case View:
+<A use case defines a goal-oriented set of interactions between external actors and the system under consideration. 
+TO DO: Provide a use case diagram which shows the entire system and all possible actors. Do not include detailed use case descriptions (these will be needed when you will be working on the Test Plan), but make sure to include a short description of what every use-case is, who are the actors in your diagram.>
+:Prompt:
+
+
+section 4.1: ------------------------------------------------------------
+
+:Prompt:
+Performance Requirements
+<If there are performance requirements for the product under various circumstances, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specify the timing relationships for real time systems. Make such requirements as specific as possible. You may need to state performance requirements for individual functional requirements or features. 
+TODO: Provide relevant performance requirements based on the information you collected from the client. For example you can say “1. Any transaction will not take more than 10 seconds, etc…>
+:Prompt:
+
+
+section 4.2: ------------------------------------------------------------
+
+:Prompt:
+Safety and Security Requirements
+<Specify those requirements that are concerned with possible loss, damage, or harm that could result from the use of the product. Define any safeguards or actions that must be taken, as well as actions that must be prevented. Refer to any external policies or regulations that state safety issues that affect the product’s design or use. Define any safety certifications that must be satisfied. Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements.
+TODO: 
+•	Provide relevant safety requirements based on your interview with the client or, on your expectation for the product.
+Describe briefly what level of security is expected from this product by your client and provide a bulleted (or numbered) list of the major security requirements.>
+:Prompt:
+
+
+
+
+section 4.3: ------------------------------------------------------------
+
+:Prompt:
+1.1	Software Quality Attributes
+<Specify any additional quality characteristics for the product that will be important to either the customers or the developers. Some to consider are: adaptability, availability, correctness, flexibility, interoperability, maintainability, portability, reliability, reusability, robustness, testability, and usability. Write these to be specific, quantitative, and verifiable when possible. At the least, clarify the relative preferences for various attributes, such as ease of use over ease of learning. 
+
+TODO: Use subsections (e.g., 4.3.1 Reliability, 4.3.2 Portability, etc…) provide requirements related to the different software quality attributes. Base the information you include in these subsections on the material you have learned in the class. Make sure, that you do not just write “This software shall be maintainable…” Indicate how you plan to achieve it, etc.>
+:Prompt:
+
+
+
+
+
+
+section 4.4: ------------------------------------------------------------
+
+:Prompt:
+
+:Prompt:

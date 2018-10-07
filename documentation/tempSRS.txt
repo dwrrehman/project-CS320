@@ -73,6 +73,7 @@ TO DO:
 3. Distinguish the most important users for this product from those who are less important to satisfy.>
 :Prompt:
 
+the users that we anticipate are possibly engineers and applied mathmaticians, who wish to have a calulating uility which can deal with units.
 
 
 section 2.4 ------------------------------------------------------------
@@ -84,21 +85,28 @@ Operating Environment
 TO DO: As stated above, in at least one paragraph, describe the environment your system will have to operate in. Make sure to include the minimum platform requirements for your system. >
 :Prompt:
 
-
+the operating enviorment is a web browser on possibly any machine, and as such it needs to be efficent and responsive. 
 
 
 
 
 section 2.5 ------------------------------------------------------------
 
+
 :Prompt:Design and Implementation Constraints
 <Describe any items or issues that will limit the options available to the developers. These might include: hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).
 TO DO: In this section you need to consider all of the information you gathered so far, analyze it and correctly identify relevant constraints.>
 :Prompt:
 
+The primary constraints on this product are the required programming languages and development schedule. To meet the project requirements, the program must be created using HTML, CSS, and Javascript. Development must also follow a strict schedule, and be completed by the end of the Fall 2018 school semester. These constraints will limit the number of features that can be implemented.
+
+In terms of functionality constraints, the product must be able to deal with numerical user input, and perform computations on that input which might have units. it must also be able to convert between units accurately.
+
+
 
 section 2.6 ------------------------------------------------------------
 
+User documentation will exist solely on the website as part of the UI. The product is fairly simple, so simple directions placed directly in the website should be sufficient to guide the user.
 
 :Prompt:
 User Documentation
@@ -109,10 +117,15 @@ TO DO: You will not actually develop any user-manuals, but you need to describe 
 
 section 2.7 ------------------------------------------------------------
 
+
 :Prompt:
+Assumptions and Dependencies
 <Describe the environment in which the software will operate, including the hardware platform, operating system and versions, and any other software components or applications with which it must peacefully coexist. In this part, make sure to include a simple diagram that shows the major components of the overall system, subsystem interconnections, and external interface
 TO DO: As stated above, in at least one paragraph, describe the environment your system will have to operate in. Make sure to include the minimum platform requirements for your system. >
 :Prompt:
+
+This product will use the Javascript Underscore Library.
+
 
 
 section 3.1.1: ------------------------------------------------------------
@@ -144,5 +157,4 @@ TO DO: The previous part illustrates some of the information you would usually i
 :Prompt:
 
 section 3.1.4: ------------------------------------------------------------
-
 

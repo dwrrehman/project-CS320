@@ -1,0 +1,55 @@
+Introduction: ------------------------------------------------------------
+
+This project is a Calculation Utility, which allows the user to calculate numbers using a calculator, graph user defined functions, convert existing units to other units, define new units, visualize the unit conversion using graphics, as well as list all current units defined. It is a web appllication written in HTML, CSS, and Javascript.
+
+section 1.1: ------------------------------------------------------------
+
+This document serves as a comprehensive overview of version 0.1 of our Calculation Utility project. The project is in its initial stages and ideas are still being formed, so the scope and details of functionality described here are tentative.
+
+section 1.2: ------------------------------------------------------------
+
+[assigned: andrew]
+
+
+section 1.3: ------------------------------------------------------------
+
+The Users of this document are the professor, and the clients who use the Caclulation Utility web application, as well as the developers of this application, which include the members of this project.
+
+section 1.4: ------------------------------------------------------------
+
+section 1.5: ------------------------------------------------------------
+
+section 1.6: ------------------------------------------------------------
+
+
+
+section 2.1 ------------------------------------------------------------
+
+The Calulation Utility is a new, standalone web application. It can be used by anyone with access to the internet, but would primarily be of use to engineers, mathematicians, and those in similar fields. The UI allows the user to select the desired units to convert to and from, to define a new unit, or to use the calculator. Results of a unit conversion or calculation are displayed to the user. A separate page displays a list of all available units and their descriptions.
+
+[todo: insert image: IMG_3329]
+
+section 2.2 ------------------------------------------------------------
+
+The product, calculation utility must be able to convert units, define additional units for converting, and list available units already defined. 
+
+As it contains a calculator, this product must also be able to perform basic arithematic on numbers given by the user, as well as perform calulations using user defined functions, and make a tumb-nail graph these user defined functions in a list format, when the user views these functions. It should also be able to store any values returned by either the converter or the calculator in a set of variables and constants, that can be loaded from at any time.
+
+[todo: insert image: IMG_8563]
+
+
+section 2.3 ------------------------------------------------------------
+
+
+section 2.4 ------------------------------------------------------------
+
+
+section 2.5 ------------------------------------------------------------
+
+
+section 2.6 ------------------------------------------------------------
+
+
+section 2.7 ------------------------------------------------------------
+
+

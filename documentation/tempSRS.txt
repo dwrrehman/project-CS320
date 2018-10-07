@@ -87,11 +87,7 @@ User documentation will exist solely on the website as part of the UI. The produ
 
 section 2.7 ------------------------------------------------------------
 
-<<<<<<< HEAD
 This product will use the Javascript Underscore Library
-=======
-:Prompt:
-:Prompt:
 
 
 section 3.1.1: ------------------------------------------------------------
@@ -124,5 +120,3 @@ TO DO: The previous part illustrates some of the information you would usually i
 
 section 3.1.4: ------------------------------------------------------------
 
-
->>>>>>> f95fb583a393ac6c132a5e691b8b9e72f66f23c0

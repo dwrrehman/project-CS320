@@ -17,6 +17,12 @@ section 1.2: ------------------------------------------------------------
 
 [assigned: andrew]
 
+:Prompt:
+<Provide a short description of the software being specified and its purpose, including relevant benefits, objectives, and goals. 
+TO DO: 1-2 paragraphs describing the scope of the product. Make sure to describe the benefits associated with the product.>
+:Prompt:
+
+
 
 section 1.3: ------------------------------------------------------------
 
@@ -24,9 +30,21 @@ The Users of this document are the professor, and the web clients who use the Ca
 
 section 1.4: ------------------------------------------------------------
 
+:Prompt:
+:Prompt:
+
+
 section 1.5: ------------------------------------------------------------
 
+:Prompt:
+:Prompt:
+
+
 section 1.6: ------------------------------------------------------------
+
+:Prompt:
+:Prompt:
+
 
 
 
@@ -48,17 +66,63 @@ It should also be able to store any values returned by either the converter or t
 section 2.3 ------------------------------------------------------------
 
 
+
+
+
+
 section 2.4 ------------------------------------------------------------
+
+
 
 
 section 2.5 ------------------------------------------------------------
 
 The primary constraints on this product are the required programming languages and development schedule. To meet the project requirements, the program must be created using HTML, CSS, and Javascript. Development must also follow a strict schedule, and be completed by the end of the Fall 2018 school semester. These constraints will limit the number of features that can be implemented.
 
+
 section 2.6 ------------------------------------------------------------
 
 User documentation will exist solely on the website as part of the UI. The product is fairly simple, so simple directions placed directly in the website should be sufficient to guide the user.
 
+
 section 2.7 ------------------------------------------------------------
 
+<<<<<<< HEAD
 This product will use the Javascript Underscore Library
+=======
+:Prompt:
+:Prompt:
+
+
+section 3.1.1: ------------------------------------------------------------
+
+
+:Prompt:
+User Interfaces
+<Describe the logical characteristics of each interface between the software product and the users. This may include sample screen images, any GUI standards or product family style guides that are to be followed, screen layout constraints, standard buttons and functions (e.g., Cancel) that will appear on every screen, error message display standards, and so on. Define the software components for which a user interface is needed.
+TO DO: The least you can do for this section is to describe in words the different User Interfaces and the different screens that will be available to the user. Optional: You may also provide an initial Graphical User Interface design (does not have to be final).>
+:Prompt:
+
+
+
+section 3.1.2: ------------------------------------------------------------
+
+:Prompt:
+Hardware Interfaces
+<Describe the logical and physical characteristics of each interface between the software product and the hardware components of the system. This may include the supported device types, the nature of the data and control interactions between the software and the hardware. You are not required to specify what protocols you will be using to communicate with the hardware, but it will be usually included in this part as well.
+TO DO: Please provide a short description of the different hardware interfaces. If you will be using some special libraries to communicate with your software mention them here. In case you have more than one hardware interface divide this section into subsections.>
+:Prompt:
+
+
+section 3.1.3: ------------------------------------------------------------
+
+:Prompt:
+Software Interfaces
+<Describe the connections between this product and other specific software components (name and version), including databases, operating systems (Windows? Linux? Etc…), tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each. Describe the services needed and the nature of communications. Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.  
+TO DO: The previous part illustrates some of the information you would usually include in this part of the SRS document. To make things simpler, you are only required to describe the specific interface with the operating system.>
+:Prompt:
+
+section 3.1.4: ------------------------------------------------------------
+
+
+>>>>>>> f95fb583a393ac6c132a5e691b8b9e72f66f23c0

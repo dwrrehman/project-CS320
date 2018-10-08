@@ -1,4 +1,4 @@
-SRS temporary textfile.
+SRS source textfile.
 
 Project Name: Calculation Utility.
 Project Members: Daniel, Jake, and Andrew.

@@ -135,6 +135,12 @@ TO DO: The least you can do for this section is to describe in words the differe
 :Prompt:
 
 
+The User Interface will have two main parts, each with multiple views. the major parts are the claulator and the unit converter. the calulator will have a typical calculator interface, as well a button which goes to a view which displays a list of the current user defined functions, and their thumbnails, and names. there is also a utility to list all the current users defined values, (variables, and cosntants).
+
+[todo: include screen shot of current UI design for the U.C., by starting up and runnign the current source code].
+
+In the unit converter, there are three main views: the main view which allows the user to convert between two units, a view to define a new unit based on existing units, as well as a a view to list all the existing units, and their definitions.
+
 
 
 
@@ -146,6 +152,13 @@ Hardware Interfaces
 TO DO: Please provide a short description of the different hardware interfaces. If you will be using some special libraries to communicate with your software mention them here. In case you have more than one hardware interface divide this section into subsections.>
 :Prompt:
 
+because this application is running in a web browser, it will interface with the hardware of the computer running the web browser. if a graphics libary is used, then this hardware will include the Users GPU, if it exists.
+
+
+
+
+
+
 
 section 3.1.3: ------------------------------------------------------------
 
@@ -155,6 +168,10 @@ Software Interfaces
 TO DO: The previous part illustrates some of the information you would usually include in this part of the SRS document. To make things simpler, you are only required to describe the specific interface with the operating system.>
 :Prompt:
 
+because the software uses the underscore library, we interface with underscore using its API. furthermore, we are interfacing with HTML CSS, and JS, because this application runs in a web browser. this is the extent of our external software interfacing, as most interfacing is internal to the application.
+
+
+
 section 3.1.4: ------------------------------------------------------------
 
 :Prompt:
@@ -163,6 +180,8 @@ Communications Interfaces
 
 TO DO: Do not go into too much detail, but provide 1-2 paragraphs were you will outline the major communication standards. For example, if you decide to use encryption there is no need to specify the exact encryption standards, but rather, specify the fact that the data will be encrypted and name what standards you consider using. >
 :Prompt:
+
+because we are using a web browser, we are using the protocol "HTTP"/"HTTPS", at some point.
 
 
 section 3.2: ------------------------------------------------------------
@@ -186,6 +205,7 @@ The main UI contains a button to 'List Available Units'. This links to a separat
 3.3.4 Calculator:
 The main UI contains a calculator that can perform basic arithmetic.
 
+
 section 3.3.1: ------------------------------------------------------------
 
 :Prompt:
@@ -204,6 +224,7 @@ Performance Requirements
 TODO: Provide relevant performance requirements based on the information you collected from the client. For example you can say “1. Any transaction will not take more than 10 seconds, etc…>
 :Prompt:
 
+The software needs to be responsive, as the users, (whether engineers or mathmeticians) probably do not want to wait more than a couple seconds (eg. 3 seconds.) for a single simple calculation/conversion. thus, the user interface, and internal logic needs to be written efficently.
 
 section 4.2: ------------------------------------------------------------
 
@@ -215,6 +236,7 @@ TODO:
 Describe briefly what level of security is expected from this product by your client and provide a bulleted (or numbered) list of the major security requirements.>
 :Prompt:
 
+There is no direct safety requirements of the system, as it is running in a web browser, however since engineers might be users of this system, giving back an accurate answer is important, as giving a wrong answer might possibly lead to incorrect systems being built by the users.
 
 
 

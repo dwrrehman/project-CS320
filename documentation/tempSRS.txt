@@ -205,6 +205,8 @@ The main UI contains a button to 'List Available Units'. This links to a separat
 3.3.4 Calculator:
 The main UI contains a calculator that can perform basic arithmetic.
 
+3.3.5 Variables and Functions:
+The main UI contains a way to define new numerical variables (or constants) and user defined functions, and list all current variables (or constants) and functions. 
 
 section 3.3.1: ------------------------------------------------------------
 

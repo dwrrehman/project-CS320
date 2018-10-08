@@ -193,6 +193,17 @@ TO DO: Break the functional requirements to several functional areas and divide 
 :Prompt:
 
 
+3.2.1 Convert Units:
+The main UI provides a space to enter a value and its units, and a space to select the unit to convert to. When the 'Convert' button or Enter key is pressed, the program calculates and displays the result of the conversion.
+
+3.2.2 Define New Units:
+The main UI contains a button to 'Define New Unit'. This opens a new UI where the user can enter the name, symbol and description of the new unit, and a formula that defines the unit.
+
+3.3.3 List Available Units:
+The main UI contains a button to 'List Available Units'. This links to a separate page that lists all default and user defined units. Each entry contains the unit name, symbol, and description.
+
+3.3.4 Calculator:
+The main UI contains a calculator that can perform basic arithmetic.
 
 
 section 3.3.1: ------------------------------------------------------------

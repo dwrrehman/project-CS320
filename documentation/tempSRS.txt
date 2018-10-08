@@ -22,7 +22,7 @@ section 1.2: ------------------------------------------------------------
 TO DO: 1-2 paragraphs describing the scope of the product. Make sure to describe the benefits associated with the product.>
 :Prompt:
 
-
+As stated in the description, we will be creating a "Calculation Utility" which works similarly to a calculator, but each value used in the calculation will have an associated unit. The user shall be able to define units which have a relationship with basic units, or previously defined units. The output will have a selected unit, and the input value will be computed and converted to the selected output unit. For select unit types there shall be a visual comparison between the input and the output scales (Length for sure). The program shall have a web based interface which will display a list of currently defined units, and give the user the ability to add a new unit in terms of previously defined units. There may be a graphing utility in the future which can graph given functions with scales defined by the units that the function should be returning. 
 
 section 1.3: ------------------------------------------------------------
 

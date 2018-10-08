@@ -262,7 +262,9 @@ section 4.3: ------------------------------------------------------------
 TODO: Use subsections (e.g., 4.3.1 Reliability, 4.3.2 Portability, etc…) provide requirements related to the different software quality attributes. Base the information you include in these subsections on the material you have learned in the class. Make sure, that you do not just write “This software shall be maintainable…” Indicate how you plan to achieve it, etc.>
 :Prompt:
 
-
+4.3.1 Readability: The software shall be readable by anyone working on the project. We can achieve this by using a standardized coding style and including comments describing functionality.
+4.3.2 Testable: The software shall be testable; every piece of code should have a something that tests that it is functional. We can achieve this by using TDD or a similar development cycle.
+4.3.3 Reusability: The code should be written in such a way that it can be reused, and when some piece of the program is similar to something that is already written, what is already written should be used. To achieve that, code should regularly be refactored to reflect this practice.
 
 
 

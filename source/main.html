@@ -20,8 +20,8 @@
 		border-right-color: #990000;		
 		border-bottom-color: #990000;
 
-		width: 250px;	
-		height: 80px;
+		width: 300px;	
+		height: 40px;
 
 		display: inline-block;	
 		vertical-align: top;	
@@ -36,7 +36,7 @@
 		border-bottom-color: #009999;	
 
 		width: 250px;	
-		height: 80px;
+		height: 40px;
 		
 		display: inline-block;
 		vertical-align: top;
@@ -55,35 +55,42 @@
 		align-items: center;
 		text-align: center;
 
-		width: 150px;	
-		height: 70px;
+		width: 250px;	
+		height: auto;
 
-		padding: 5px;
+		padding: 2px;
 		
 		display: inline-block;
 		vertical-align: top;
 	}
 
 	#arrow {
-		font-size: 30px;
+		font-size: 20px;
 	}
 
 	#equals {
-		font-size: 30px;
+		font-size: 20px;
 	}
 
 	p {
 		display: inline-block;
 	}
 
+	#unit {
+		font-size: 10px;
+	}
+
 	#section {
-		width: 1500px;
+		width: 1200px;
 		
 	}
 
 	input {
 		text-align: right;
+		display: inline-block;
 	}
+
+
 
 </style>
 <div id="section"> 
@@ -95,9 +102,8 @@
 
 	<div id="from">
 		<p style="font-family: Courier;">from: </p>		
-		<input type="text" name="from" style="font-family: Courier;" oninput="reset();">
-		<br>
-		<select id="unit" style="font-family: Courier;" name="unit">
+		<input type="text" id="value_input" name="from" style="font-family: Courier;" oninput="reset();">		
+		<select id="unit" style="font-family: Courier;" name="unit" oninput="reset();">
   			<option value="meters">meters</option>
   			<option value="kilograms">kilograms</option>
   			<option value="seconds">seconds</option>
@@ -111,10 +117,8 @@
 	<p>&nbsp;&nbsp;&nbsp;</p>
 
 	<div id="to">
-		<p style="font-family: Courier;">to: </p>
-		<input type="text" name="to" style="font-family: Courier;" oninput="reset();">
-		<br>
-		<select id="unit" style="font-family: Courier;" name="unit">
+		<p style="font-family: Courier;">to: </p>	
+		<select id="unit" style="font-family: Courier;" name="unit" oninput="reset();">
   			<option value="meters">meters</option>
   			<option value="kilograms">kilograms</option>
   			<option value="seconds">seconds</option>

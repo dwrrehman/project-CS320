@@ -41,7 +41,7 @@ function load_file(file_path) {
 // sets the current content div
 function draw() {
 	if (displaymode === convert_displaymode) {				
-		document.getElementById("content").innerHTML = load_file("convert.html");
+		document.getElementById("content").innerHTML = load_file("main.html");
 	} else if (displaymode === add_displaymode) {
 		document.getElementById("content").innerHTML = load_file("add.html");
 	} else if (displaymode === list_displaymode) {
@@ -68,11 +68,11 @@ function main() {
 
 function convert() {	
 	document.getElementById("value").innerHTML = "42";
-	document.getElementById("value").setAttribute("style", "font-size: 30px; font-family: Courier;");
+	document.getElementById("value").setAttribute("style", "font-size: 15px; font-family: Courier;");
 }
 
 function reset() {
-	document.getElementById("value").innerHTML = "<button style=\"font-size: 20px;\" style=\"font-family: Courier;\" onclick=\"convert();\">Convert</button>";
+	document.getElementById("value").innerHTML = "<button style=\"font-size: 10px;\" style=\"font-family: Courier;\" onclick=\"convert();\">Convert</button>";
 }
 
 

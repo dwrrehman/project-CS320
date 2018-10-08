@@ -1,4 +1,4 @@
-SRS temporary textfile.
+SRS source textfile.
 
 Project Name: Calculation Utility.
 Project Members: Daniel, Jake, and Andrew.
@@ -31,19 +31,28 @@ The Users of this document are the professor, and the web clients who use the Ca
 section 1.4: ------------------------------------------------------------
 
 :Prompt:
+[any document defintions or acronyms are using.]
 :Prompt:
 
 
 section 1.5: ------------------------------------------------------------
 
 :Prompt:
+[any document conventions are using.]
 :Prompt:
 
 
 section 1.6: ------------------------------------------------------------
 
 :Prompt:
+[Citations]
 :Prompt:
+
+
+
+
+
+
 
 
 
@@ -73,7 +82,7 @@ TO DO:
 3. Distinguish the most important users for this product from those who are less important to satisfy.>
 :Prompt:
 
-the users that we anticipate are possibly engineers and applied mathmaticians, who wish to have a calulating uility which can deal with units.
+the users that we anticipate are possibly engineers, scientists, and applied mathmaticians, all of which might wish to have a calulating uility which can deal with units. all three of these user bases are important to satisfy, however giving accurate service to the engineers would be possibly the most important, as these users might be in charge of making structures in the real world based on this product.
 
 
 section 2.4 ------------------------------------------------------------
@@ -177,7 +186,6 @@ section 3.1.4: ------------------------------------------------------------
 :Prompt:
 Communications Interfaces
 <Describe the requirements associated with any communications functions required by this product, including e-mail, web browser, network server communications protocols, electronic forms, and so on. Define any pertinent message formatting. Identify any communication standards that will be used, such as FTP or HTTP. Specify any communication security or encryption issues, data transfer rates, and synchronization mechanisms.
-
 TO DO: Do not go into too much detail, but provide 1-2 paragraphs were you will outline the major communication standards. For example, if you decide to use encryption there is no need to specify the exact encryption standards, but rather, specify the fact that the data will be encrypted and name what standards you consider using. >
 :Prompt:
 
@@ -199,13 +207,13 @@ The main UI provides a space to enter a value and its units, and a space to sele
 3.2.2 Define New Units:
 The main UI contains a button to 'Define New Unit'. This opens a new UI where the user can enter the name, symbol and description of the new unit, and a formula that defines the unit.
 
-3.3.3 List Available Units:
+3.2.3 List Available Units:
 The main UI contains a button to 'List Available Units'. This links to a separate page that lists all default and user defined units. Each entry contains the unit name, symbol, and description.
 
-3.3.4 Calculator:
+3.2.4 Calculator:
 The main UI contains a calculator that can perform basic arithmetic.
 
-3.3.5 Variables and Functions:
+3.2.5 Variables and Functions:
 The main UI contains a way to define new numerical variables (or constants) and user defined functions, and list all current variables (or constants) and functions. 
 
 section 3.3.1: ------------------------------------------------------------

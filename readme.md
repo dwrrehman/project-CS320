@@ -1,5 +1,3 @@
-# Project 1: CS 320 - Unit Conversion Utility
+# Project 1: CS 320 - Calculation Utility
 
-but wait theres more!
-
-order now, and we will throw in a free graphing calculator!
+A Calculation tool useful for Engineers, Scientists, and Mathmaticians.

@@ -2,141 +2,272 @@
 
 <style type="text/css">	
 
-	#list_button {
-		align-self: right;
-		font-size: 20px;
-	}
+	
 
-	#add_button {
-		align-self: left;
-		font-size: 20px;
-	}
 
-	#from {
-		background-color: #ffcccc;
-		border: solid;
-		border-top-color: #990000;
-		border-left-color: #990000;
-		border-right-color: #990000;		
-		border-bottom-color: #990000;
 
-		width: 300px;	
-		height: 40px;
 
-		display: inline-block;	
-		vertical-align: top;	
-	}
 
-	#to {
-		background-color: #ccffff;
-		border: solid;
-		border-top-color: #009999;
-		border-left-color: #009999;
-		border-right-color: #009999;		
-		border-bottom-color: #009999;	
 
-		width: 250px;	
-		height: 40px;
-		
-		display: inline-block;
-		vertical-align: top;
-		
-	}
 
-	#result {
-		background-color: #ffffcc;
-		border: solid;
-		border-top-color: #999900;
-		border-left-color: #999900;
-		border-right-color: #999900;		
-		border-bottom-color: #999900;	
+
+	#calculator_div {
 
 		align-content: center;
+		align-self: center;
 		align-items: center;
-		text-align: center;
+		text-align: center;			
+		vertical-align: middle;
 
-		width: 250px;	
-		height: auto;
-
-		padding: 2px;
+		background-color: #eeeeee;
+		border: solid;
+		border-color: gray;		
+		border-bottom: none;
 		
-		display: inline-block;
-		vertical-align: top;
+		width: auto;	
+		height: 400px;		
+
+		margin: 0;    			
+    	padding-top: 0;
+    	padding-right: 20px;
+    	padding-left: 20px;
+    	padding-bottom: 0;		
 	}
 
-	#arrow {
-		font-size: 20px;
-	}
+	#converter_div {
+		background-color: #cceeff;
+		border: solid;
+		border-color: gray;		
 
-	#equals {
-		font-size: 20px;
+		width: auto;	
+		height: auto;		
+
+		margin: 0;    			
+    	padding-top: 10px;
+    	padding-right: 20px;
+    	padding-left: 20px;
+    	padding-bottom: 0;	
 	}
 
 	p {
 		display: inline-block;
 	}
 
-	#unit {
-		font-size: 10px;
-	}
-
-	#section {
-		width: 1200px;
-		
-	}
-
-	input {
+	input {			
 		text-align: right;
-		display: inline-block;
+		display: inline-block;			
 	}
 
+	select {			
+		display: inline-block;				
+	}
+
+	table {
+	    border-collapse: collapse;
+	}
+
+	.div_display {
+
+		border-color: black;
+		border: none;
+		
+		margin: 0;
+		padding: 5px;
+		
+
+		overflow: auto;
+
+		width: 599px;
+		height: 40px;
+
+		font-size: 20px;
+		font-family: Courier New;
+		text-align: right;
+
+		vertical-align: bottom;
+
+		color: black;
+		background-color: white;
+	}
+
+	.th_display {
+		border-color: #000000;
+		border: solid;
+		border-bottom: none;
+		border-width: 1px;
+		margin: 0;
+		padding: 0;
+		
+		width: 240px;
+		height: 60px;
+
+		color: inherit;
+		background-color: white;
+	}
+
+	.th_button {
+		border-color: #dddddd;
+		border: solid;
+		border-width: 1px;
+		margin: 0;
+		padding: 0;
+		
+		width: 60px;
+		height: 60px;
+
+		color: inherit;
+		background-color: #DDDDDD;
+	}
+
+	.cbutton {		
+		border: none;		
+		margin: 0;	
+		padding: 0;
+		cursor: pointer;
+
+		color: black;
+		background-color: inherit;
+
+		font: inherit;
+		font-size: 20px;		
+		font-family: Courier New; 
+
+		
+		width: 60px;
+		height: 60px;
+	}	
+
+
+
+
+	.th_clearbutton {
+		border-color: #dddddd;
+		border: solid;
+		border-width: 1px;
+		margin: 0;
+		padding: 0;
+		
+		width: 60px;
+		height: 60px;
+
+		background-color: orange;
+	}
+
+	.clearbutton {		
+		border: none;		
+		margin: 0;	
+		padding: 0;
+		cursor: pointer;
+		
+		font-size: 20px;
+		font-family: Courier New; 
+
+
+		color: gray;
+		background-color: inherit;
+
+		width: 60px;
+		height: 60px;
+	}
 
 
 </style>
-<div id="section"> 
+<div class="section">
 
-	<button id="add_button" style="font-family: Courier;" onclick="displaymode = add_displaymode; draw();">Add New Unit</button>	
-	<button id="list_button" style="font-family: Courier;" onclick="displaymode = list_displaymode; draw();">List All Units</button>
-	
-	<hr>
+	<div id="calculator_div">
+		<table>
+			<tr>
+				<th class="th_button" style="border-bottom: none; background-color: orange;"><button class="clearbutton" onclick="receive('clear');"><b>c</b></button></th>
+				<th class="th_display">
+					<div class="div_display" id="calculator_display" contenteditable="false">Welcome to the Calculation Utility.</div>
+				</th>
+			</tr>
+		</table>
+		<table>			
+			<tr>
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('divide');">÷</button></th>			
 
-	<div id="from">
-		<p style="font-family: Courier;">from: </p>		
-		<input type="text" id="value_input" name="from" style="font-family: Courier;" oninput="reset();">		
-		<select id="unit" style="font-family: Courier;" name="unit" oninput="reset();">
+				<th class="th_button"><button class="cbutton" onclick="receive('7');">7</button></th>
+				<th class="th_button"><button class="cbutton" onclick="receive('8');">8</button></th>
+				<th class="th_button"><button class="cbutton" onclick="receive('9');">9</button></th>	
+			</tr>
+			<tr>
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('multiply');">&times;</button></th>	
+
+				<th class="th_button"><button class="cbutton" onclick="receive('4');">4</button></th>
+				<th class="th_button"><button class="cbutton" onclick="receive('5');">5</button></th>
+				<th class="th_button"><button class="cbutton" onclick="receive('6');">6</button></th>							
+			</tr>
+			<tr>
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('subtract');">-</button></th>	
+
+				<th class="th_button"><button class="cbutton" onclick="receive('1');">1</button></th>
+				<th class="th_button"><button class="cbutton" onclick="receive('2');">2</button></th>
+				<th class="th_button"><button class="cbutton" onclick="receive('3');">3</button></th>			
+			</tr>
+			<tr>
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button"><button class="cbutton">u</button></th>			
+				<th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('add');">+</button></th>	
+
+				<th class="th_button"><button class="cbutton" onclick="receive('.');">.</button></th>
+				<th class="th_button"><button class="cbutton" onclick="receive('0');">0</button></th>
+				<th class="th_button" style="background-color: #1dd686;"><button class="cbutton" onclick="receive('equals');">=</button></th>
+			</tr>
+		</table>
+
+	</div>
+
+	<div id="converter_div">		
+
+		<button class="standard_button" id="add_button" onclick="displaymode = add_displaymode; draw();">add</button>	
+		<button class="standard_button" id="list_button" onclick="displaymode = list_displaymode; draw();">list</button>
+		<button class="standard_button" id="list_button" onclick="displaymode = list_displaymode; draw();">dump</button>
+
+		<!-- <p>&nbsp; | &nbsp;</p> -->
+		<hr>
+		<input type="text" id="converter_input" oninput="convert();">		
+		<select id="from_unit" oninput="convert();">
   			<option value="meters">meters</option>
   			<option value="kilograms">kilograms</option>
   			<option value="seconds">seconds</option>
-		</select>
-	</div>
-	
-	<p>&nbsp;&nbsp;&nbsp;</p>
-	<p>&nbsp;&nbsp;&nbsp;</p>
-	<p id="arrow"><b>&rarr;</b></p>
-	<p>&nbsp;&nbsp;&nbsp;</p>
-	<p>&nbsp;&nbsp;&nbsp;</p>
-
-	<div id="to">
-		<p style="font-family: Courier;">to: </p>	
-		<select id="unit" style="font-family: Courier;" name="unit" oninput="reset();">
+		</select>		
+		<p> to </p>
+		<select id="to_unit" oninput="convert();">
   			<option value="meters">meters</option>
   			<option value="kilograms">kilograms</option>
   			<option value="seconds">seconds</option>
-		</select>
-	</div>
-
-	<p>&nbsp;&nbsp;&nbsp;</p>
-	<p>&nbsp;&nbsp;&nbsp;</p>
-	<p id="equals"><b>=</b></p>
-	<p>&nbsp;&nbsp;&nbsp;</p>
-	<p>&nbsp;&nbsp;&nbsp;</p>
-
-	<div id="result">
-		<p align="center" id="value"></p>		
+		</select>		
+		<p> is </p>
+		<input type="text" id="converter_result" oninput="convert();">				
 	</div>	
 
-	<p></p>
 
-	<hr>
 
 </div>

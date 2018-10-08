@@ -1,0 +1,418 @@
+commit de42526bfebf9b7825438ddc17f8c96ce7eece23
+Merge: 9f44c08 aa0dd3d
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Mon Oct 8 02:04:11 2018 -0700
+
+    pull changes for SRS.
+
+commit 9f44c0819fdd8cd3ed40bb302d1ee4571ae61e5e
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Mon Oct 8 02:02:05 2018 -0700
+
+    completed base UI for the calulator, preparing to implement calulator algorithm code.
+
+commit aa0dd3dfa9e6fab9990808550048d41b3a5a5a91
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 20:59:18 2018 -1000
+
+    Updated SRS
+
+commit a039f69c5788ed32ffdf74c5a07626232f79b9d9
+Author: Andrew Oakes <andrew.oakes@wsu.edu>
+Date:   Sun Oct 7 22:44:32 2018 -0700
+
+    Completed 4.3, unless you would like to add more.
+
+commit 1daca254b23726d428b706564e18aba1c6ec55fd
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 21:42:17 2018 -0700
+
+    delete convert.html, renamed to main.html.
+
+commit 64af23f8f448867e08c3b5bccd95f6d25a766841
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 18:12:48 2018 -1000
+
+    Add section 1.2. Clean up document.
+    
+    Added notes to appendix B, updated table of contents
+
+commit d0f98718ef9498639d51869b8cf939058f8e3db5
+Merge: 6715f14 5d982db
+Author: Andrew Oakes <andrew.oakes@wsu.edu>
+Date:   Sun Oct 7 20:30:58 2018 -0700
+
+    Merge branch 'develop' of https://github.com/dwrrehman/project-CS320 into develop
+
+commit 6715f1471585464c4c42222bdab1fff935c0538c
+Author: Andrew Oakes <andrew.oakes@wsu.edu>
+Date:   Sun Oct 7 20:30:36 2018 -0700
+
+    Completed section 1.2, feel free to modify as you wish.
+
+commit 5d982dbb94eae606388a13f1dfbeab621fc366db
+Merge: 6c75198 e636587
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 16:07:14 2018 -1000
+
+    Merge branch 'develop' of https://github.com/dwrrehman/project-CS320 into develop
+
+commit 6c751984d95d2e9d078c648b02ca84200f4fa139
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 16:06:54 2018 -1000
+
+    Updated .gitignore
+
+commit e6365876eb986f45926a85aec66b91713a917fe7
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 19:06:01 2018 -0700
+
+    add the pictures of the UI for section 3.1.1.
+
+commit 072d3e7b0d8b064de9c140c24705572957cb42c0
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 18:59:57 2018 -0700
+
+    add in use case diagram for 3.3
+
+commit 6649c6848bc56e9fdd6cb95c045ed91b3b8b4ead
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 18:53:03 2018 -0700
+
+    make changes to ui code, rename convert.html.
+
+commit 9aaff66095952996e69af7293efd61211477bd84
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 15:37:09 2018 -1000
+
+    Moved usecase.png to proper folder
+    
+    I didn't see that there was a new SRS folder.
+
+commit a03976d01f463830f603b2597f0f341788cbc120
+Merge: 444f2bd 33af11f
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 15:34:30 2018 -1000
+
+    Merge branch 'develop' of https://github.com/dwrrehman/project-CS320 into develop
+
+commit 444f2bd6f4ddbfc2f9809951a0fc19c7e8782bbd
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 15:34:18 2018 -1000
+
+    Add usecase.png
+
+commit 33af11fea7f60e4c99c2a28bddfbe50780d030c3
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 18:33:24 2018 -0700
+
+    add version.txt, rename tempSRS to SRS_source, and add srs direcory.
+
+commit f114ea7968f20911da84d41809aeab20c9247832
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 18:17:45 2018 -0700
+
+    remove SRS.docx save file.
+
+commit 2983b26e69014204c011b4a309c6bb31c8ccace0
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 18:12:07 2018 -0700
+
+    reduce file size of SRS.docx
+
+commit 67a4be939aca10cb758cb50f9b9a16a0fa8ccf85
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 18:06:40 2018 -0700
+
+    convert tempSRS to SRS.docx, make small changes to tempSRS.txt.
+
+commit f5acadbaa3c069118f6dfeb6dbc36b66e6059df3
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 17:37:49 2018 -0700
+
+    add small changes to empty sections.
+
+commit 3a459f4f1c0440d9c2608d23c2971a11baa5a860
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 17:18:46 2018 -0700
+
+    add a new section 3.3.5, for varibles and functions.
+
+commit 3512794d75db568de636eee92e8ff104cffd4e1e
+Merge: 91ff722 ed3f479
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 17:13:52 2018 -0700
+
+    Merge branch 'develop' of github.com:dwrrehman/project-CS320 into develop
+
+commit 91ff72273dfe27f76204020715129dc29dc88782
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 17:13:40 2018 -0700
+
+    update readme.md, and fix title tag in index.html
+
+commit ed3f479a0975cd29f257808c64b645c61b59d906
+Merge: bd32fd4 b322a3b
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 14:10:28 2018 -1000
+
+    Merge branch 'develop' of https://github.com/dwrrehman/project-CS320 into develop
+
+commit bd32fd475e654353781ecc2b6e198fbfee332220
+Merge: bc87bbe de5f5bd
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 14:10:18 2018 -1000
+
+    Add Section 3.2 with subsetions (merged with previous commit)
+
+commit b322a3be0120ce490fd917a75d6e2d269528ed33
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 17:09:11 2018 -0700
+
+    make change to section 4.2.
+
+commit bc87bbe5581b7b8921a4aeabf54ce38ca97c7d31
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 14:06:36 2018 -1000
+
+    Add Section 3.2 with subsections
+
+commit de5f5bd9bebaacabb84584a1eda853b4232f0aa0
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 17:04:37 2018 -0700
+
+    finish sections 3.1.1, 3.1.2, 3.1.3, 3.1.4, 4.1, and 4.2.
+
+commit 80ca9a3c356145da7adbeb2812a918c5c17ec91f
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 16:46:59 2018 -0700
+
+    add prompts for the rest of section 3 and 4.
+
+commit 35ba822a5d721401f3808f9940065e8019fb0a7e
+Merge: f4fd0f4 7216bab
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 16:37:28 2018 -0700
+
+    fix merge conflict, (which was a breeze) and add section 2.3 and 2.4. also add more to 2.5.
+
+commit f4fd0f42fa805d0a7c49ac6286ae29df42e4843c
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 16:30:49 2018 -0700
+
+    add prompts for 2.3-2.7.
+
+commit 7216babacb3a9162a7756be279804767b74bde1c
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 13:29:35 2018 -1000
+
+    Removed conflict text from merge
+
+commit d1f7e89d02dd8dd6dc5f46b69c0a561fb92daef6
+Merge: 6cab34c f95fb58
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 13:27:35 2018 -1000
+
+    Merge branch 'develop' of https://github.com/dwrrehman/project-CS320 into develop
+
+commit 6cab34c53449d21b7fbde86a104786abcd4e86fd
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 13:26:03 2018 -1000
+
+    Add sections 2.5, 2.6, and 2.7
+
+commit f95fb583a393ac6c132a5e691b8b9e72f66f23c0
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 16:25:57 2018 -0700
+
+    add prompts to future sections.
+
+commit 6fbb17f9ea8b3da98db6bd70f8b0ffb9b645b7ef
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 16:21:35 2018 -0700
+
+    fix typos in temp srs.
+
+commit 9cf785970145218496aefe659232a1784979f909
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 16:16:54 2018 -0700
+
+    convert SRS.docx file progress into just a textfile tempSRS.txt, which will be ALOT easier to merge.
+
+commit 0043fdbe1aaf850809c3fdeab0b87acf437206f1
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 16:03:50 2018 -0700
+
+    add in section 1.3 again. again, merging binary files just doesnt work right now.
+
+commit 646c41823d4e97f5c9ade31baaf78ab0fc27ee68
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 16:01:25 2018 -0700
+
+    make small change to 1.3.
+
+commit faf43c69fd66981dc6eb34dfd2a3c93201b36fb3
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 15:59:55 2018 -0700
+
+    add back in 2.1 paragraph, merging binary files it worthless right now.
+
+commit 227cecf673be0efd233d54552d6f6cac90dd037c
+Merge: cd94712 e454a29
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 15:57:00 2018 -0700
+
+    merge develop into develop: fix SRS
+
+commit cd9471220a0b03fc72aabbce4d46600bc82d2bcf
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 15:56:22 2018 -0700
+
+    make changes to the SRS: add more to 2.2, start on 2.3/4
+
+commit e454a29a8d6e514d2b8b1c6e268e5820d0d9544a
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 12:52:32 2018 -1000
+
+    Add text for section 2.1 Product Perspective
+
+commit 26b5d86262b4a07388684d95b2a93b1d64ebf3f4
+Merge: 51d6a4c 4818d56
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 15:49:15 2018 -0700
+
+    merge master into develop, fix merge conflict in SRS.docx
+
+commit 51d6a4c9d0a19d1950879655e4a0ab276a2f74f6
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 15:44:58 2018 -0700
+
+    make small changes to the srs document.
+
+commit 1307b126c522f1c4a72edcbadc64836658e01ef9
+Merge: 2f484ec 6af9049
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 15:40:40 2018 -0700
+
+    Merge branch 'develop' of github.com:dwrrehman/project-CS320 into develop
+
+commit 2f484ece2bc2043d91e3c4013197900f2dae8fdd
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 15:40:22 2018 -0700
+
+    add data flow diagram for srs.
+
+commit 6af90498b59a74c62a19118ea4f92d608e3554f5
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 12:37:20 2018 -1000
+
+    Add text and diagram for Section 2.1 Product Scope
+
+commit 269407fd6979f30782a014fdbf70010144a34a83
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Sun Oct 7 15:28:13 2018 -0700
+
+    Add image for context diagram.
+
+commit 4818d567d658d0b305f682fe541a72b1154f4967
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Sun Oct 7 12:27:22 2018 -1000
+
+    Add text for Section 2.1 Product Perspective
+
+commit ea40f7f07209d5046f852d4274c948808a212a49
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 21:18:54 2018 -0700
+
+    finish the Bulk of the UI, and boilerplace code for the project. propose possible expansion of the project in the readme.md
+
+commit dd37340c9c43720aa73ae9178f699087f5d1473b
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 15:46:19 2018 -0700
+
+    make changes to index.html to setup and get srtarted with the basic UI using html and css.
+
+commit 750e1c25fde2c6a45b561bfccb951d6e69b47bf4
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 15:30:39 2018 -0700
+
+    construct skeleton of html and js code for project
+
+commit 954ccf4cbcbf54d94813e7618c4c3cc3c29982d4
+Merge: d2a8938 6e9a1b3
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 15:09:37 2018 -0700
+
+    commit some stuff so we are merge master into develop
+
+commit 6e9a1b361663792510b51072b8ec8112920de5dc
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 15:04:34 2018 -0700
+
+    commit residual master changes, to merge into develop
+
+commit 24c3c7338da73c53fe4b4705034c5c06e44bd127
+Author: Andrew Oakes <andrew.oakes@wsu.edu>
+Date:   Fri Oct 5 14:51:36 2018 -0700
+
+    Takin this bad boi for a spin.
+
+commit d2a8938cc210347dff4e78948debfc1414e43994
+Author: Jake Palmer <jake.palmer1842@gmail.com>
+Date:   Fri Oct 5 14:50:59 2018 -0700
+
+    Added section 1.1 Document Purpose
+
+commit 66eaf6b9969f6fce8e34dc380268e31f217acb17
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 14:48:57 2018 -0700
+
+    remove SRS save docx file, add a gitignore to prevent commiting it ever again.
+
+commit b347e53c1688d2d14abea4049a23bb09ca135dd9
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 14:44:52 2018 -0700
+
+    move image to the documentation directory.
+
+commit 3b9858fc58ded0e1796980096f9931dc6fd5e8a1
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 14:43:30 2018 -0700
+
+    add image that describes the project superficially
+
+commit b7fd5ed258c337f9a28127acd565050504fda7a1
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 14:31:18 2018 -0700
+
+    add .gitkeep for source directory.
+
+commit 2b16fa840836ea954143978f5b5a778cfe543a40
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 14:29:52 2018 -0700
+
+    make doc and src folders, add simple readme.md
+
+commit e8dbd33d9d7d9cca1b33ab1866a1bf3aef6ab66c
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 14:25:41 2018 -0700
+
+    Make preliminary changes to the SRS, and fill in the topic of the project.
+
+commit d1d8035c3a09161f04ca1c2ba7bca80f423cf483
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 13:56:30 2018 -0700
+
+    Choose project idea
+
+commit eef6c669fea23b7fe0c0e0ffc266d9d7fb2d9744
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Fri Oct 5 13:43:52 2018 -0700
+
+    Update manifest.md
+
+commit b675dc0596cc37ea2d02b3516e29951da98ba7c1
+Author: Daniel Rehman <dwrrehman@gmail.com>
+Date:   Thu Sep 27 13:04:33 2018 -0700
+
+    Initial Commit, add project manifest.

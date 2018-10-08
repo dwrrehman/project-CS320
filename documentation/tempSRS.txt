@@ -227,6 +227,9 @@ Describe briefly what level of security is expected from this product by your cl
 
 There is no direct safety requirements of the system, as it is running in a web browser, however since engineers might be users of this system, giving back an accurate answer is important, as giving a wrong answer might possibly lead to incorrect systems being built by the users.
 
+Safety Requirements:
+1. give correct/accurate answers to calculations.
+2. give correct/accurate answers to unit conversions.
 
 
 section 4.3: ------------------------------------------------------------
@@ -243,8 +246,8 @@ TODO: Use subsections (e.g., 4.3.1 Reliability, 4.3.2 Portability, etc…) provi
 
 
 
-section 4.4: ------------------------------------------------------------
+section 5: ------------------------------------------------------------
 
 :Prompt:
-
+[OPTIONAL]
 :Prompt:

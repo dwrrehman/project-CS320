@@ -31,19 +31,28 @@ The Users of this document are the professor, and the web clients who use the Ca
 section 1.4: ------------------------------------------------------------
 
 :Prompt:
+[any document defintions or acronyms are using.]
 :Prompt:
 
 
 section 1.5: ------------------------------------------------------------
 
 :Prompt:
+[any document conventions are using.]
 :Prompt:
 
 
 section 1.6: ------------------------------------------------------------
 
 :Prompt:
+[Citations]
 :Prompt:
+
+
+
+
+
+
 
 
 
@@ -177,7 +186,6 @@ section 3.1.4: ------------------------------------------------------------
 :Prompt:
 Communications Interfaces
 <Describe the requirements associated with any communications functions required by this product, including e-mail, web browser, network server communications protocols, electronic forms, and so on. Define any pertinent message formatting. Identify any communication standards that will be used, such as FTP or HTTP. Specify any communication security or encryption issues, data transfer rates, and synchronization mechanisms.
-
 TO DO: Do not go into too much detail, but provide 1-2 paragraphs were you will outline the major communication standards. For example, if you decide to use encryption there is no need to specify the exact encryption standards, but rather, specify the fact that the data will be encrypted and name what standards you consider using. >
 :Prompt:
 

@@ -9,7 +9,7 @@ if you dont have this package already, use this command:
 
 (dont forget to use sudo if you are on Mac...)
 
-once you have cd'd into the project-CS32/source directory, run the command "http-server -c-1". 
+once you have cd'd into the project-CS320/source directory, run the command "http-server -c-1". 
 
 then just point your browser to the ip and port provided by the command, and marvel at our amazing UI. :P
 

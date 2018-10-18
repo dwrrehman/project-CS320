@@ -1,0 +1,150 @@
+<html>
+    <body>
+        <script>
+
+            class Unit{
+                constructor(name,description, abbreviation){
+                    this.name = name;
+                    this.description = description;
+                    this.abbreviation = abbreviation;
+                }
+            }
+
+            class Composit{
+                constructor(unit, power){
+                    this.unit = unit;
+                    this.power = power;
+                }    
+                set Power(p){
+                    this.power = p;
+                }
+                get getPower(){
+                    return this.power;
+                }
+                toString(){
+                    if(this.power > 1 || this.power <= -1){
+                        return this.unit.abbreviation +"^"+"("+this.power+")";
+                    }else if(this.power === 0){
+                        return "";
+                    }else{
+                        return this.unit.abbreviation;
+                    }
+                }
+            }
+
+            class CompositUnit{
+
+                constructor(){
+                    this.compArr = [];
+                }
+
+                addComposit(comp){
+                    var current;
+                    for(var j = 0; j < this.compArr.length; j++){
+                        current = this.compArr[j];
+                        if(current.unit.name === comp.unit.name){
+                            current.Power = current.getPower+comp.getPower;
+                            if(current.Power === 0){
+                                this.compArr.splice(j,1);
+                            }
+                            return;
+                        }
+                    }
+                    //console.log("Pushing");
+                    this.compArr.push(comp);
+                    //console.log(this.compArr);
+                }
+                toString(){
+                    var first = true;
+                    var str = "";
+                    var current;
+                    for(var k = 0; k < this.compArr.length; k++){
+                        current = this.compArr[k];
+                        if(!first && current.toString() != ""){
+                            str += "*";
+                        }
+                        first = false;
+                        str += current.toString(); 
+                    }
+                    return str;
+                }
+            }
+
+            class UnitTree{
+                constructor(unit,unitTreeList,power){
+                    this.unit = unit;
+                    this.unitTreeList = unitTreeList;
+                    this.power = power;
+                    this.composit = new CompositUnit();
+                    this.cached = false;
+                }
+                CompositionR(compositUnit){
+                    if(this.unitTreeList == null){
+                        compositUnit.addComposit(new Composit(this.unit,this.power));
+                        return;
+                    }
+                    for(var i = 0; i < this.unitTreeList.length; i++){
+                        this.unitTreeList[i].CompositionR(compositUnit);
+                    }
+           
+                   
+                }
+                    
+                get Composition(){  // Wrapper function for CompositionR (recursive unit simplifier);
+                    this.CompositionR(this.composit);
+                    return this.unit.name+": "+this.composit.toString();
+                }            
+
+                copyChangePower(p){
+                    return new UnitTree(this.unit,this.unitTreeList,p);
+                }
+                
+                set Power(p){
+                    this.power = p;
+                }
+        
+            }
+
+            function test(){
+                var unitTestkg = new Unit("Kilogram","The standard international unit of mass","kg");
+                var unitTestm = new Unit("Meter","The standard international unit of distance","m");
+                var unitTests = new Unit("Second","The standard international unit of time","s");
+                var unitTestN = new Unit("Newton","The standard international unit of force, so named after Isaac Newton","N");
+                var unitTestJ = new Unit("Joule","The standard international unit of energy", "J");
+                var unitTestHz = new Unit("Hertz","The standard international unit of frequency", "Hz");
+                var unitTestA = new Unit("Ampere","The standard international unit of electric current","A");
+                var unitTestmol = new Unit("Mole","The standard international unit of substance quantity", "mol");
+                var unitTestcd = new Unit("Candela","The standard international unit of light intensity","cd");
+                var unitTestK = new Unit("Kelvin","The standard international unit of temperature", "K");
+                var unitTestC = new Unit("Coulomb","The standard international unit of charge", "C");
+                var unitTestV = new Unit("Volt","The standard international unit of electric potential","V");
+                var unitTestF = new Unit("Farad","The standard international unit of electric capacitance", "F");
+                var unitTestOhm = new Unit("Ohm","The standard international unit of electric resistance","Ohm");
+                // Basic units
+                var unitTreeTestkg = new UnitTree(unitTestkg, null, 1);
+                var unitTreeTestm = new UnitTree(unitTestm, null, 1);
+                var unitTreeTests = new UnitTree(unitTests, null, 1);
+                var unitTreeTestA = new UnitTree(unitTestA, null, 1);
+                var unitTreeTestmol = new UnitTree(unitTestmol,null,1);
+                var unitTreeTestcd = new UnitTree(unitTestcd, null, 1);
+                var unitTreeTestK = new UnitTree(unitTestK, null, 1);
+                // Composits
+                var unitTreeTestC = new UnitTree(unitTestC, [unitTreeTestA, unitTreeTests],1);
+                var unitTreeTestN = new UnitTree(unitTestN,[unitTreeTestkg,unitTreeTestm, unitTreeTests.copyChangePower(-2)],1);
+                var unitTreeTestJ = new UnitTree(unitTestJ,[unitTreeTestN,unitTreeTestm],1);
+                var unitTreeTestV = new UnitTree(unitTestV,[unitTreeTestJ,unitTreeTestC.copyChangePower(-1)],1);
+                var unitTreeTestHz = new UnitTree(unitTestHz,[unitTreeTests.copyChangePower(-1)],1);
+                var unitTreeTestF = new UnitTree(unitTestF,[unitTreeTestC,unitTreeTestV.copyChangePower(-1)],1);
+                var unitTreeTestOhm = new UnitTree(unitTestOhm,[unitTreeTestV,unitTreeTestA.copyChangePower(-1)],1);
+                console.log(unitTreeTestN.Composition); 
+                console.log(unitTreeTestJ.Composition);
+                console.log(unitTreeTestHz.Composition);
+                console.log(unitTreeTestC.Composition);
+                console.log(unitTreeTestV.Composition);
+                console.log(unitTreeTestF.Composition);
+                console.log(unitTreeTestOhm.Composition);
+            }
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,8 @@
+Software Design Document source textfile.
+
+Project Name: Calculation Utility.
+Project Members: Daniel, Jake, and Andrew.
+Date: 2018, Oct 20.
+
+
+Introduction: ------------------------------------------------------------

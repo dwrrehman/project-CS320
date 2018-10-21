@@ -24,7 +24,7 @@ var bin_constants = [];
 
 //--------------------------- converter code: ---------------------------------
 
-var systemes = []; // array of array of units. each element in the outer array is a system, and each element in the system is a unit.
+var systems = []; // array of array of units. each element in the outer array is a system, and each element in the system is a unit.
 // except its not an array of arrays, its a array of pair<name, array>. where name is the name of the systems, and array is an array of units.
 
 

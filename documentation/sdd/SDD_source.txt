@@ -4,5 +4,8 @@ Project Name: Calculation Utility.
 Project Members: Daniel, Jake, and Andrew.
 Date: 2018, Oct 20.
 
+It seems that this document is mainly just UML diagrams, and as such there is not much text to transfer over to the docx file.
 
-Introduction: ------------------------------------------------------------
+
+
+i guess ill just get working on the UML diagrams!

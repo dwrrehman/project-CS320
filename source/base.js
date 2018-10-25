@@ -15,7 +15,14 @@ const conversion_precision = 5;// digits past the decimal point.
 
 
 
+/* 
 
+	Need to define the following Classes (refer to class diagram for details)
+	-Expression | a string, supposed to be a valid mathematical
+	expression, and its corresponding solution.
+	-Value | a double with an associated unit.
+	-Unit | ...
+*/
 
 
 var bin_variables = [];
@@ -27,6 +34,7 @@ var bin_constants = [];
 var systems = []; // array of array of units. each element in the outer array is a system, and each element in the system is a unit.
 // except its not an array of arrays, its a array of pair<name, array>. where name is the name of the systems, and array is an array of units.
 
+// Likely will be an array of System objects, rather than just a pair. ~ Andrew 
 
 
 function system(given_systemname, given_units) {

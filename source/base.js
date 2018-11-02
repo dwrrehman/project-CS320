@@ -55,6 +55,99 @@ function add_new_system(given_systemname) {
 
 
 
+class UnitPower {
+	constructor(unit, power) {
+		this.unit = unit;
+		this.power = power;
+	}
+}
+
+
+class CompoundUnit {
+	constructor(given_name, abbreviation, description, unitpower_list) {
+		this.given_name = given_name;
+		this.abbreviation = abbreviation;
+		this.description = description;
+		this.unitpower_list = unitpower_list;
+	}
+}
+
+
+
+class UnitPair {
+	constructor(to, from) {
+		this.to = to;
+		this.from = from;
+	}
+}
+
+
+class UnitConversions {
+	constructor(to,from, shift, factor) {
+		this.factor = factor;
+		this.shift = shift;
+		this.to = to;
+		this.from = from;
+	}
+}
+
+class BaseUnit {
+	constructor(given_name, abbreviation, description, given_type, system) {
+		this.given_name = given_name;
+		this.abbreviation = abbreviation;
+		this.description = description;
+		this.given_type = given_type;
+		this.system = system;
+	}
+}
+
+
+class System {
+	constructor(given_name, length, mass, time, charge, temperature, brightness) {
+		this.given_name = name;
+		this.length = length;
+		this.mass = mass;
+		this.time = time;
+		this.charge = charge;
+		this.temperature = temperature;
+		this.brightness = brightness;
+	}
+
+	function add_conversion() {
+
+	}
+}
+
+
+
+function baseunit_converter(desired, system, visited, product, sum) { // expects: {Unit, Unit}
+	let list = system[desired.from.given_type];
+	if (system in visited) return [false, product, sum];
+		
+	for (let i = 0; i < list.length; i++) {
+		if(list[i].to.given_name === desired.to.given_name) 
+			return [true, product * list[i].factor, sum + list[i].shift];		
+	}
+	visited.push(desired.from.system);
+	for (let i = 0; i < list.length; i++) {
+		var result = baseunit_converter(desired, list[i].to.system, visited, list[i].factor * product, list[i].shift + sum);
+		if (result[0]) return result;
+	}
+	return [false, product, sum];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

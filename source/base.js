@@ -121,9 +121,9 @@ class System {
 		this.brightness = brightness;
 	}
 
-	function add_conversion() {
+	/*function add_conversion() {
 
-	}
+	}*/
 }
 
 
@@ -144,14 +144,54 @@ function baseunit_converter(desired, system, visited, product, sum) { // expects
 	return [false, product, sum];
 }
 
+function convertUnit(desired,value){
+    const visited = []
+    let factor = baseunit_converter(desired,desired.from.system,visited,1.0,0);
+    if(visited.length > 0){
+        // Define a new path.
+        console.log("Path does not yet exist...adding.");
+        var from_to_to = new UnitConversions(desired.to,desired.from,factor[2],factor[1]);
+        desired.from.system.length.push(from_to_to)
+        var to_to_from = new UnitConversions(desired.from,desired.to,-factor[2],1/factor[1]);
+        desired.to.system.length.push(to_to_from);
+    }else{
+        console.log("Path exists already.");
+    }
+    return value*factor[1]+factor[2];
+}
 
 
+/* TEST CODE FOR BASE UNIT CONVERTER */
 
+var metric = new System("Metric",[],[],[],[],[],[]);
+var imperial = new System("Imperial",[],[],[],[],[],[]);
+var smootric = new System("Smootric",[],[],[],[],[],[]);
+var meter = new BaseUnit("meter", "m", "The length of a meter stick", "length", metric);
+var foot = new BaseUnit("foot","ft","Less smelly, but about as long as a large human foot.","length",imperial);
+var smoot = new BaseUnit("smoot","smt","replace 'f' with 'sm' and you get a smoot.","length",smootric);
+var metertofoot = new UnitConversions(foot,meter, 0, 3.28084);
+var foottometer = new UnitConversions(meter,foot, 0, 1.0/3.28084);
+var foottosmoot = new UnitConversions(smoot,foot, 0, 42.0);
+var smoottofoot = new UnitConversions(foot,smoot, 0, 1/42.0);
+metric.length.push(metertofoot);
+imperial.length.push(foottometer);
+imperial.length.push(foottosmoot);
+smootric.length.push(smoottofoot);
+let vis = [];
+var pair = new UnitPair(smoot,meter);
+/*factor = baseunit_converter(pair,metric,vis,1.0,0.0);
+var metertosmoot = new UnitConversions(smoot,meter,factor[2],factor[1]);
+metric.length.push(metertosmoot)
+var smoottometer = new UnitConversions(meter,smoot,-factor[2],1/factor[1]);
+smootric.length.push(smoottometer);
+console.log(factor[1]);
+*/
+console.log("Answer: "+convertUnit(pair,3));    // Convert 3 meters into smoots.
+// The new path should exist when the second call is made.
+console.log("Answer: "+convertUnit(pair,4));    // Convert 4 meters into smoots.(should use new path.)
 
-
-
-
-
+console.log("Answer: "+convertUnit(new UnitPair(meter,smoot),413.38584))    // Convert 413.38584 smoots into meters, should be 3 meters.
+/* END OF TEST CODE */
 
 
 

@@ -166,16 +166,22 @@ function convertUnit(desired,value){
 var metric = new System("Metric",[],[],[],[],[],[]);
 var imperial = new System("Imperial",[],[],[],[],[],[]);
 var smootric = new System("Smootric",[],[],[],[],[],[]);
+var feathers = new System("feathers",[],[],[],[],[],[]);
 var meter = new BaseUnit("meter", "m", "The length of a meter stick", "length", metric);
 var foot = new BaseUnit("foot","ft","Less smelly, but about as long as a large human foot.","length",imperial);
 var smoot = new BaseUnit("smoot","smt","replace 'f' with 'sm' and you get a smoot.","length",smootric);
+var flock = new BaseUnit("flock","fl","I don't even know.","length",feathers);
 var metertofoot = new UnitConversions(foot,meter, 0, 3.28084);
 var foottometer = new UnitConversions(meter,foot, 0, 1.0/3.28084);
 var foottosmoot = new UnitConversions(smoot,foot, 0, 42.0);
+var foottoflock = new UnitConversions(flock,foot, 0, 23.5);
+var flocktofoot = new UnitConversions(foot,flock, 0, 1/23.5);
 var smoottofoot = new UnitConversions(foot,smoot, 0, 1/42.0);
 metric.length.push(metertofoot);
 imperial.length.push(foottometer);
 imperial.length.push(foottosmoot);
+imperial.length.push(foottoflock);
+feathers.length.push(flocktofoot);
 smootric.length.push(smoottofoot);
 let vis = [];
 var pair = new UnitPair(smoot,meter);
@@ -191,6 +197,8 @@ console.log("Answer: "+convertUnit(pair,3));    // Convert 3 meters into smoots.
 console.log("Answer: "+convertUnit(pair,4));    // Convert 4 meters into smoots.(should use new path.)
 
 console.log("Answer: "+convertUnit(new UnitPair(meter,smoot),413.38584))    // Convert 413.38584 smoots into meters, should be 3 meters.
+
+console.log("Answer: "+convertUnit(new UnitPair(meter,flock),100));
 /* END OF TEST CODE */
 
 

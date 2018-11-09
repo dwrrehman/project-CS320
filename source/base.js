@@ -72,11 +72,12 @@ class UnitPower {
 
 
 class CompoundUnit {
-	constructor(given_name, abbreviation, description, unitpower_list) {
+	constructor(given_name, abbreviation, description, unitpower_list, system) {
 		this.given_name = given_name;
 		this.abbreviation = abbreviation;
 		this.description = description;
 		this.unitpower_list = unitpower_list;
+		this.system = system;
 	}
 }
 
@@ -128,7 +129,7 @@ class System {
 
 
 
-function baseunit_converter(desired, system, visited, product, sum) { // expects: {Unit, Unit}
+function baseunit_converter(desired, system, visited, product, sum) { // expects: {Unit, Unit}, from_sys  [] 1.0, 0.0
 	let list = system[desired.from.given_type];
 	if (system in visited) return [false, product, sum];
 		
@@ -144,20 +145,54 @@ function baseunit_converter(desired, system, visited, product, sum) { // expects
 	return [false, product, sum];
 }
 
+
+
+
 function convertUnit(desired,value){
     const visited = []
     let factor = baseunit_converter(desired,desired.from.system,visited,1.0,0);
-    if(visited.length > 0){
+    if(visited.length > 0) {
         // Define a new path.
         console.log("Path does not yet exist...adding.");
-        var from_to_to = new UnitConversions(desired.to,desired.from,factor[2],factor[1]);
+        var from_to_to = new UnitConversions(desired.to, desired.from, factor[2], factor[1]);
         desired.from.system.length.push(from_to_to)
-        var to_to_from = new UnitConversions(desired.from,desired.to,-factor[2],1/factor[1]);
+        var to_to_from = new UnitConversions(desired.from, desired.to, -factor[2], 1 / factor[1]);
         desired.to.system.length.push(to_to_from);
     }else{
         console.log("Path exists already.");
     }
-    return value*factor[1]+factor[2];
+    return value * factor[1] + factor[2];
+}
+
+
+function convertComp(to_compound, from_compound) {
+	let product = 1.0;
+	let sum = 0.0;
+	if (from_compound.system
+	for (var i = 0; i < to_compound.unitpower_list.length; i++) {
+		for (var j = 0; j < from_compound.unitpower_list.length; j++) {
+			if  (to_compound.unitpower_list[i].unit.given_type == from_compound.unitpower_list[j].unit.given_type) {
+				if (to_compound.unitpower_list[i].power == from_compound.unitpower_list[j].power) {
+					found = true;
+					let desired = new UnitPair(to_compound.unitpower_list[i].unit, from_compound.unitpower_list[j].unit);
+
+					let result = baseunit_converter(desired, from_compound.unitpower_list[j].unit.system, [], 1.0, 0.0);
+
+					if (!result[0]) {
+						console.log("Error: convertComp(): base unit conversion failure!");
+						return [false, 1.0, 0.0];
+					}
+					sum += Math.pow(result[2],to_compound.unitpower_list[i].power);
+					product *= Math.pow(result[1],to_compound.unitpower_list[i].power);
+				}
+			}
+		}
+		if (!found) {
+			console.log("Error: convertComp(): could not find base unit in from compound.");
+			return [false, 1.0, 0.0];
+		}
+	}
+	return [true, product, sum];
 }
 
 
@@ -183,6 +218,9 @@ imperial.length.push(foottosmoot);
 imperial.length.push(foottoflock);
 feathers.length.push(flocktofoot);
 smootric.length.push(smoottofoot);
+
+var newton = new CompoundUnit()
+
 let vis = [];
 var pair = new UnitPair(smoot,meter);
 /*factor = baseunit_converter(pair,metric,vis,1.0,0.0);

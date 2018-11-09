@@ -15,7 +15,7 @@ const conversion_precision = 5;// digits past the decimal point.
 
 
 
-/* 
+/*
 
 	Need to define the following Classes (refer to class diagram for details)
 	-Expression | a string, supposed to be a valid mathematical
@@ -34,7 +34,7 @@ var bin_constants = [];
 var systems = []; // array of array of units. each element in the outer array is a system, and each element in the system is a unit.
 // except its not an array of arrays, its a array of pair<name, array>. where name is the name of the systems, and array is an array of units.
 
-// Likely will be an array of System objects, rather than just a pair. ~ Andrew 
+// Likely will be an array of System objects, rather than just a pair. ~ Andrew
 
 
 function system(given_systemname, given_units) {
@@ -112,7 +112,7 @@ class BaseUnit {
 
 class System {
 	constructor(given_name, length, mass, time, charge, temperature, brightness) {
-		this.given_name = name;
+		this.given_name = given_name;
 		this.length = length;
 		this.mass = mass;
 		this.time = time;
@@ -131,10 +131,10 @@ class System {
 function baseunit_converter(desired, system, visited, product, sum) { // expects: {Unit, Unit}
 	let list = system[desired.from.given_type];
 	if (system in visited) return [false, product, sum];
-		
+
 	for (let i = 0; i < list.length; i++) {
-		if(list[i].to.given_name === desired.to.given_name) 
-			return [true, product * list[i].factor, sum + list[i].shift];		
+		if(list[i].to.given_name === desired.to.given_name)
+			return [true, product * list[i].factor, sum + list[i].shift];
 	}
 	visited.push(desired.from.system);
 	for (let i = 0; i < list.length; i++) {
@@ -258,7 +258,7 @@ function receive(string) {
 			alert("cannot store: " + raw_data);
 			return;
 		}
-		
+
 		if (bin_type == "variable") {
 			add_variable(given_name, num_data);
 			alert("Stored Successfully");
@@ -266,8 +266,8 @@ function receive(string) {
 			add_constant(given_name, num_data);
 			alert("Stored Successfully");
 		} else {
-			alert("cannot use bin type: " + bin_type);			
-		}		
+			alert("cannot use bin type: " + bin_type);
+		}
 		return;
 	}
 
@@ -299,13 +299,13 @@ function load_file(file_path) {
   xmlhttp.send();
   if (xmlhttp.status==200) {
     result = xmlhttp.responseText;
-  } else return "undefined text, could not load file: " + file_path;  
+  } else return "undefined text, could not load file: " + file_path;
   return result;
 }
 
 // sets the current content div
 function draw() {
-	if (displaymode === convert_displaymode) {				
+	if (displaymode === convert_displaymode) {
 		document.getElementById("content").innerHTML = load_file("main.html");
 	} else if (displaymode === add_displaymode) {
 		document.getElementById("content").innerHTML = load_file("add.html");
@@ -320,13 +320,13 @@ function draw() {
 
 // a function for each page that is run when the page finsihes loading.
 function main() {
-	if (displaymode === convert_displaymode) {		
+	if (displaymode === convert_displaymode) {
 		document.getElementById("calculator_display").text = display_string;
 
 
 
 
-	} else if (displaymode === add_displaymode) {		
+	} else if (displaymode === add_displaymode) {
 
 	} else if (displaymode === list_displaymode) {
 		for (v = 0; v < bin_variables.length; v++) {
@@ -337,7 +337,7 @@ function main() {
 
 		}
 	}
-}	
+}
 
 
 
@@ -359,7 +359,7 @@ function main() {
 
 
 
-function convert() {	
+function convert() {
 	let result = null;
 	let input = document.getElementById("converter_input").value;
 
@@ -370,24 +370,24 @@ function convert() {
 		return;
 	}
 
-	// temp dummy code :	
-	result = Number(input) * Number(input);	
+	// temp dummy code :
+	result = Number(input) * Number(input);
 
 	//get the units the user picked.
 	var from = document.getElementById("from_unit").value;
 	var to = document.getElementById("to_unit").value;
 
 	// do conversion;
-	
-	if (isNaN(result) || result == null || result == undefined) {		
+
+	if (isNaN(result) || result == null || result == undefined) {
 		document.getElementById("converter_result").value = null;
 		return;
-	}	
+	}
 
 	result = result.toFixed(conversion_precision);
 	result = Number(result);
 
-	document.getElementById("converter_result").value = result + " " + to;	
+	document.getElementById("converter_result").value = result + " " + to;
 }
 
 
@@ -403,17 +403,17 @@ function convert() {
 
 /// --------- add.html code: --------------          [OLD and invalid now]
 
-function validate(formula) {	
+function validate(formula) {
 	var result = true;
 	return result;
 }
 
-function store_new_unit() { 
+function store_new_unit() {
 
 }
 
 function submit_new_unit() {
-	var formula = document.getElementById("formula").text;		
+	var formula = document.getElementById("formula").text;
 	// unimplemented
 	if (validate(formula)) {
 
@@ -421,9 +421,9 @@ function submit_new_unit() {
 
 		alert("Successfully added new unit.");
 
-		displaymode = convert_displaymode; 
+		displaymode = convert_displaymode;
 		draw();
 	} else {
 		alert("error in parsing defintition!");
-	}		
+	}
 }

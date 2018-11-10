@@ -72,11 +72,12 @@ class UnitPower {
 
 
 class CompoundUnit {
-	constructor(given_name, abbreviation, description, unitpower_list, system) {
+	constructor(given_name, abbreviation, description, given_type, unitpower_list, system) {
 		this.given_name = given_name;
 		this.abbreviation = abbreviation;
 		this.description = description;
 		this.unitpower_list = unitpower_list;
+		this.given_type = given_type
 		this.system = system;
 	}
 }
@@ -153,7 +154,7 @@ function convertUnit(desired,value){
     let factor = baseunit_converter(desired,desired.from.system,visited,1.0,0);
     if(visited.length > 0) {
         // Define a new path.
-        console.log("Path does not yet exist...adding.");
+        
         var from_to_to = new UnitConversions(desired.to, desired.from, factor[2], factor[1]);
         desired.from.system.length.push(from_to_to)
         var to_to_from = new UnitConversions(desired.from, desired.to, -factor[2], 1 / factor[1]);
@@ -165,10 +166,21 @@ function convertUnit(desired,value){
 }
 
 
-function convertComp(to_compound, from_compound) {
+function convertComp(to_compound, from_compound, value) {	
+	if (from_compound.system[from_compound.given_type] !== undefined) {
+		for (let i = 0; i < from_compound.system[from_compound.given_type].length; i++) {
+			let conversion = from_compound.system[from_compound.given_type][i].to;
+			if (conversion.given_name == to_compound.given_name) {				
+				console.log("Path exists already.");
+				return [true, conversion.product, conversion.sum];
+			}
+		}
+	} else from_compound.system[from_compound.given_type] = [];	
+	console.log("Path does not yet exist...adding.");
+
 	let product = 1.0;
 	let sum = 0.0;
-	if (from_compound.system
+
 	for (var i = 0; i < to_compound.unitpower_list.length; i++) {
 		for (var j = 0; j < from_compound.unitpower_list.length; j++) {
 			if  (to_compound.unitpower_list[i].unit.given_type == from_compound.unitpower_list[j].unit.given_type) {
@@ -192,6 +204,16 @@ function convertComp(to_compound, from_compound) {
 			return [false, 1.0, 0.0];
 		}
 	}
+
+	
+
+	from_compound.system[from_compound.given_type].push(new UnitConversions(to_compound, from_compound, sum, product));
+
+	if (to_compound.system[to_compound.given_type] === undefined) 
+		to_compound.system[to_compound.given_type] = [];
+
+	to_compound.system[to_compound.given_type].push(new UnitConversions(from_compound, to_compound, -1 * sum, 1/product));
+
 	return [true, product, sum];
 }
 
@@ -202,16 +224,21 @@ var metric = new System("Metric",[],[],[],[],[],[]);
 var imperial = new System("Imperial",[],[],[],[],[],[]);
 var smootric = new System("Smootric",[],[],[],[],[],[]);
 var feathers = new System("feathers",[],[],[],[],[],[]);
+
 var meter = new BaseUnit("meter", "m", "The length of a meter stick", "length", metric);
 var foot = new BaseUnit("foot","ft","Less smelly, but about as long as a large human foot.","length",imperial);
 var smoot = new BaseUnit("smoot","smt","replace 'f' with 'sm' and you get a smoot.","length",smootric);
 var flock = new BaseUnit("flock","fl","I don't even know.","length",feathers);
+var newton = new CompoundUnit("newton", "N", "wabam to your head", "force", "")
+
 var metertofoot = new UnitConversions(foot,meter, 0, 3.28084);
 var foottometer = new UnitConversions(meter,foot, 0, 1.0/3.28084);
 var foottosmoot = new UnitConversions(smoot,foot, 0, 42.0);
 var foottoflock = new UnitConversions(flock,foot, 0, 23.5);
 var flocktofoot = new UnitConversions(foot,flock, 0, 1/23.5);
 var smoottofoot = new UnitConversions(foot,smoot, 0, 1/42.0);
+
+
 metric.length.push(metertofoot);
 imperial.length.push(foottometer);
 imperial.length.push(foottosmoot);
@@ -223,13 +250,9 @@ var newton = new CompoundUnit()
 
 let vis = [];
 var pair = new UnitPair(smoot,meter);
-/*factor = baseunit_converter(pair,metric,vis,1.0,0.0);
-var metertosmoot = new UnitConversions(smoot,meter,factor[2],factor[1]);
-metric.length.push(metertosmoot)
-var smoottometer = new UnitConversions(meter,smoot,-factor[2],1/factor[1]);
-smootric.length.push(smoottometer);
-console.log(factor[1]);
-*/
+
+
+
 console.log("Answer: "+convertUnit(pair,3));    // Convert 3 meters into smoots.
 // The new path should exist when the second call is made.
 console.log("Answer: "+convertUnit(pair,4));    // Convert 4 meters into smoots.(should use new path.)
@@ -237,11 +260,32 @@ console.log("Answer: "+convertUnit(pair,4));    // Convert 4 meters into smoots.
 console.log("Answer: "+convertUnit(new UnitPair(meter,smoot),413.38584))    // Convert 413.38584 smoots into meters, should be 3 meters.
 
 console.log("Answer: "+convertUnit(new UnitPair(meter,flock),100));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* END OF TEST CODE */
 
 
 
-
+/*factor = baseunit_converter(pair,metric,vis,1.0,0.0);
+var metertosmoot = new UnitConversions(smoot,meter,factor[2],factor[1]);
+metric.length.push(metertosmoot)
+var smoottometer = new UnitConversions(meter,smoot,-factor[2],1/factor[1]);
+smootric.length.push(smoottometer);
+console.log(factor[1]);
+*/
 
 
 

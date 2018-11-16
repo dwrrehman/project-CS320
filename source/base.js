@@ -134,7 +134,7 @@ function baseunit_converter(desired, system, visited, product, sum) { // expects
 
 	for (let i = 0; i < list.length; i++) {
 		if(list[i].to.given_name === desired.to.given_name)
-			return [true, product * list[i].factor, sum + list[i].shift];
+			return [true, product * list[i].factor, sum*list[i].factor + list[i].shift];
 	}
 	visited.push(desired.from.system);
 	for (let i = 0; i < list.length; i++) {

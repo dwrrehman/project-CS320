@@ -101,6 +101,15 @@ class UnitConversions {
 	}
 }
 
+class CompountUnitConversions{
+    constructor(to,from){
+        this.conversions = [];
+        this.to = to;
+        this.from = from;
+    }
+}
+
+
 class BaseUnit {
 	constructor(given_name, abbreviation, description, given_type, system) {
 		this.given_name = given_name;
@@ -167,6 +176,7 @@ function convertUnit(desired,value){
 
 
 function convertComp(to_compound, from_compound, value) {	
+
 	if (from_compound.system[from_compound.given_type] !== undefined) {
 		for (let i = 0; i < from_compound.system[from_compound.given_type].length; i++) {
 			let conversion = from_compound.system[from_compound.given_type][i].to;

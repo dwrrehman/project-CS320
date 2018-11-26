@@ -149,7 +149,7 @@ function baseunit_converter(desired, system, visited, product, sum) { // expects
 	}
 	visited.push(desired.from.system);
 	for (let i = 0; i < list.length; i++) {
-		var result = baseunit_converter(desired, list[i].to.system, visited, list[i].factor * product, list[i].shift + sum);
+		var result = baseunit_converter(desired, list[i].to.system, visited, list[i].factor * product, list[i].shift + (sum*list[i].factor));
 		if (result[0]) return result;
 	}
 	return [false, product, sum];

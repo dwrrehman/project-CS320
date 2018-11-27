@@ -159,14 +159,13 @@ function baseunit_converter(desired, system, visited, product, sum) { // expects
 
 
 function convertUnit(desired,value){
-    const visited = []
+    const visited = [];
     let factor = baseunit_converter(desired,desired.from.system,visited,1.0,0);
     if(visited.length > 0) {
         // Define a new path.
-        
         var from_to_to = new UnitConversions(desired.to, desired.from, factor[2], factor[1]);
-        desired.from.system.length.push(from_to_to)
-        var to_to_from = new UnitConversions(desired.from, desired.to, -factor[2], 1 / factor[1]);
+        desired.from.system.length.push(from_to_to);
+        var to_to_from = new UnitConversions(desired.from, desired.to, -factor[2]*(1/factor[1]), 1 / factor[1]);
         desired.to.system.length.push(to_to_from);
     }else{
         console.log("Path exists already.");
@@ -180,7 +179,7 @@ function convertComp(to_compound, from_compound, value) {
 	if (from_compound.system[from_compound.given_type] !== undefined) {
 		for (let i = 0; i < from_compound.system[from_compound.given_type].length; i++) {
 			let conversion = from_compound.system[from_compound.given_type][i].to;
-			if (conversion.given_name == to_compound.given_name) {				
+			if (conversion.given_name === to_compound.given_name) {				
 				console.log("Path exists already.");
 				return [true, conversion.product, conversion.sum];
 			}
@@ -240,6 +239,9 @@ var foot = new BaseUnit("foot","ft","Less smelly, but about as long as a large h
 var smoot = new BaseUnit("smoot","smt","replace 'f' with 'sm' and you get a smoot.","length",smootric);
 var flock = new BaseUnit("flock","fl","I don't even know.","length",feathers);
 var newton = new CompoundUnit("newton", "N", "wabam to your head", "force", "")
+var celsius = new BaseUnit("celsius","dC","A unit of temperature in the metric system","temperature",metric);
+var fahrenheit = new BaseUnit("fahrenheit","dF","A unit of temperature in the imperial system","temperature",imperial);
+var warmth = new BaseUnit("warmth","dW","A unit of temperature in the feathers system","temperature",feathers);
 
 var metertofoot = new UnitConversions(foot,meter, 0, 3.28084);
 var foottometer = new UnitConversions(meter,foot, 0, 1.0/3.28084);
@@ -247,9 +249,12 @@ var foottosmoot = new UnitConversions(smoot,foot, 0, 42.0);
 var foottoflock = new UnitConversions(flock,foot, 0, 23.5);
 var flocktofoot = new UnitConversions(foot,flock, 0, 1/23.5);
 var smoottofoot = new UnitConversions(foot,smoot, 0, 1/42.0);
-
+var celsiustofahrenheit = new UnitConversions(fahrenheit,celsius,32.0,9.0/5.0);
+var fahrenheittowarmth = new UnitConversions(warmth,fahrenheittowarmth,12.0,3.0/5.0);
 
 metric.length.push(metertofoot);
+metric.temperature.push(celsiustofahrenheit);
+imperial.temperature.push(fahrenheittowarmth);
 imperial.length.push(foottometer);
 imperial.length.push(foottosmoot);
 imperial.length.push(foottoflock);
@@ -271,6 +276,10 @@ console.log("Answer: "+convertUnit(new UnitPair(meter,smoot),413.38584))    // C
 
 console.log("Answer: "+convertUnit(new UnitPair(meter,flock),100));
 
+console.log("12 celsius to fahrenheit");
+console.log("Answer: "+convertUnit(new UnitPair(fahrenheit,celsius),12));
+console.log("10 celsius to warmth");
+console.log("Answer: "+convertUnit(new UnitPair(warmth,celsius),10));
 
 
 

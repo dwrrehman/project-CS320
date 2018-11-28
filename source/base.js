@@ -101,11 +101,18 @@ class UnitConversions {
 	}
 }
 
-class CompountUnitConversions{
+class CompoundUnitConversions{
     constructor(to,from){
-        this.conversions = [];
-        this.to = to;
+        this.conversions = []; // This should be an array of [UnitConversions, int] where the int is a power.
+        this.to = to;          // To and from should be compound units.
         this.from = from;
+    }
+    convert(value){
+        let total = value;
+        for(let i = 0; i < this.conversions.length; i++){
+            total *= Math.pow(this.conversions[i][0].factor,this.conversions[i][1]);
+        }
+        return total;
     }
 }
 
@@ -175,55 +182,51 @@ function convertUnit(desired,value){
 
 
 function convertComp(to_compound, from_compound, value) {	
-
+    let conversion;
+    // Check if a conversion already exists for this compound unit.
 	if (from_compound.system[from_compound.given_type] !== undefined) {
 		for (let i = 0; i < from_compound.system[from_compound.given_type].length; i++) {
-			let conversion = from_compound.system[from_compound.given_type][i].to;
+			conversion = from_compound.system[from_compound.given_type][i].to;
 			if (conversion.given_name === to_compound.given_name) {				
 				console.log("Path exists already.");
-				return [true, conversion.product, conversion.sum];
+
+				return  [from_compound.system[from_compound.given_type][i].convert(value),from_compound.system[from_compound.given_type][i]];
 			}
 		}
 	} else from_compound.system[from_compound.given_type] = [];	
 	console.log("Path does not yet exist...adding.");
-
+    var compResult = new CompoundUnitConversions(to_compound, from_compound);   // Create the new conversion that is to be found if one does not exist.
 	let product = 1.0;
 	let sum = 0.0;
-
 	for (var i = 0; i < to_compound.unitpower_list.length; i++) {
 		for (var j = 0; j < from_compound.unitpower_list.length; j++) {
-			if  (to_compound.unitpower_list[i].unit.given_type == from_compound.unitpower_list[j].unit.given_type) {
-				if (to_compound.unitpower_list[i].power == from_compound.unitpower_list[j].power) {
+			if  (to_compound.unitpower_list[i].unit.given_type === from_compound.unitpower_list[j].unit.given_type) {
+				if (to_compound.unitpower_list[i].power === from_compound.unitpower_list[j].power) {
 					found = true;
 					let desired = new UnitPair(to_compound.unitpower_list[i].unit, from_compound.unitpower_list[j].unit);
-
-					let result = baseunit_converter(desired, from_compound.unitpower_list[j].unit.system, [], 1.0, 0.0);
-
-					if (!result[0]) {
-						console.log("Error: convertComp(): base unit conversion failure!");
-						return [false, 1.0, 0.0];
-					}
-					sum += Math.pow(result[2],to_compound.unitpower_list[i].power);
-					product *= Math.pow(result[1],to_compound.unitpower_list[i].power);
+                    let currentPower = to_compound.unitpower_list[i].power;
+                    if(to_compound.unitpower_list[i].unit.given_name !== from_compound.unitpower_list[j].unit.given_name){
+                        let result = baseunit_converter(desired, from_compound.unitpower_list[j].unit.system, [], 1.0, 0.0);
+                        compResult.conversions.push([new UnitConversions(desired.to,desired.from,result[2],result[1]),currentPower])
+                        if (!result[0]) {
+                            console.log("Error: convertComp(): base unit conversion failure! Converting "+desired.from.given_name+" to "+desired.to.given_name);
+                            return [0,undefined];
+                        }
+                    }
 				}
 			}
 		}
 		if (!found) {
 			console.log("Error: convertComp(): could not find base unit in from compound.");
-			return [false, 1.0, 0.0];
+			return [0,undefined];
 		}
 	}
-
-	
-
-	from_compound.system[from_compound.given_type].push(new UnitConversions(to_compound, from_compound, sum, product));
-
+	from_compound.system[from_compound.given_type].push(compResult);
 	if (to_compound.system[to_compound.given_type] === undefined) 
 		to_compound.system[to_compound.given_type] = [];
-
-	to_compound.system[to_compound.given_type].push(new UnitConversions(from_compound, to_compound, -1 * sum, 1/product));
-
-	return [true, product, sum];
+    console.log("Adding inverse");
+	convertComp(from_compound,to_compound,value)
+	return [compResult.convert(value), compResult];
 }
 
 
@@ -238,10 +241,13 @@ var meter = new BaseUnit("meter", "m", "The length of a meter stick", "length", 
 var foot = new BaseUnit("foot","ft","Less smelly, but about as long as a large human foot.","length",imperial);
 var smoot = new BaseUnit("smoot","smt","replace 'f' with 'sm' and you get a smoot.","length",smootric);
 var flock = new BaseUnit("flock","fl","I don't even know.","length",feathers);
-var newton = new CompoundUnit("newton", "N", "wabam to your head", "force", "")
 var celsius = new BaseUnit("celsius","dC","A unit of temperature in the metric system","temperature",metric);
 var fahrenheit = new BaseUnit("fahrenheit","dF","A unit of temperature in the imperial system","temperature",imperial);
 var warmth = new BaseUnit("warmth","dW","A unit of temperature in the feathers system","temperature",feathers);
+var secondM = new BaseUnit("second","s", "THE unit of time","time",metric);
+var secondI = new BaseUnit("second","s", "THE unit of time","time",imperial);
+var kilogram = new BaseUnit("kilogram","kg","The metric unit of mass","mass",metric);
+var slug = new BaseUnit("slug","slug","The imperial unit of mass","mass", imperial);
 
 var metertofoot = new UnitConversions(foot,meter, 0, 3.28084);
 var foottometer = new UnitConversions(meter,foot, 0, 1.0/3.28084);
@@ -251,17 +257,20 @@ var flocktofoot = new UnitConversions(foot,flock, 0, 1/23.5);
 var smoottofoot = new UnitConversions(foot,smoot, 0, 1/42.0);
 var celsiustofahrenheit = new UnitConversions(fahrenheit,celsius,32.0,9.0/5.0);
 var fahrenheittowarmth = new UnitConversions(warmth,fahrenheittowarmth,12.0,3.0/5.0);
+var kilogramtoslug = new UnitConversions(slug,kilogram,0,1.0/14.59390);
+var slugtokilogram = new UnitConversions(kilogram,slug,0,14.59390);
 
 metric.length.push(metertofoot);
+metric.mass.push(kilogramtoslug);
 metric.temperature.push(celsiustofahrenheit);
 imperial.temperature.push(fahrenheittowarmth);
 imperial.length.push(foottometer);
 imperial.length.push(foottosmoot);
 imperial.length.push(foottoflock);
+imperial.mass.push(slugtokilogram);
 feathers.length.push(flocktofoot);
 smootric.length.push(smoottofoot);
 
-var newton = new CompoundUnit()
 
 let vis = [];
 var pair = new UnitPair(smoot,meter);
@@ -280,13 +289,15 @@ console.log("12 celsius to fahrenheit");
 console.log("Answer: "+convertUnit(new UnitPair(fahrenheit,celsius),12));
 console.log("10 celsius to warmth");
 console.log("Answer: "+convertUnit(new UnitPair(warmth,celsius),10));
+/* COMPOUND UNIT CONVERSION TESTING */
 
+var newton = new CompoundUnit("Newton", "N", "A unit of force", "force", [new UnitPower(kilogram, 1),new UnitPower(meter, 1),new UnitPower(secondM, -2)], metric)
+var poundforce = new CompoundUnit("poundforce","lbf","The imperial unit of force","force",[new UnitPower(slug, 1),new UnitPower(foot, 1),new UnitPower(secondI, -2)], imperial);
 
-
-
-
-
-
+console.log("from 10 newton to poundforce");
+console.log(convertComp(poundforce, newton, 10)[0]);
+console.log("from 22.5 poundforce to newton");
+console.log(convertComp(newton,poundforce, 22.5)[0]);
 
 
 

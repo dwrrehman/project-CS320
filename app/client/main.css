@@ -1,4 +1,158 @@
-body {
-  padding: 10px;
-  font-family: sans-serif;
+#calculator_div {
+
+  align-content: center;
+  align-self: center;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+
+  background-color: #eeeeee;
+  border: solid;
+  border-color: gray;
+  border-bottom: none;
+
+  width: auto;
+  height: 400px;
+
+  margin: 0;
+  padding-top: 0;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 0;
+}
+
+#converter_div {
+  background-color: #cceeff;
+  border: solid;
+  border-color: gray;
+
+  width: auto;
+  height: auto;
+
+  margin: 0;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 0;
+}
+
+p {
+  display: inline-block;
+}
+
+input {
+  text-align: right;
+  display: inline-block;
+}
+
+select {
+  display: inline-block;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.div_display {
+
+  border-color: black;
+  border: none;
+
+  margin: 0;
+  padding: 5px;
+
+
+  overflow: auto;
+
+  width: 599px;
+  height: 40px;
+
+  font-size: 20px;
+  font-family: Courier New;
+  text-align: right;
+
+  vertical-align: bottom;
+
+  color: black;
+  background-color: white;
+}
+
+.th_display {
+  border-color: #000000;
+  border: solid;
+  border-bottom: none;
+  border-width: 1px;
+  margin: 0;
+  padding: 0;
+
+  width: 240px;
+  height: 60px;
+
+  color: inherit;
+  background-color: white;
+}
+
+.th_button {
+  border-color: #dddddd;
+  border: solid;
+  border-width: 1px;
+  margin: 0;
+  padding: 0;
+
+  width: 60px;
+  height: 60px;
+
+  color: inherit;
+  background-color: #DDDDDD;
+}
+
+.cbutton {
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+  color: black;
+  background-color: inherit;
+
+  font: inherit;
+  font-size: 20px;
+  font-family: Courier New;
+
+
+  width: 60px;
+  height: 60px;
+}
+
+
+
+
+.th_clearbutton {
+  border-color: #dddddd;
+  border: solid;
+  border-width: 1px;
+  margin: 0;
+  padding: 0;
+
+  width: 60px;
+  height: 60px;
+
+  background-color: orange;
+}
+
+.clearbutton {
+  border: none;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+
+  font-size: 20px;
+  font-family: Courier New;
+
+
+  color: gray;
+  background-color: inherit;
+
+  width: 60px;
+  height: 60px;
 }

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<!--
+	contains the main webpage, which will be manipulated by the view-switching code.
+-->
+
+<head>
+	<title>Calculation Utility</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="base.js"></script>
+
+	<script type="text/javascript">
+		window.onload = function() {
+			displaymode = convert_displaymode; draw();
+		}
+	</script>
+	<style type="text/css">
+
+		body {
+			background-color: #c4c4c4;
+		}
+
+		.section {
+			background-color: white;
+			border: solid;
+
+			width: 800px;
+			height: auto;
+			padding: 5px;
+
+			align-content: center;
+			align-self: center;
+			align-items: center;
+			text-align: center;
+			vertical-align: middle;
+		}
+
+		.standard_button {
+  			padding: 2px;
+  			border: solid;
+  			border-color: #DDDDDD;
+  			border-width: 1px;
+			border-radius: 4px;
+
+			font: inherit;
+			font-size: 15px;
+			font-family: Courier;
+
+  			color: inherit;
+  			background-color: #FFFFFF;
+  			cursor: pointer;
+
+		}
+
+		input {
+  			border: solid;
+  			border-color: #DDDDDD;
+  			border-width: 1px;
+			border-radius: 3px;
+
+			font: inherit;
+			font-size: 15px;
+			font-family: Courier;
+
+  			color: inherit;
+  			background-color: #FFFFFF;
+		}
+
+		select {
+			padding: 1px;
+  			border: solid;
+  			border-color: #DDDDDD;
+  			border-width: 1px;
+			border-radius: 3px;
+
+			font: inherit;
+			font-size: 15px;
+			font-family: Courier;
+
+  			color: inherit;
+  			background-color: #FFFFFF;
+  			cursor: pointer;
+		}
+
+		p {
+			font-family: Courier;
+			font-size: 20px;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div id="content" align="center"></div>
+</body>
+</html>

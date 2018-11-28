@@ -144,8 +144,6 @@ class System {
 	}*/
 }
 
-
-
 function baseunit_converter(desired, system, visited, product, sum) { // expects: {Unit, Unit}, from_sys  [] 1.0, 0.0
 	let list = system[desired.from.given_type];
 	if (system in visited) return [false, product, sum];
@@ -162,9 +160,6 @@ function baseunit_converter(desired, system, visited, product, sum) { // expects
 	return [false, product, sum];
 }
 
-
-
-
 function convertUnit(desired,value){
     const visited = [];
     let factor = baseunit_converter(desired,desired.from.system,visited,1.0,0);
@@ -179,7 +174,6 @@ function convertUnit(desired,value){
     }
     return value * factor[1] + factor[2];
 }
-
 
 function convertComp(to_compound, from_compound, value) {	
     let conversion;
@@ -196,8 +190,6 @@ function convertComp(to_compound, from_compound, value) {
 	} else from_compound.system[from_compound.given_type] = [];	
 	console.log("Path does not yet exist...adding.");
     var compResult = new CompoundUnitConversions(to_compound, from_compound);   // Create the new conversion that is to be found if one does not exist.
-	let product = 1.0;
-	let sum = 0.0;
 	for (var i = 0; i < to_compound.unitpower_list.length; i++) {
 		for (var j = 0; j < from_compound.unitpower_list.length; j++) {
 			if  (to_compound.unitpower_list[i].unit.given_type === from_compound.unitpower_list[j].unit.given_type) {
@@ -224,83 +216,81 @@ function convertComp(to_compound, from_compound, value) {
 	from_compound.system[from_compound.given_type].push(compResult);
 	if (to_compound.system[to_compound.given_type] === undefined) 
 		to_compound.system[to_compound.given_type] = [];
-    console.log("Adding inverse");
 	convertComp(from_compound,to_compound,value)
 	return [compResult.convert(value), compResult];
 }
 
-
 /* TEST CODE FOR BASE UNIT CONVERTER */
+function unitTest(){
+    var metric = new System("Metric",[],[],[],[],[],[]);
+    var imperial = new System("Imperial",[],[],[],[],[],[]);
+    var smootric = new System("Smootric",[],[],[],[],[],[]);
+    var feathers = new System("feathers",[],[],[],[],[],[]);
 
-var metric = new System("Metric",[],[],[],[],[],[]);
-var imperial = new System("Imperial",[],[],[],[],[],[]);
-var smootric = new System("Smootric",[],[],[],[],[],[]);
-var feathers = new System("feathers",[],[],[],[],[],[]);
+    var meter = new BaseUnit("meter", "m", "The length of a meter stick", "length", metric);
+    var foot = new BaseUnit("foot","ft","Less smelly, but about as long as a large human foot.","length",imperial);
+    var smoot = new BaseUnit("smoot","smt","replace 'f' with 'sm' and you get a smoot.","length",smootric);
+    var flock = new BaseUnit("flock","fl","I don't even know.","length",feathers);
+    var celsius = new BaseUnit("celsius","dC","A unit of temperature in the metric system","temperature",metric);
+    var fahrenheit = new BaseUnit("fahrenheit","dF","A unit of temperature in the imperial system","temperature",imperial);
+    var warmth = new BaseUnit("warmth","dW","A unit of temperature in the feathers system","temperature",feathers);
+    var secondM = new BaseUnit("second","s", "THE unit of time","time",metric);
+    var secondI = new BaseUnit("second","s", "THE unit of time","time",imperial);
+    var kilogram = new BaseUnit("kilogram","kg","The metric unit of mass","mass",metric);
+    var slug = new BaseUnit("slug","slug","The imperial unit of mass","mass", imperial);
 
-var meter = new BaseUnit("meter", "m", "The length of a meter stick", "length", metric);
-var foot = new BaseUnit("foot","ft","Less smelly, but about as long as a large human foot.","length",imperial);
-var smoot = new BaseUnit("smoot","smt","replace 'f' with 'sm' and you get a smoot.","length",smootric);
-var flock = new BaseUnit("flock","fl","I don't even know.","length",feathers);
-var celsius = new BaseUnit("celsius","dC","A unit of temperature in the metric system","temperature",metric);
-var fahrenheit = new BaseUnit("fahrenheit","dF","A unit of temperature in the imperial system","temperature",imperial);
-var warmth = new BaseUnit("warmth","dW","A unit of temperature in the feathers system","temperature",feathers);
-var secondM = new BaseUnit("second","s", "THE unit of time","time",metric);
-var secondI = new BaseUnit("second","s", "THE unit of time","time",imperial);
-var kilogram = new BaseUnit("kilogram","kg","The metric unit of mass","mass",metric);
-var slug = new BaseUnit("slug","slug","The imperial unit of mass","mass", imperial);
+    var metertofoot = new UnitConversions(foot,meter, 0, 3.28084);
+    var foottometer = new UnitConversions(meter,foot, 0, 1.0/3.28084);
+    var foottosmoot = new UnitConversions(smoot,foot, 0, 42.0);
+    var foottoflock = new UnitConversions(flock,foot, 0, 23.5);
+    var flocktofoot = new UnitConversions(foot,flock, 0, 1/23.5);
+    var smoottofoot = new UnitConversions(foot,smoot, 0, 1/42.0);
+    var celsiustofahrenheit = new UnitConversions(fahrenheit,celsius,32.0,9.0/5.0);
+    var fahrenheittowarmth = new UnitConversions(warmth,fahrenheittowarmth,12.0,3.0/5.0);
+    var kilogramtoslug = new UnitConversions(slug,kilogram,0,1.0/14.59390);
+    var slugtokilogram = new UnitConversions(kilogram,slug,0,14.59390);
 
-var metertofoot = new UnitConversions(foot,meter, 0, 3.28084);
-var foottometer = new UnitConversions(meter,foot, 0, 1.0/3.28084);
-var foottosmoot = new UnitConversions(smoot,foot, 0, 42.0);
-var foottoflock = new UnitConversions(flock,foot, 0, 23.5);
-var flocktofoot = new UnitConversions(foot,flock, 0, 1/23.5);
-var smoottofoot = new UnitConversions(foot,smoot, 0, 1/42.0);
-var celsiustofahrenheit = new UnitConversions(fahrenheit,celsius,32.0,9.0/5.0);
-var fahrenheittowarmth = new UnitConversions(warmth,fahrenheittowarmth,12.0,3.0/5.0);
-var kilogramtoslug = new UnitConversions(slug,kilogram,0,1.0/14.59390);
-var slugtokilogram = new UnitConversions(kilogram,slug,0,14.59390);
-
-metric.length.push(metertofoot);
-metric.mass.push(kilogramtoslug);
-metric.temperature.push(celsiustofahrenheit);
-imperial.temperature.push(fahrenheittowarmth);
-imperial.length.push(foottometer);
-imperial.length.push(foottosmoot);
-imperial.length.push(foottoflock);
-imperial.mass.push(slugtokilogram);
-feathers.length.push(flocktofoot);
-smootric.length.push(smoottofoot);
-
-
-let vis = [];
-var pair = new UnitPair(smoot,meter);
+    metric.length.push(metertofoot);
+    metric.mass.push(kilogramtoslug);
+    metric.temperature.push(celsiustofahrenheit);
+    imperial.temperature.push(fahrenheittowarmth);
+    imperial.length.push(foottometer);
+    imperial.length.push(foottosmoot);
+    imperial.length.push(foottoflock);
+    imperial.mass.push(slugtokilogram);
+    feathers.length.push(flocktofoot);
+    smootric.length.push(smoottofoot);
 
 
-
-console.log("Answer: "+convertUnit(pair,3));    // Convert 3 meters into smoots.
-// The new path should exist when the second call is made.
-console.log("Answer: "+convertUnit(pair,4));    // Convert 4 meters into smoots.(should use new path.)
-
-console.log("Answer: "+convertUnit(new UnitPair(meter,smoot),413.38584))    // Convert 413.38584 smoots into meters, should be 3 meters.
-
-console.log("Answer: "+convertUnit(new UnitPair(meter,flock),100));
-
-console.log("12 celsius to fahrenheit");
-console.log("Answer: "+convertUnit(new UnitPair(fahrenheit,celsius),12));
-console.log("10 celsius to warmth");
-console.log("Answer: "+convertUnit(new UnitPair(warmth,celsius),10));
-/* COMPOUND UNIT CONVERSION TESTING */
-
-var newton = new CompoundUnit("Newton", "N", "A unit of force", "force", [new UnitPower(kilogram, 1),new UnitPower(meter, 1),new UnitPower(secondM, -2)], metric)
-var poundforce = new CompoundUnit("poundforce","lbf","The imperial unit of force","force",[new UnitPower(slug, 1),new UnitPower(foot, 1),new UnitPower(secondI, -2)], imperial);
-
-console.log("from 10 newton to poundforce");
-console.log(convertComp(poundforce, newton, 10)[0]);
-console.log("from 22.5 poundforce to newton");
-console.log(convertComp(newton,poundforce, 22.5)[0]);
+    let vis = [];
+    var pair = new UnitPair(smoot,meter);
 
 
 
+    console.log("Answer: "+convertUnit(pair,3));    // Convert 3 meters into smoots.
+    // The new path should exist when the second call is made.
+    console.log("Answer: "+convertUnit(pair,4));    // Convert 4 meters into smoots.(should use new path.)
+
+    console.log("Answer: "+convertUnit(new UnitPair(meter,smoot),413.38584))    // Convert 413.38584 smoots into meters, should be 3 meters.
+
+    console.log("Answer: "+convertUnit(new UnitPair(meter,flock),100));
+
+    console.log("12 celsius to fahrenheit");
+    console.log("Answer: "+convertUnit(new UnitPair(fahrenheit,celsius),12));
+    console.log("10 celsius to warmth");
+    console.log("Answer: "+convertUnit(new UnitPair(warmth,celsius),10));
+    /* COMPOUND UNIT CONVERSION TESTING */
+
+    var newton = new CompoundUnit("Newton", "N", "A unit of force", "force", [new UnitPower(kilogram, 1),new UnitPower(meter, 1),new UnitPower(secondM, -2)], metric)
+    var poundforce = new CompoundUnit("poundforce","lbf","The imperial unit of force","force",[new UnitPower(slug, 1),new UnitPower(foot, 1),new UnitPower(secondI, -2)], imperial);
+    var velocity = new CompoundUnit("velocity","v","a speed usually with an associated direction.",[new UnitPower(meter,1),new UnitPower(secondM,-1)], metric);
+    console.log("from 10 newton to poundforce");
+    console.log(convertComp(poundforce, newton, 10)[0]);
+    console.log("from 2.2480899554 poundforce to newton");
+    console.log(convertComp(newton,poundforce, 2.2480899554)[0]);
+}
+
+unitTest();
 
 
 

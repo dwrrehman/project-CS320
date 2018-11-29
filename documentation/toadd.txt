@@ -1,0 +1,9 @@
+the remaining things we need to add for the project:
+(to be ready to present in time on Tue/Thur)
+
+- finish UI for main page.
+- finish UI for adding a unit
+- add the calculators expression parser, and implement multiple buttons for its functionality.
+- add load and store variables datastructures / algorithm.
+
+

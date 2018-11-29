@@ -1,0 +1,14 @@
+unit int with calc UI - base conv and comp conv:
+----> Daniel
+
+
+add unit page:
+- grammar for the expression definition for comp unit
+- UI (using semantic)
+----> Jake
+
+calculator parser:
+- grammar for parser
+----> Andrew
+
+

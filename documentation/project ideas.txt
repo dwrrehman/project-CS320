@@ -1,0 +1,12 @@
+CS 320 Project 1:
+
+Members: Jake, Daniel, Andew,
+
+Project Ideas:
+- make a projectile motion simulator
+- make a robot controller connector system
+- make a sandbox game 
+
+
+Libraries:
+- WebGL

@@ -78,7 +78,7 @@ class SystemMap {
     }
     add(system){
         if(this[system.given_name] === undefined){
-            this[system.abbreviation] = system;
+            this[system.given_name] = system;
         }else{
             console.log("System with that name already exists.");
 

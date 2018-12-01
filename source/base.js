@@ -59,7 +59,33 @@ function add_new_system(given_systemname) {
 	systemes.push(system(given_systemname, []));
 }
 
+class UnitMap {
+    constructor(){
+    }
+    add(unit){
+        if(this[unit.abbreviation] === undefined){
+            this[unit.abbreviation] = unit;
+        }else{
+            console.log("Unit with that abbreviation already exists.");
 
+            console.log(this[unit.abbreviation]);
+        }
+    }
+}
+
+class SystemMap {
+    constructor(){
+    }
+    add(system){
+        if(this[system.given_name] === undefined){
+            this[system.abbreviation] = system;
+        }else{
+            console.log("System with that name already exists.");
+
+            console.log(this[system.given_name]);
+        }
+    }
+}
 
 
 
@@ -73,12 +99,12 @@ class UnitPower {
 
 class CompoundUnit {
 	constructor(given_name, abbreviation, description, given_type, unitpower_list, system) {
-		this.given_name = given_name;
-		this.abbreviation = abbreviation;
-		this.description = description;
-		this.unitpower_list = unitpower_list;
-		this.given_type = given_type
-		this.system = system;
+		this.given_name = given_name;               // String
+		this.abbreviation = abbreviation;           // String
+		this.description = description;             // String
+		this.unitpower_list = unitpower_list;       // list of UnitPower Objects
+		this.given_type = given_type                // String
+		this.system = system;                       // Actual system object.
 	}
 }
 
@@ -104,7 +130,9 @@ class abstractCompound {            // Allows for easy arithmetic with any combi
     equals(abstr){
         let pow = abstr.powMap;
         let unitNames = Object.keys(pow);
+        console.log("Comparing "+Object.keys(this.powMap)+" and "+unitNames);
         if(unitNames.length !== Object.keys(this.powMap).length){
+            console.log("Not equal because of length++++++++++++++++++=");
             return false;
         }
         for(let name in unitNames){
@@ -153,51 +181,25 @@ class CompoundUnitConversions{
 
 class BaseUnit {
 	constructor(given_name, abbreviation, description, given_type, system) {
-		this.given_name = given_name;
-		this.abbreviation = abbreviation;
-		this.description = description;
-		this.given_type = given_type;
-		this.system = system;
+		this.given_name = given_name;       // String
+		this.abbreviation = abbreviation;   // String
+		this.description = description;     // String
+		this.given_type = given_type;       // String
+		this.system = system;               // Actual system object
 	}
 }
 
-class UnitMap {
-    constructor(){
-    }
-    add(unit){
-        if(this[unit.abbreviation] === undefined){
-            this[unit.abbreviation] = unit;
-        }else{
-            console.log("Unit with that abbreviation already exists.");
 
-            console.log(this[unit.abbreviation]);
-        }
-    }
-}
-
-class SystemMap {
-    constructor(){
-    }
-    add(system){
-        if(this[system.given_name] === undefined){
-            this[system.abbreviation] = system;
-        }else{
-            console.log("System with that name already exists.");
-
-            console.log(this[system.given_name]);
-        }
-    }
-}
 
 class System {
 	constructor(given_name, length, mass, time, charge, temperature, brightness) {
-		this.given_name = given_name;
-		this.length = length;
-		this.mass = mass;
-		this.time = time;
-		this.charge = charge;
-		this.temperature = temperature;
-		this.brightness = brightness;
+		this.given_name = given_name;   // String
+		this.length = length;           // List of UnitConversions
+		this.mass = mass;               // List of UnitConversions
+		this.time = time;               // List of UnitConversions
+		this.charge = charge;           // List of UnitConversions
+		this.temperature = temperature; // List of UnitConversions
+		this.brightness = brightness;   // List of UnitConversions
 	}
 
 	/*function add_conversion() {
@@ -219,9 +221,12 @@ class Value{
             this.quantity = quantity;
         }
         this.units = new abstractCompound(compound);
+        console.log("Making a new value "+quantity);
+        console.log(compound);
     }
     add(val){
-        if(this.units.equals(val.units)){
+        //this.units.equals(val.units)
+        if(true){
             console.log("Successfully added..............");
             this.quantity += val.quantity;
         }else{
@@ -342,10 +347,33 @@ function convertComp(to_compound, from_compound, value) {
 function getNextValue(expression,systems,baseUnits,compoundUnits){
     let quantity = getNextNumber(expression);   // Returns a string.
     if(quantity.charAt(0) === '('){
-        return solve(quantity.substring(1,quantity.length-1),systems,baseUnits,compoundUnits);
+        let newVal = solve(quantity.substring(1,quantity.length-1),systems,baseUnits,compoundUnits);
+        removeParen(expression);
+        return newVal;
     }
     let compound = getAbstractCompound(expression,baseUnits,compoundUnits);// Actually returns a unit power list.
     return new Value(quantity,compound);
+}
+
+function removeParen(expression){
+    let newString = "";
+    let parenCount = 0;
+    for(let i = 0; i < expression.val.length; i++){
+        if(expression.val[i] === "("){
+            parenCount++;
+            newString += expression.val[i];
+        }else if(expression.val[i] === ")"){
+            parenCount--;
+            newString += expression.val[i];
+        }
+        if(parenCoun === 0){
+            newString += expression.val[i];
+            expression.val = expression.val.substring(newString.length,expression.val.length);
+            return 0;
+        }
+    }
+    console.log("ERROR: Non matching parenthesis");
+    return 1;
 }
 
 function getNextNumber(expression){
@@ -480,23 +508,18 @@ function solve(expression, systems, baseUnits, compoundUnits){
         console.log(val2.units);
         op2 = getOp(expression);    
         console.log("Op2: "+op2);
-        if(op1 === ""){
+        if( val2 === undefined || val2.quantity === "" || val2.quantity === null){
             return val1;
         }
         if(precidence(op1) >= precidence(op2)){
-            if(op1 !== ""){
-                doOp(val1,op1,val2);
-                if(op2 !== ""){
-                    doOp(val1,op2,solve(expression,systems,baseUnits,compoundUnits));
-                }
+            doOp(val1,op1,val2);
+            if(op2 === undefined || op2 === "" || op2 === null){
+                return val1;
             }
+            doOp(val1,op2,solve(expression,systems,baseUnits,compoundUnits));
         }else if(precidence(op1) < precidence(op2)){
-            if(op2 !== ""){
-                doOp(val2,op2,solve(expression,systems,baseUnits,compoundUnits));
-                if(op1 !== ""){
-                    doOp(val1,op1,val2);
-                }
-            }
+            doOp(val2, op2, solve(expression,systems,baseUnits,compoundUnits));
+            doOp(val1,op1,val2);
         }    
     }
             return val1;
@@ -589,7 +612,7 @@ function solve(expression, systems, baseUnits, compoundUnits){
     console.log(convertComp(poundforce, newton, 10)[0]);
     console.log("from 2.2480899554 poundforce to newton");
     console.log(convertComp(newton,poundforce, 2.2480899554)[0]);
-    let testx = new Expression("145.6kg^2*32.5m^1s^-2kg^-1+15kg^1m^1s^-2");
+    let testx = new Expression("145.6kg^1*32.5kg^1+15kg^2-12kg^1*2kg^1");
     let ans = solve(testx,systems1, baseunits, compoundunits);
     console.log(ans.quantity);
     console.log(ans.units);

@@ -88,11 +88,7 @@ class AbstractCompound { // Allows for easy arithmetic with any combination of u
   equals(abstr) {
     const pow = abstr.powMap;
     const unitNames = Object.keys(pow);
-    console.log('Comparing');
-    console.log(unitNames);
-    console.log(Object.keys(this.powMap));
     if (unitNames.length !== Object.keys(this.powMap).length) {
-      console.log('Not equal because of length++++++++++++++++++=');
       return false;
     }
     let name;
@@ -183,13 +179,10 @@ class Value {
     } else {
       this.units = compound;
     }
-    console.log(`Making a new value ${quantity}`);
-    console.log(compound);
   }
 
   add(val) {
     if (this.units.equals(val.units)) {
-      console.log('Successfully added..............');
       console.log(val.quantity);
       console.log(this.quantity);
       this.quantity += val.quantity;
@@ -237,8 +230,6 @@ class Value {
         delete this.units.powMap[key];
       }
     }
-    console.log('Just did some powerful stuff');
-    console.log(this.units);
   }
 }
 
@@ -326,11 +317,7 @@ function convertComp(ToCompound, FromCompound, value) {
 function getNextValue(expression, systems, baseUnits, compoundUnits) {
   if (expression.val.charAt(0) === '(') {
     const quantity = removeParen(expression);
-    console.log('Parens removed -----1-1-1--1-1--------1-1-1-');
-    console.log(expression.val);
     const newString = new Expression(quantity.substring(1, quantity.length - 2));
-    console.log('NEW STRING AHHHHHHHHHHHHHHHHHHHHHHH');
-    console.log(newString.val);
     const newVal = solve(newString, systems, baseUnits, compoundUnits);
     return newVal;
   }
@@ -477,34 +464,19 @@ function solve(expression, systems, baseUnits, compoundUnits) {
   let val2;
   let op2;
   if (expression.val !== undefined && expression.val !== '' && expression.val !== null) {
-    console.log(`Starting Expression------>${expression.val}`);
     val1 = getNextValue(expression, systems, baseUnits, compoundUnits);
-    console.log(expression.val);
-    console.log(`Value 1: ${val1.quantity}`);
-    console.log(val1.units);
     op1 = getOp(expression);
-    console.log(expression.val);
-    console.log(`Op1: ${op1}`);
     val2 = getNextValue(expression, systems, baseUnits, compoundUnits);
-    console.log(expression.val);
-    console.log(`Value 2: ${val2.quantity}`);
-    console.log(val2.units);
     op2 = getOp(expression);
-    console.log(expression.val);
-    console.log(`Op2: ${op2}`);
     if (val1 === undefined || isNaN(val1.quantity) || val1.quantity === null) {
       console.log('What??? nothing is defined');
       return undefined;
     }
     if (val2 === undefined || isNaN(val2.quantity) || val2.quantity === null) {
-      console.log('Val2 is not defined returning val 1');
       return val1;
     }
     if (precidence(op1) >= precidence(op2)) {
       doOp(val1, op1, val2);
-      console.log('Result of operation.....');
-      console.log(val1.quantity);
-      console.log(val1.units);
       if (op2 === undefined || op2 === '' || op2 === null) {
         return val1;
       }

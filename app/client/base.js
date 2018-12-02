@@ -21,9 +21,6 @@ const bin_constants = [];
 // --------------------------- converter code: ---------------------------------
 
 class UnitMap {
-  constructor() {
-  }
-
   add(unit) {
     if (this[unit.abbreviation] === undefined) {
       this[unit.abbreviation] = unit;
@@ -36,16 +33,13 @@ class UnitMap {
 }
 
 class SystemMap {
-  constructor() {
-  }
-
   add(system) {
-    if (this[system.given_name] === undefined) {
+    if (this[system.givenName] === undefined) {
       this[system.abbreviation] = system;
     } else {
       console.log('System with that name already exists.');
 
-      console.log(this[system.given_name]);
+      console.log(this[system.givenName]);
     }
   }
 }
@@ -60,17 +54,17 @@ class UnitPower {
 
 
 class CompoundUnit {
-  constructor(given_name, abbreviation, description, given_type, unitpower_list, system) {
-    this.given_name = given_name; // String
+  constructor(givenName, abbreviation, description, GivenType, UnitpowerList, system) {
+    this.givenName = givenName; // String
     this.abbreviation = abbreviation; // String
     this.description = description; // String
-    this.unitpower_list = unitpower_list; // list of UnitPower Objects
-    this.given_type = given_type; // String
+    this.UnitpowerList = UnitpowerList; // list of UnitPower Objects
+    this.GivenType = GivenType; // String
     this.system = system; // Actual system object.
   }
 }
 
-class abstractCompound { // Allows for easy arithmetic with any combination of units.
+class AbstractCompound { // Allows for easy arithmetic with any combination of units.
   constructor(unitpowerlist) {
     this.powMap = {};
     this.unitMap = {};
@@ -94,12 +88,16 @@ class abstractCompound { // Allows for easy arithmetic with any combination of u
   equals(abstr) {
     const pow = abstr.powMap;
     const unitNames = Object.keys(pow);
-    console.log(`Comparing ${Object.keys(this.powMap)} and ${unitNames}`);
+    console.log('Comparing');
+    console.log(unitNames);
+    console.log(Object.keys(this.powMap));
     if (unitNames.length !== Object.keys(this.powMap).length) {
       console.log('Not equal because of length++++++++++++++++++=');
       return false;
     }
-    for (const name in unitNames) {
+    let name;
+    for (let i = 0; i < unitNames.length; i++) {
+      name = unitNames[i];
       if (pow[name] !== this.powMap[name]) {
         console.log(`${pow[name]} !== ${this.powMap[name]}`);
         return false;
@@ -137,7 +135,7 @@ class CompoundUnitConversions {
   convert(value) {
     let total = value;
     for (let i = 0; i < this.conversions.length; i++) {
-      total *= Math.pow(this.conversions[i][0].factor, this.conversions[i][1]);
+      total *= this.conversions[i][0].factor ** (this.conversions[i][1]);
     }
     return total;
   }
@@ -145,19 +143,19 @@ class CompoundUnitConversions {
 
 
 class BaseUnit {
-  constructor(given_name, abbreviation, description, given_type, system) {
-    this.given_name = given_name; // String
+  constructor(givenName, abbreviation, description, GivenType, system) {
+    this.givenName = givenName; // String
     this.abbreviation = abbreviation; // String
     this.description = description; // String
-    this.given_type = given_type; // String
+    this.GivenType = GivenType; // String
     this.system = system; // Actual system object
   }
 }
 
 
 class System {
-  constructor(given_name, length, mass, time, charge, temperature, brightness) {
-    this.given_name = given_name; // String
+  constructor(givenName, length, mass, time, charge, temperature, brightness) {
+    this.givenName = givenName; // String
     this.length = length; // List of UnitConversions
     this.mass = mass; // List of UnitConversions
     this.time = time; // List of UnitConversions
@@ -165,10 +163,6 @@ class System {
     this.temperature = temperature; // List of UnitConversions
     this.brightness = brightness; // List of UnitConversions
   }
-
-  /* function add_conversion() {
-
-	} */
 }
 
 class Expression {
@@ -184,21 +178,27 @@ class Value {
     } else {
       this.quantity = quantity;
     }
-    this.units = new abstractCompound(compound);
+    if (Array.isArray(compound)) {
+      this.units = new AbstractCompound(compound);
+    } else {
+      this.units = compound;
+    }
     console.log(`Making a new value ${quantity}`);
     console.log(compound);
   }
 
   add(val) {
-    // this.units.equals(val.units)
-    if (true) {
+    if (this.units.equals(val.units)) {
       console.log('Successfully added..............');
+      console.log(val.quantity);
+      console.log(this.quantity);
       this.quantity += val.quantity;
     } else {
       console.log('Error: Addition of two different units. Value.add();');
+      console.log(val.quantity);
+      console.log(this.quantity);
       console.log(this.units.powMap);
       console.log(val.units.powMap);
-      return undefined;
     }
   }
 
@@ -218,33 +218,43 @@ class Value {
 
   divide(val) {
     this.quantity /= val.quantity;
-    for (const key in val.units.keys()) {
+    const keys = Object.keys(val.units.powMap);
+    let key;
+    for (let i = 0; i < keys.length; i++) {
+      key = keys[i];
       this.units.add(new UnitPower(key, -val.units[key]));
     }
   }
 
   pow(power) {
-    this.quantity = Math.pow(this.quantity, power);
-    for (const key in this.units.keys()) {
-      this.units[key] *= power;
-      if (this.units[key] === 0) {
-        delete this.units[key];
+    this.quantity = this.quantity ** power;
+    const keys = Object.keys(this.units.powMap);
+    let key;
+    for (let i = 0; i < keys.length; i++) {
+      key = keys[i];
+      this.units.powMap[key] *= power;
+      if (this.units.powMap[key] === 0) {
+        delete this.units.powMap[key];
       }
     }
+    console.log('Just did some powerful stuff');
+    console.log(this.units);
   }
 }
 
 
-function baseunit_converter(desired, system, visited, product, sum) { // expects: {Unit, Unit}, from_sys  [] 1.0, 0.0
-  const list = system[desired.from.given_type];
+function BaseunitConverter(desired, system, visited, product, sum) { // expects: {Unit, Unit}, FromSys  [] 1.0, 0.0
+  const list = system[desired.from.GivenType];
   if (system in visited) return [false, product, sum];
 
   for (let i = 0; i < list.length; i++) {
-    if (list[i].to.given_name === desired.to.given_name) return [true, product * list[i].factor, sum * list[i].factor + list[i].shift];
+    if (list[i].to.givenName === desired.to.givenName) {
+      return [true, product * list[i].factor, sum * list[i].factor + list[i].shift];
+    }
   }
   visited.push(desired.from.system);
   for (let i = 0; i < list.length; i++) {
-    const result = baseunit_converter(desired, list[i].to.system, visited, list[i].factor * product, list[i].shift + (sum * list[i].factor));
+    const result = BaseunitConverter(desired, list[i].to.system, visited, list[i].factor * product, list[i].shift + (sum * list[i].factor));
     if (result[0]) return result;
   }
   return [false, product, sum];
@@ -252,46 +262,48 @@ function baseunit_converter(desired, system, visited, product, sum) { // expects
 
 function convertUnit(desired, value) {
   const visited = [];
-  const factor = baseunit_converter(desired, desired.from.system, visited, 1.0, 0);
+  const factor = BaseunitConverter(desired, desired.from.system, visited, 1.0, 0);
   if (visited.length > 0) {
     // Define a new path.
-    const from_to_to = new UnitConversions(desired.to, desired.from, factor[2], factor[1]);
-    desired.from.system.length.push(from_to_to);
-    const to_to_from = new UnitConversions(desired.from, desired.to, -factor[2] * (1 / factor[1]), 1 / factor[1]);
-    desired.to.system.length.push(to_to_from);
+    const FromToTo = new UnitConversions(desired.to, desired.from, factor[2], factor[1]);
+    desired.from.system.length.push(FromToTo);
+    const ToToFrom = new UnitConversions(desired.from, desired.to, -factor[2] * (1 / factor[1]), 1 / factor[1]);
+    desired.to.system.length.push(ToToFrom);
   } else {
     console.log('Path exists already.');
   }
   return value * factor[1] + factor[2];
 }
 
-function convertComp(to_compound, from_compound, value) {
+function convertComp(ToCompound, FromCompound, value) {
   let conversion;
+  let found;
   // Check if a conversion already exists for this compound unit.
-  if (from_compound.system[from_compound.given_type] !== undefined) {
-    for (let i = 0; i < from_compound.system[from_compound.given_type].length; i++) {
-      conversion = from_compound.system[from_compound.given_type][i].to;
-      if (conversion.given_name === to_compound.given_name) {
+  if (FromCompound.system[FromCompound.GivenType] !== undefined) {
+    for (let i = 0; i < FromCompound.system[FromCompound.GivenType].length; i++) {
+      conversion = FromCompound.system[FromCompound.GivenType][i].to;
+      if (conversion.givenName === ToCompound.givenName) {
         console.log('Path exists already.');
 
-        return [from_compound.system[from_compound.given_type][i].convert(value), from_compound.system[from_compound.given_type][i]];
+        return [FromCompound.system[FromCompound.GivenType][i].convert(value),
+          FromCompound.system[FromCompound.GivenType][i]];
       }
     }
-  } else from_compound.system[from_compound.given_type] = [];
+  } else FromCompound.system[FromCompound.GivenType] = [];
   console.log('Path does not yet exist...adding.');
-  const compResult = new CompoundUnitConversions(to_compound, from_compound); // Create the new conversion that is to be found if one does not exist.
-  for (let i = 0; i < to_compound.unitpower_list.length; i++) {
-    for (let j = 0; j < from_compound.unitpower_list.length; j++) {
-      if (to_compound.unitpower_list[i].unit.given_type === from_compound.unitpower_list[j].unit.given_type) {
-        if (to_compound.unitpower_list[i].power === from_compound.unitpower_list[j].power) {
+  const compResult = new CompoundUnitConversions(ToCompound, FromCompound); // Create the new conversion that is to be found if one does not exist.
+  for (let i = 0; i < ToCompound.UnitpowerList.length; i++) {
+    for (let j = 0; j < FromCompound.UnitpowerList.length; j++) {
+      if (ToCompound.UnitpowerList[i].unit.GivenType === FromCompound.UnitpowerList[j].unit.GivenType) {
+        if (ToCompound.UnitpowerList[i].power === FromCompound.UnitpowerList[j].power) {
           found = true;
-          const desired = new UnitPair(to_compound.unitpower_list[i].unit, from_compound.unitpower_list[j].unit);
-          const currentPower = to_compound.unitpower_list[i].power;
-          if (to_compound.unitpower_list[i].unit.given_name !== from_compound.unitpower_list[j].unit.given_name) {
-            const result = baseunit_converter(desired, from_compound.unitpower_list[j].unit.system, [], 1.0, 0.0);
+          const desired = new UnitPair(ToCompound.UnitpowerList[i].unit, FromCompound.UnitpowerList[j].unit);
+          const currentPower = ToCompound.UnitpowerList[i].power;
+          if (ToCompound.UnitpowerList[i].unit.givenName !== FromCompound.UnitpowerList[j].unit.givenName) {
+            const result = BaseunitConverter(desired, FromCompound.UnitpowerList[j].unit.system, [], 1.0, 0.0);
             compResult.conversions.push([new UnitConversions(desired.to, desired.from, result[2], result[1]), currentPower]);
             if (!result[0]) {
-              console.log(`Error: convertComp(): base unit conversion failure! Converting ${desired.from.given_name} to ${desired.to.given_name}`);
+              console.log(`Error: convertComp(): base unit conversion failure! Converting ${desired.from.givenName} to ${desired.to.givenName}`);
               return [0, undefined];
             }
           }
@@ -303,21 +315,24 @@ function convertComp(to_compound, from_compound, value) {
       return [0, undefined];
     }
   }
-  from_compound.system[from_compound.given_type].push(compResult);
-  if (to_compound.system[to_compound.given_type] === undefined) to_compound.system[to_compound.given_type] = [];
-  convertComp(from_compound, to_compound, value);
+  FromCompound.system[FromCompound.GivenType].push(compResult);
+  if (ToCompound.system[ToCompound.GivenType] === undefined) ToCompound.system[ToCompound.GivenType] = [];
+  convertComp(FromCompound, ToCompound, value);
   return [compResult.convert(value), compResult];
 }
 /* Parsing code */
 
 // baseUnits and compoundUnits are supposed to be "maps" of unit abbreviation to units
 function getNextValue(expression, systems, baseUnits, compoundUnits) {
-  const quantity = getNextNumber(expression); // Returns a string.
-  if (quantity.charAt(0) === '(') {
-    const newVal = solve(quantity.substring(1, quantity.length - 1), systems, baseUnits, compoundUnits);
-    removeParen(expression);
+  if (expression.val.charAt(0) === '(') {
+    const quantity = removeParen(expression);
+    const newString = new Expression(quantity.substring(1, quantity.length - 2));
+    console.log('NEW STRING AHHHHHHHHHHHHHHHHHHHHHHH');
+    console.log(newString.val);
+    const newVal = solve(newString, systems, baseUnits, compoundUnits);
     return newVal;
   }
+  const quantity = getNextNumber(expression); // Returns a string.
   const compound = getAbstractCompound(expression, baseUnits, compoundUnits);// Actually returns a unit power list.
   return new Value(quantity, compound);
 }
@@ -332,11 +347,13 @@ function removeParen(expression) {
     } else if (expression.val[i] === ')') {
       parenCount--;
       newString += expression.val[i];
+    } else {
+      newString += expression.val[i];
     }
-    if (parenCoun === 0) {
+    if (parenCount === 0) {
       newString += expression.val[i];
       expression.val = expression.val.substring(newString.length, expression.val.length);
-      return 0;
+      return newString;
     }
   }
   console.log('ERROR: Non matching parenthesis');
@@ -360,7 +377,7 @@ function doOp(value1, op, value2) {
   } else if (op === '/') {
     value1.divide(value2);
   } else if (op === '^') {
-    value.pow(value2.quantity);
+    value1.pow(value2.quantity);
   }
   // Result stored in value1.
 }
@@ -388,6 +405,9 @@ function getAbstractCompound(expression, baseUnits, compoundUnits) {
 function getUnit(expression, baseUnits, compoundUnits) {
   // Unit prefix followed by ^ and a float
   const newUnit = getWord(expression);
+  if (newUnit === undefined || newUnit === '') {
+    return '';
+  }
   const power = getPower(expression);
   if (baseUnits[newUnit] !== undefined || compoundUnits[newUnit] !== undefined) {
     return newUnit + power;
@@ -454,23 +474,35 @@ function solve(expression, systems, baseUnits, compoundUnits) {
   let op1;
   let val2;
   let op2;
-  if (expression.val != '') {
-    console.log(expression.val);
+  if (expression.val !== undefined && expression.val !== '' && expression.val !== null) {
+    console.log(`Starting Expression------>${expression.val}`);
     val1 = getNextValue(expression, systems, baseUnits, compoundUnits);
+    console.log(expression.val);
     console.log(`Value 1: ${val1.quantity}`);
     console.log(val1.units);
     op1 = getOp(expression);
+    console.log(expression.val);
     console.log(`Op1: ${op1}`);
     val2 = getNextValue(expression, systems, baseUnits, compoundUnits);
+    console.log(expression.val);
     console.log(`Value 2: ${val2.quantity}`);
     console.log(val2.units);
     op2 = getOp(expression);
+    console.log(expression.val);
     console.log(`Op2: ${op2}`);
-    if (val2 === undefined || val2.quantity === '' || val2.quantity === null) {
+    if (val1 === undefined || isNaN(val1.quantity) || val1.quantity === null) {
+      console.log('What??? nothing is defined');
+      return undefined;
+    }
+    if (val2 === undefined || isNaN(val2.quantity) || val2.quantity === null) {
+      console.log('Val2 is not defined returning val 1');
       return val1;
     }
     if (precidence(op1) >= precidence(op2)) {
       doOp(val1, op1, val2);
+      console.log('Result of operation.....');
+      console.log(val1.quantity);
+      console.log(val1.units);
       if (op2 === undefined || op2 === '' || op2 === null) {
         return val1;
       }
@@ -569,10 +601,15 @@ console.log('from 10 newton to poundforce');
 console.log(convertComp(poundforce, newton, 10)[0]);
 console.log('from 2.2480899554 poundforce to newton');
 console.log(convertComp(newton, poundforce, 2.2480899554)[0]);
-const testx = new Expression('145.6kg^1*32.5kg^1+15kg^2-12kg^1*2kg^1');
-const ans = solve(testx, systems1, baseunits, compoundunits);
-console.log(ans.quantity);
-console.log(ans.units);
+/* Solving Tests */
+const test1 = new Expression('(5kg^1)^3*(15*16+12)');
+const ans1 = solve(test1, systems1, baseunits, compoundunits);
+console.log(ans1.quantity);
+console.log(ans1.units);
+const test2 = new Expression('5kg^1^3*252');
+const ans2 = solve(test2, systems1, baseunits, compoundunits);
+console.log(ans2.quantity);
+console.log(ans2.units);
 
 // unitTest();
 
@@ -592,22 +629,22 @@ console.log(factor[1]);
 // variables and constants: bins :
 
 // a ds that could be a var or a const.
-function bin(given_name, given_data) {
-  this.given_name = given_name;
+function bin(givenName, given_data) {
+  this.givenName = givenName;
   this.given_data = given_data;
 }
 
 
 // adders:
 
-function add_variable(given_name, given_data) {
-  if (given_name === undefined && given_data === undefined) return;
-  bin_variables.push(bin(given_name, given_data));
+function add_variable(givenName, given_data) {
+  if (givenName === undefined && given_data === undefined) return;
+  bin_variables.push(bin(givenName, given_data));
 }
 
-function add_constant(given_name, given_data) {
-  if (given_name === undefined && given_data === undefined) return;
-  bin_constants.push(bin(given_name, given_data));
+function add_constant(givenName, given_data) {
+  if (givenName === undefined && given_data === undefined) return;
+  bin_constants.push(bin(givenName, given_data));
 }
 
 
@@ -619,7 +656,7 @@ let display_string = '';
 function receive(string) {
   if (string == 'store') {
     const bin_type = prompt('Specify the bin type: (variable/constant)', 'variable');
-    const given_name = prompt('Specify the name of the bin: ');
+    const givenName = prompt('Specify the name of the bin: ');
 
     const raw_data = document.getElementById('calculator_display').innerText;
     const num_data = Number(raw_data);
@@ -629,10 +666,10 @@ function receive(string) {
     }
 
     if (bin_type == 'variable') {
-      add_variable(given_name, num_data);
+      add_variable(givenName, num_data);
       alert('Stored Successfully');
     } else if (bin_type == 'constant') {
-      add_constant(given_name, num_data);
+      add_constant(givenName, num_data);
       alert('Stored Successfully');
     } else {
       alert(`cannot use bin type: ${bin_type}`);

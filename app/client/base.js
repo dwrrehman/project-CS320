@@ -326,6 +326,8 @@ function convertComp(ToCompound, FromCompound, value) {
 function getNextValue(expression, systems, baseUnits, compoundUnits) {
   if (expression.val.charAt(0) === '(') {
     const quantity = removeParen(expression);
+    console.log('Parens removed -----1-1-1--1-1--------1-1-1-');
+    console.log(expression.val);
     const newString = new Expression(quantity.substring(1, quantity.length - 2));
     console.log('NEW STRING AHHHHHHHHHHHHHHHHHHHHHHH');
     console.log(newString.val);
@@ -352,7 +354,7 @@ function removeParen(expression) {
     }
     if (parenCount === 0) {
       newString += expression.val[i];
-      expression.val = expression.val.substring(newString.length, expression.val.length);
+      expression.val = expression.val.substring(newString.length - 1, expression.val.length);
       return newString;
     }
   }
@@ -610,6 +612,14 @@ const test2 = new Expression('5kg^1^3*252');
 const ans2 = solve(test2, systems1, baseunits, compoundunits);
 console.log(ans2.quantity);
 console.log(ans2.units);
+const test3 = new Expression('5kg^1^3*(252*(16m^-3+5m^-3)-7m^-3)');
+const ans3 = solve(test3, systems1, baseunits, compoundunits);
+console.log(ans3.quantity);
+console.log(ans3.units);
+const test4 = new Expression('5kg^1^3*(252*(((16m^-3+5m^-3)))-7m^-3)');
+const ans4 = solve(test4, systems1, baseunits, compoundunits);
+console.log(ans4.quantity);
+console.log(ans4.units);
 
 // unitTest();
 

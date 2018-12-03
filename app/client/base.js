@@ -426,7 +426,7 @@ function getAbstractCompound(expression, baseUnits, compoundUnits) {
       div = unit.split('^');
       if (div.length === 1) {
         if (div[0].toUpperCase() !== div[0].toLowerCase()) {
-          div.append('^1');
+          div.push('1');
         }
       }
       if (baseUnits[div[0]] !== undefined) {
@@ -664,6 +664,11 @@ console.log(`Solving: ${test5.val}`);
 const ans5 = solve(test5, systems1, baseunits, compoundunits);
 console.log(ans5.quantity);
 console.log(ans5.units);
+const test6 = new Expression('5N*6^2)');
+console.log(`Solving: ${test6.val}`);
+const ans6 = solve(test6, systems1, baseunits, compoundunits);
+console.log(ans6.quantity);
+console.log(ans6.units);
 
 // unitTest();
 

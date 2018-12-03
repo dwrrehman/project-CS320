@@ -1,16 +1,8 @@
 <template name="add">
   <div class="section">
-    <div id="form">
-      <p style="font-family: Courier;">Name: </p>
-      <input id="name" style="font-family: Courier;" type="text">
-      <hr>
-      <p align="left" style="font-family: Courier;">Definition: </p>
-      <br>
-      <textarea id="formula" style="font-family: Courier;" placeholder="Insert unit definition here..."></textarea>
-      <div>
-        <br>
-        <button class="standard_button" id="submit_button" style="font-family: Courier;" onclick="submit_new_unit();">Done</button>
-      </div>
-    </div>
+    {{> quickForm
+        collection=baseUnitsCollection
+        id="AddBaseUnitForm"
+        type="insert"}}
   </div>
 </template>

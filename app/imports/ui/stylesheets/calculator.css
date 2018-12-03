@@ -74,6 +74,8 @@ table {
 
   color: black;
   background-color: white;
+
+  content-editable
 }
 
 .th_display {

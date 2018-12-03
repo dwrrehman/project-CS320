@@ -1,8 +1,15 @@
 <template name="add">
   <div class="section">
-    {{> quickForm
-        collection=baseUnitsCollection
-        id="AddBaseUnitForm"
-        type="insert"}}
+  {{#autoForm
+      collection=baseUnitsCollection
+      id="AddBaseUnitForm"
+      type="insert"}}
+    {{> afQuickField name="name"}}
+    {{> afQuickField name="abbreviation"}}
+    {{> afQuickField name="description"}}
+    {{> afQuickField name="type"}}
+    {{> afQuickField name="system"}}
+    <button type="submit">Submit</button>
+  {{/autoForm}}
   </div>
 </template>

@@ -1,8 +1,8 @@
 import './calculator.html';
-import '../../../../app/clients/base.js'
+import '../../../../client/base.js';
 import '../../stylesheets/calculator.css';
 import { Template } from 'meteor/templating';
-import { Systems } from '../../../api/systems/systems.js'
+import { Systems } from '../../../api/systems/systems.js';
 
 Template.calculator.helpers({
 	SystemsCollection() {

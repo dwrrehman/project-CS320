@@ -424,6 +424,11 @@ function getAbstractCompound(expression, baseUnits, compoundUnits) {
     unit = getUnit(expression, baseUnits, compoundUnits);
     if (unit !== '') {
       div = unit.split('^');
+      if (div.length === 1) {
+        if (div[0].toUpperCase() !== div[0].toLowerCase()) {
+          div.append('^1');
+        }
+      }
       if (baseUnits[div[0]] !== undefined) {
         unitPowerList.push(new UnitPower(baseUnits[div[0]], parseFloat(div[1])));
       } else if (compoundUnits[div[0]] !== undefined) {

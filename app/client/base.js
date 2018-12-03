@@ -1,3 +1,4 @@
+/* eslint-disable max-len,no-use-before-define,no-param-reassign,no-restricted-globals,camelcase */
 // this file contains the algorithmic javascritpt code for the project, as well as some of the view-switching code.
 
 
@@ -58,7 +59,21 @@ class CompoundUnit {
     this.givenName = givenName; // String
     this.abbreviation = abbreviation; // String
     this.description = description; // String
-    this.UnitpowerList = UnitpowerList; // list of UnitPower Objects
+    if (Array.isArray(UnitpowerList)) {
+      this.UnitpowerList = UnitpowerList; // list of UnitPower Objects
+    } else if (typeof (UnitpowerList) === 'object') {
+      console.log(UnitpowerList);
+      const keys = Object.keys(UnitpowerList.powMap);
+      let key;
+      const newunitpowers = [];
+      for (let i = 0; i < keys.length; i++) {
+        key = keys[i];
+        newunitpowers.push(new UnitPower(UnitpowerList.unitMap[key], UnitpowerList.powMap[key]));
+      }
+      this.UnitpowerList = newunitpowers;
+      console.log('Generate UnitPowerList with abstract compound.');
+      console.log(newunitpowers);
+    }
     this.GivenType = GivenType; // String
     this.system = system; // Actual system object.
   }
@@ -75,14 +90,20 @@ class AbstractCompound { // Allows for easy arithmetic with any combination of u
   }
 
   add(unitPower) {
-    if (this.powMap[unitPower.unit] === undefined) {
-      this.powMap[unitPower.unit] = unitPower.power;
+    console.log('Adding unit');
+    console.log(unitPower.unit);
+    if (this.powMap[unitPower.unit.abbreviation] === undefined) {
+      this.powMap[unitPower.unit.abbreviation] = unitPower.power;
+      this.unitMap[unitPower.unit.abbreviation] = unitPower.unit;
     } else {
-      this.powMap[unitPower.unit] += unitPower.power;
-      if (this.powMap[unitPower.unit] === 0) {
-        delete this.powMap[unitPower.unit];
+      this.powMap[unitPower.unit.abbreviation] += unitPower.power;
+      if (this.powMap[unitPower.unit.abbreviation] === 0) {
+        delete this.powMap[unitPower.unit.abbreviation];
+        delete this.unitMap[unitPower.unit.abbreviation];
       }
     }
+    console.log(`Abbreviation: ${unitPower.unit.abbreviation}Power: ${unitPower.power}`);
+    console.log(this.powMap[unitPower.unit.abbreviation]);
   }
 
   equals(abstr) {
@@ -183,15 +204,9 @@ class Value {
 
   add(val) {
     if (this.units.equals(val.units)) {
-      console.log(val.quantity);
-      console.log(this.quantity);
       this.quantity += val.quantity;
     } else {
       console.log('Error: Addition of two different units. Value.add();');
-      console.log(val.quantity);
-      console.log(this.quantity);
-      console.log(this.units.powMap);
-      console.log(val.units.powMap);
     }
   }
 
@@ -205,7 +220,7 @@ class Value {
     let key;
     for (let i = 0; i < keys.length; i++) {
       key = keys[i];
-      this.units.add(new UnitPower(key, val.units.powMap[key]));
+      this.units.add(new UnitPower(val.units.unitMap[key], val.units.powMap[key]));
     }
   }
 
@@ -314,15 +329,18 @@ function convertComp(ToCompound, FromCompound, value) {
 /* Parsing code */
 
 // baseUnits and compoundUnits are supposed to be "maps" of unit abbreviation to units
-function getNextValue(expression, systems, baseUnits, compoundUnits) {
+function getNextValue(expression, systems, baseUnits, compoundUnits, desiredSystem) {
   if (expression.val.charAt(0) === '(') {
     const quantity = removeParen(expression);
     const newString = new Expression(quantity.substring(1, quantity.length - 2));
-    const newVal = solve(newString, systems, baseUnits, compoundUnits);
+    const newVal = solve(newString, systems, baseUnits, compoundUnits, desiredSystem);
     return newVal;
   }
   const quantity = getNextNumber(expression); // Returns a string.
   const compound = getAbstractCompound(expression, baseUnits, compoundUnits);// Actually returns a unit power list.
+  if (desiredSystem !== undefined) {
+    // Convert the value to units in the desired system.
+  }
   return new Value(quantity, compound);
 }
 
@@ -352,7 +370,6 @@ function removeParen(expression) {
 function getNextNumber(expression) {
   const newString = parseFloat(expression.val).toString();
   expression.val = expression.val.substring(newString.length, expression.val.length);
-  const i = 0;
   return newString;
 }
 
@@ -370,29 +387,25 @@ function doOp(value1, op, value2) {
   }
   // Result stored in value1.
 }
-
-function getAbstractCompound(expression, baseUnits, compoundUnits) {
-  let unit;
-  let div;
-  const unitPowerList = [];
-  while (true) {
-    unit = getUnit(expression, baseUnits, compoundUnits);
-    if (unit !== '') {
-      div = unit.split('^');
-      if (baseUnits[div[0]] !== undefined) {
-        unitPowerList.push(new UnitPower(baseUnits[div[0]], parseFloat(div[1])));
-      } else if (compountUnits[div[0]] !== undefined) {
-        unitPowerList.push(new UnitPower(compoundUnits[div[0]], parseFloat(div[1])));
-      }
+function getWord(expression) {
+  /* this function is used to get a string which consists only of letters. */
+  let newString = '';
+  let c;
+  for (let i = 0; i < expression.val.length; i++) {
+    c = expression.val[i];
+    if (c.toLowerCase() !== c.toUpperCase()) {
+      newString += c;
     } else {
       break;
     }
   }
-  return unitPowerList;
+  expression.val = expression.val.substring(newString.length, expression.val.length);
+  return newString;
 }
-
 function getUnit(expression, baseUnits, compoundUnits) {
-  // Unit prefix followed by ^ and a float
+  /*  This function is used to get a unit prefix followed by ^ and a float
+  *   from a string which can then be used to produce a value. i.e(kg^2)
+  * */
   const newUnit = getWord(expression);
   if (newUnit === undefined || newUnit === '') {
     return '';
@@ -403,23 +416,31 @@ function getUnit(expression, baseUnits, compoundUnits) {
   }
   return '';
 }
-
-function getWord(expression) {
-  let newString = '';
-  let c;
-  for (let i = 0; i < expression.val.length; i++) {
-    c = expression.val[i];
-    if (c.toLowerCase() != c.toUpperCase()) {
-      newString += c;
+function getAbstractCompound(expression, baseUnits, compoundUnits) {
+  let unit;
+  let div;
+  const unitPowerList = [];
+  while (true) {
+    unit = getUnit(expression, baseUnits, compoundUnits);
+    if (unit !== '') {
+      div = unit.split('^');
+      if (baseUnits[div[0]] !== undefined) {
+        unitPowerList.push(new UnitPower(baseUnits[div[0]], parseFloat(div[1])));
+      } else if (compoundUnits[div[0]] !== undefined) {
+        unitPowerList.push(new UnitPower(compoundUnits[div[0]], parseFloat(div[1])));
+      }
     } else {
       break;
     }
   }
-  expression.val = expression.val.substring(newString.length, expression.val.length);
-  return newString;
+  // console.log('New unit power lists, wooo');
+  // console.log(unitPowerList);
+  return unitPowerList;
 }
 
+
 function getPower(expression) {
+  /* This function is used to get a ^ followed by a number */
   let newString = '';
   if (expression.val[0] === '^') {
     newString += '^';
@@ -432,6 +453,7 @@ function getPower(expression) {
 }
 
 function getOp(expression) {
+  /* This function is used to get a valid unit if it is the first character in expression.val */
   if (expression.val === '' || expression.val === undefined) {
     return '';
   }
@@ -463,6 +485,42 @@ function solve(expression, systems, baseUnits, compoundUnits) {
   let op1;
   let val2;
   let op2;
+  if (expression.val !== undefined && expression.val !== '' && expression.val !== null) {
+    val1 = getNextValue(expression, systems, baseUnits, compoundUnits);
+    op1 = getOp(expression);
+    val2 = getNextValue(expression, systems, baseUnits, compoundUnits);
+    op2 = getOp(expression);
+    if (val1 === undefined || isNaN(val1.quantity) || val1.quantity === null) {
+      console.log('What??? nothing is defined');
+      return undefined;
+    }
+    if (val2 === undefined || isNaN(val2.quantity) || val2.quantity === null) {
+      return val1;
+    }
+    if (precidence(op1) >= precidence(op2)) {
+      doOp(val1, op1, val2);
+      if (op2 === undefined || op2 === '' || op2 === null) {
+        return val1;
+      }
+      doOp(val1, op2, solve(expression, systems, baseUnits, compoundUnits));
+    } else if (precidence(op1) < precidence(op2)) {
+      doOp(val2, op2, solve(expression, systems, baseUnits, compoundUnits));
+      doOp(val1, op1, val2);
+    }
+  }
+  return val1;
+}
+
+
+function solveConvert(expression, systems, baseUnits, compoundUnits, systemName) {
+  let val1;
+  let op1;
+  let val2;
+  let op2;
+  const chosenSystem = systems[systemName];
+  if (chosenSystem === undefined) {
+    console.log('Desired System does not exist.');
+  }
   if (expression.val !== undefined && expression.val !== '' && expression.val !== null) {
     val1 = getNextValue(expression, systems, baseUnits, compoundUnits);
     op1 = getOp(expression);
@@ -534,7 +592,7 @@ const foottoflock = new UnitConversions(flock, foot, 0, 23.5);
 const flocktofoot = new UnitConversions(foot, flock, 0, 1 / 23.5);
 const smoottofoot = new UnitConversions(foot, smoot, 0, 1 / 42.0);
 const celsiustofahrenheit = new UnitConversions(fahrenheit, celsius, 32.0, 9.0 / 5.0);
-var fahrenheittowarmth = new UnitConversions(warmth, fahrenheittowarmth, 12.0, 3.0 / 5.0);
+const fahrenheittowarmth = new UnitConversions(warmth, fahrenheit, 12.0, 3.0 / 5.0);
 const kilogramtoslug = new UnitConversions(slug, kilogram, 0, 1.0 / 14.59390);
 const slugtokilogram = new UnitConversions(kilogram, slug, 0, 14.59390);
 
@@ -550,7 +608,6 @@ feathers.length.push(flocktofoot);
 smootric.length.push(smoottofoot);
 
 
-const vis = [];
 const pair = new UnitPair(smoot, meter);
 
 
@@ -569,29 +626,39 @@ console.log(`Answer: ${convertUnit(new UnitPair(warmth, celsius), 10)}`);
 /* COMPOUND UNIT CONVERSION TESTING */
 
 const newton = new CompoundUnit('Newton', 'N', 'A unit of force', 'force', [new UnitPower(kilogram, 1), new UnitPower(meter, 1), new UnitPower(secondM, -2)], metric);
+compoundunits.add(newton);
 const poundforce = new CompoundUnit('poundforce', 'lbf', 'The imperial unit of force', 'force', [new UnitPower(slug, 1), new UnitPower(foot, 1), new UnitPower(secondI, -2)], imperial);
-const velocity = new CompoundUnit('velocity', 'v', 'a speed usually with an associated direction.', [new UnitPower(meter, 1), new UnitPower(secondM, -1)], metric);
+compoundunits.add(poundforce);
 console.log('from 10 newton to poundforce');
 console.log(convertComp(poundforce, newton, 10)[0]);
 console.log('from 2.2480899554 poundforce to newton');
 console.log(convertComp(newton, poundforce, 2.2480899554)[0]);
 /* Solving Tests */
 const test1 = new Expression('(5kg^1)^3*(15*16+12)');
+console.log(`Solving: ${test1.val}`);
 const ans1 = solve(test1, systems1, baseunits, compoundunits);
 console.log(ans1.quantity);
 console.log(ans1.units);
 const test2 = new Expression('5kg^1^3*252');
+console.log(`Solving: ${test2.val}`);
 const ans2 = solve(test2, systems1, baseunits, compoundunits);
 console.log(ans2.quantity);
 console.log(ans2.units);
 const test3 = new Expression('5kg^1^3*(252*(16m^-3+5m^-3)-7m^-3)');
+console.log(`Solving: ${test3.val}`);
 const ans3 = solve(test3, systems1, baseunits, compoundunits);
 console.log(ans3.quantity);
 console.log(ans3.units);
 const test4 = new Expression('5kg^1^3*(252*(((16m^-3+5m^-3)))-7m^-3)');
+console.log(`Solving: ${test4.val}`);
 const ans4 = solve(test4, systems1, baseunits, compoundunits);
 console.log(ans4.quantity);
 console.log(ans4.units);
+const test5 = new Expression('5N^1^3*(252*(((16N^-2+5N^-2)))-7N^-2)');
+console.log(`Solving: ${test5.val}`);
+const ans5 = solve(test5, systems1, baseunits, compoundunits);
+console.log(ans5.quantity);
+console.log(ans5.units);
 
 // unitTest();
 

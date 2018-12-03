@@ -1,5 +1,12 @@
 <template name="list">
   <div class="section">
-    <p>This is a list...soon</p>
+    {{#each unit in baseUnitsList}}
+      <p>{{unit.name}}</p>
+      <p>{{unit.abbreviation}}</p>
+      <p>{{unit.description}}</p>
+      <p>{{unit.type}}</p>
+      <p>{{unit.system}}</p>
+      <br>
+    {{/each}}
   </div>
 </template>

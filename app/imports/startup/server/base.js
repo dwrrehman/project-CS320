@@ -1,5 +1,5 @@
 import { _ } from 'meteor/underscore';
-import { BaseUnits } from '../../api/base/base';
+import { BaseUnits } from '../../api/base/base.js';
 
 /**
  * A list of BaseUnits to pre-fill the Collection.

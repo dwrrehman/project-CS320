@@ -36,7 +36,7 @@ class UnitMap {
 class SystemMap {
   add(system) {
     if (this[system.givenName] === undefined) {
-      this[system.abbreviation] = system;
+      this[system.givenName] = system;
     } else {
       console.log('System with that name already exists.');
 
@@ -147,12 +147,20 @@ class CompoundUnitConversions {
     this.conversions = []; // This should be an array of [UnitConversions, int] where the int is a power.
     this.to = to; // To and from should be compound units.
     this.from = from;
+    this.invalid = false;
+    this.isShift = false;
   }
 
   convert(value) {
     let total = value;
     for (let i = 0; i < this.conversions.length; i++) {
       total *= this.conversions[i][0].factor ** (this.conversions[i][1]);
+      if (this.conversions[i][0].shift !== 0) {
+        this.isShift = true;
+        if (this.conversions.length > 1 || this.conversions[0][1] !== 1) {
+          this.invalid = true;
+        }
+      }
     }
     return total;
   }
@@ -284,6 +292,7 @@ function convertUnit(desired, value) {
 function convertComp(ToCompound, FromCompound, value) {
   let conversion;
   let found;
+  let shiftFlag = false;
   // Check if a conversion already exists for this compound unit.
   if (FromCompound.system[FromCompound.GivenType] !== undefined) {
     for (let i = 0; i < FromCompound.system[FromCompound.GivenType].length; i++) {
@@ -308,7 +317,10 @@ function convertComp(ToCompound, FromCompound, value) {
           if (ToCompound.UnitpowerList[i].unit.givenName !== FromCompound.UnitpowerList[j].unit.givenName) {
             const result = BaseunitConverter(desired, FromCompound.UnitpowerList[j].unit.system, [], 1.0, 0.0);
             compResult.conversions.push([new UnitConversions(desired.to, desired.from, result[2], result[1]), currentPower]);
-            if (!result[0]) {
+            if (result[1] !== 0) {
+              shiftFlag = true;
+            }
+            if (!result[0] || (shiftFlag && compResult.conversions.length > 1)) {
               console.log(`Error: convertComp(): base unit conversion failure! Converting ${desired.from.givenName} to ${desired.to.givenName}`);
               return [0, undefined];
             }
@@ -326,6 +338,75 @@ function convertComp(ToCompound, FromCompound, value) {
   convertComp(FromCompound, ToCompound, value);
   return [compResult.convert(value), compResult];
 }
+
+function getAbstractConversion(systems, desiredSystemName, abstractCompound) {
+  let conversion = 1;
+  let shift = 0;
+  const keys = Object.keys(abstractCompound.powMap);
+  let key;
+  let currentPower;
+  let currentUnit;
+  let currentToUnit;
+  let currentSystem;
+  let currentBaseConversion;
+  let currentCompoundConversion;
+  const newUnitPowerList = [];
+  const desiredSystem = systems[desiredSystemName];
+  if (keys.length === 0) {
+    console.log('Ayyye, there be no units here?');
+    return [1, 0, new AbstractCompound([])];
+  }
+  if (desiredSystem === undefined) {
+    console.log('There isnt a system with that name????');
+    return [1, undefined];
+  }
+  for (let i = 0; i < keys.length; i++) {
+    key = keys[i];
+    currentPower = abstractCompound.powMap[key];
+    currentUnit = abstractCompound.unitMap[key];
+    currentSystem = currentUnit.system;
+    if (currentUnit.GivenType === undefined || currentUnit.GivenType === '') {
+      console.log('Current unit has no type????');
+      return [1, 0, undefined];
+    } if (desiredSystem[currentUnit.GivenType] === undefined || desiredSystem[currentUnit.GivenType].length === 0) {
+      console.log('The desired system has no conversions for that type????');
+      return [1, 0, undefined];
+    }
+    currentToUnit = desiredSystem[currentUnit.GivenType][0].from;
+    if (currentUnit.UnitpowerList === undefined) { // Means currentUnit is a base unit
+      currentBaseConversion = BaseunitConverter(new UnitPair(currentToUnit, currentUnit), currentSystem, [], 1.0, 0);
+      if (!currentBaseConversion[1]) {
+        console.log('Failed to find a baseconversion.');
+        return [1, 0, undefined];
+      }
+      newUnitPowerList.push(new UnitPower(currentToUnit, currentPower));
+      if (currentBaseConversion[2] !== 0) {
+        if (keys.length > 1 || currentPower > 1) {
+          console.log('Shifty business going on in getAbstractConversion');
+          return [1, 0, undefined];
+        }
+        return [currentBaseConversion[1], currentBaseConversion[2], new AbstractCompound(newUnitPowerList)];
+      }
+      conversion *= currentBaseConversion[1];
+      shift += currentBaseConversion[2];
+    } else { // Means currentUnit is a compound unit
+      currentCompoundConversion = convertComp(currentToUnit, currentUnit, 1.0);
+      if (currentCompoundConversion.invalid || (currentCompoundConversion.isShift && keys.length > 0)) {
+        console.log('Compound conversion with a shift, oh dear......');
+        return [1, 0, undefined];
+      }
+      if (!currentCompoundConversion.isShift) {
+        conversion *= currentCompoundConversion[0];
+      } else {
+        conversion *= currentCompoundConversion[1].conversions[0].factor;
+        shift += currentCompoundConversion.conversions[0].shift;
+      }
+      newUnitPowerList.push(new UnitPower(currentToUnit, currentPower));
+    }
+  }
+  return [conversion, shift, new AbstractCompound(newUnitPowerList)];
+}
+
 /* Parsing code */
 
 // baseUnits and compoundUnits are supposed to be "maps" of unit abbreviation to units
@@ -485,11 +566,16 @@ function precidence(op) {
   return 0;
 }
 
-function solve(expression, systems, baseUnits, compoundUnits) {
+function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName) {
   let val1;
   let op1;
   let val2;
   let op2;
+  let val1NewAbstract;
+  let val2NewAbstract;
+  let newval;
+  let newabstract;
+  const expressionSave = expression.val;
   if (expression.val !== undefined && expression.val !== '' && expression.val !== null) {
     val1 = getNextValue(expression, systems, baseUnits, compoundUnits);
     op1 = getOp(expression);
@@ -499,60 +585,55 @@ function solve(expression, systems, baseUnits, compoundUnits) {
       console.log('What??? nothing is defined');
       return undefined;
     }
-    if (val2 === undefined || isNaN(val2.quantity) || val2.quantity === null) {
-      return val1;
+    if (desiredSystemName !== undefined && desiredSystemName !== '') {
+      val1NewAbstract = getAbstractConversion(systems, desiredSystemName, val1.units);
+      if (val1NewAbstract[2] === undefined) {
+        console.log('Abandoning Ship captainnnn ahhhh');
+        newval = solve(new Expression(expressionSave), systems, baseUnits, compoundUnits);
+        newabstract = getAbstractConversion(systems, desiredSystemName, newval.units);
+        if (newabstract[2] !== undefined) {
+          return new Value(newval.quantity * newabstract[0] + newabstract[1], newabstract[2]);
+        }
+        return newval;
+      }
+      console.log('The old val1 :(');
+      console.log(val1.quantity);
+      val1 = new Value(val1.quantity * val1NewAbstract[0] + val1NewAbstract[1], val1NewAbstract[2]);
+      console.log('The new value 1, wooooooooo');
+      console.log(val1.quantity);
+      if (val2 === undefined || isNaN(val2.quantity) || val2.quantity === null) {
+        return val1;
+      }
+      val2NewAbstract = getAbstractConversion(systems, desiredSystemName, val2.units);
+      if (val2NewAbstract[2] === undefined) {
+        console.log('Abandoning Ship captainnnn ahhhh');
+        newval = solve(new Expression(expressionSave), systems, baseUnits, compoundUnits);
+        newabstract = getAbstractConversion(systems, desiredSystemName, newval.units);
+        if (newabstract[2] !== undefined) {
+          return new Value(newval.quantity * newabstract[0] + newabstract[1], newabstract[2]);
+        }
+        return newval;
+      }
+      console.log('The old val2 :(');
+      console.log(val2.quantity);
+      val2 = new Value(val2.quantity * val2NewAbstract[0] + val2NewAbstract[1], val2NewAbstract[2]);
+      console.log('The new value 2, wooooooooo');
+      console.log(val2.quantity);
+
     }
     if (precidence(op1) >= precidence(op2)) {
       doOp(val1, op1, val2);
       if (op2 === undefined || op2 === '' || op2 === null) {
         return val1;
       }
-      doOp(val1, op2, solve(expression, systems, baseUnits, compoundUnits));
+      doOp(val1, op2, solve(expression, systems, baseUnits, compoundUnits,desiredSystemName));
     } else if (precidence(op1) < precidence(op2)) {
-      doOp(val2, op2, solve(expression, systems, baseUnits, compoundUnits));
+      doOp(val2, op2, solve(expression, systems, baseUnits, compoundUnits,desiredSystemName));
       doOp(val1, op1, val2);
     }
   }
   return val1;
 }
-
-
-function solveConvert(expression, systems, baseUnits, compoundUnits, systemName) {
-  let val1;
-  let op1;
-  let val2;
-  let op2;
-  const chosenSystem = systems[systemName];
-  if (chosenSystem === undefined) {
-    console.log('Desired System does not exist.');
-  }
-  if (expression.val !== undefined && expression.val !== '' && expression.val !== null) {
-    val1 = getNextValue(expression, systems, baseUnits, compoundUnits);
-    op1 = getOp(expression);
-    val2 = getNextValue(expression, systems, baseUnits, compoundUnits);
-    op2 = getOp(expression);
-    if (val1 === undefined || isNaN(val1.quantity) || val1.quantity === null) {
-      console.log('What??? nothing is defined');
-      return undefined;
-    }
-    if (val2 === undefined || isNaN(val2.quantity) || val2.quantity === null) {
-      return val1;
-    }
-    if (precidence(op1) >= precidence(op2)) {
-      doOp(val1, op1, val2);
-      if (op2 === undefined || op2 === '' || op2 === null) {
-        return val1;
-      }
-      doOp(val1, op2, solve(expression, systems, baseUnits, compoundUnits));
-    } else if (precidence(op1) < precidence(op2)) {
-      doOp(val2, op2, solve(expression, systems, baseUnits, compoundUnits));
-      doOp(val1, op1, val2);
-    }
-  }
-  return val1;
-}
-
-
 /* TEST CODE FOR BASE UNIT CONVERTER */
 
 const baseunits = new UnitMap();
@@ -651,7 +732,7 @@ console.log(ans2.quantity);
 console.log(ans2.units);
 const test3 = new Expression('5kg^1^3*(252*(16m^-3+5m^-3)-7m^-3)');
 console.log(`Solving: ${test3.val}`);
-const ans3 = solve(test3, systems1, baseunits, compoundunits);
+const ans3 = solve(test3, systems1, baseunits, compoundunits, 'Imperial');
 console.log(ans3.quantity);
 console.log(ans3.units);
 const test4 = new Expression('5kg^1^3*(252*(((16m^-3+5m^-3)))-7m^-3)');
@@ -661,7 +742,7 @@ console.log(ans4.quantity);
 console.log(ans4.units);
 const test5 = new Expression('5N^1^3*(252*(((16N^-2+5N^-2)))-7N^-2)');
 console.log(`Solving: ${test5.val}`);
-const ans5 = solve(test5, systems1, baseunits, compoundunits);
+const ans5 = solve(test5, systems1, baseunits, compoundunits, 'Imperial');
 console.log(ans5.quantity);
 console.log(ans5.units);
 const test6 = new Expression('5N*6^2)');

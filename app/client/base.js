@@ -62,7 +62,6 @@ class CompoundUnit {
     if (Array.isArray(UnitpowerList)) {
       this.UnitpowerList = UnitpowerList; // list of UnitPower Objects
     } else if (typeof (UnitpowerList) === 'object') {
-      console.log(UnitpowerList);
       const keys = Object.keys(UnitpowerList.powMap);
       let key;
       const newunitpowers = [];
@@ -71,8 +70,6 @@ class CompoundUnit {
         newunitpowers.push(new UnitPower(UnitpowerList.unitMap[key], UnitpowerList.powMap[key]));
       }
       this.UnitpowerList = newunitpowers;
-      console.log('Generate UnitPowerList with abstract compound.');
-      console.log(newunitpowers);
     }
     this.GivenType = GivenType; // String
     this.system = system; // Actual system object.
@@ -90,8 +87,6 @@ class AbstractCompound { // Allows for easy arithmetic with any combination of u
   }
 
   add(unitPower) {
-    console.log('Adding unit');
-    console.log(unitPower.unit);
     if (this.powMap[unitPower.unit.abbreviation] === undefined) {
       this.powMap[unitPower.unit.abbreviation] = unitPower.power;
       this.unitMap[unitPower.unit.abbreviation] = unitPower.unit;
@@ -102,8 +97,6 @@ class AbstractCompound { // Allows for easy arithmetic with any combination of u
         delete this.unitMap[unitPower.unit.abbreviation];
       }
     }
-    console.log(`Abbreviation: ${unitPower.unit.abbreviation}Power: ${unitPower.power}`);
-    console.log(this.powMap[unitPower.unit.abbreviation]);
   }
 
   equals(abstr) {
@@ -116,19 +109,19 @@ class AbstractCompound { // Allows for easy arithmetic with any combination of u
     for (let i = 0; i < unitNames.length; i++) {
       name = unitNames[i];
       if (pow[name] !== this.powMap[name]) {
-        console.log(`${pow[name]} !== ${this.powMap[name]}`);
         return false;
       }
     }
     return true;
   }
-  toString(){
-    let str = "";
-    let keys = Object.keys(this.powMap);
+
+  toString() {
+    let str = '';
+    const keys = Object.keys(this.powMap);
     let key;
-    for(let i = 0; i < keys.length; i++){
+    for (let i = 0; i < keys.length; i++) {
       key = keys[i];
-      str += (key+"^"+this.powMap[key]);
+      str += (`${key}^${this.powMap[key]}`);
     }
     return str;
   }
@@ -202,7 +195,7 @@ class System {
 
 class Expression {
   constructor(expr) {
-    this.val = expr;
+    this.val = expr.replace(/\s/g, '');
   }
 }
 
@@ -264,9 +257,10 @@ class Value {
       }
     }
   }
-  toString(){
-    let units = this.units.toString();
-    return this.quantity+units;
+
+  toString() {
+    const units = this.units.toString();
+    return this.quantity + units;
   }
 }
 
@@ -622,16 +616,15 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
         return newval;
       }
       val2 = new Value(val2.quantity * val2NewAbstract[0] + val2NewAbstract[1], val2NewAbstract[2]);
-
     }
     if (precidence(op1) >= precidence(op2)) {
       doOp(val1, op1, val2);
       if (op2 === undefined || op2 === '' || op2 === null) {
         return val1;
       }
-      doOp(val1, op2, solve(expression, systems, baseUnits, compoundUnits,desiredSystemName));
+      doOp(val1, op2, solve(expression, systems, baseUnits, compoundUnits, desiredSystemName));
     } else if (precidence(op1) < precidence(op2)) {
-      doOp(val2, op2, solve(expression, systems, baseUnits, compoundUnits,desiredSystemName));
+      doOp(val2, op2, solve(expression, systems, baseUnits, compoundUnits, desiredSystemName));
       doOp(val1, op1, val2);
     }
   }
@@ -743,10 +736,14 @@ const test5 = new Expression('5N^1^3*(252*(((16N^-2+5N^-2)))-7N^-2)');
 console.log(`Solving: ${test5.val}`);
 const ans5 = solve(test5, systems1, baseunits, compoundunits, 'Imperial');
 console.log(ans5.toString());
-const test6 = new Expression('5N*6*12m)');
+const test6 = new Expression('5N*6*12m');
 console.log(`Solving: ${test6.val}`);
 const ans6 = solve(test6, systems1, baseunits, compoundunits, 'Imperial');
 console.log(ans6.toString());
+const test7 = new Expression('5 N  * 6 * 12 m');
+console.log(`Solving: ${test7.val}`);
+const ans7 = solve(test7, systems1, baseunits, compoundunits, 'Imperial');
+console.log(ans7.toString());
 
 // unitTest();
 

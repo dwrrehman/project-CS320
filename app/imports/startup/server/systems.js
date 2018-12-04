@@ -27,7 +27,7 @@ const systemSeeds = [
 ];
 
 /**
- * Initialize the BaseUnits collection if empty with seed data.
+ * Initialize the Systems collection if empty with seed data.
  */
 if (Systems.find().count() === 0) {
   _.each(systemSeeds, function seedSystems(system) {

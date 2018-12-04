@@ -1,13 +1,12 @@
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema';
-import { Meteor } from "meteor/meteor";
-import { BaseUnits } from '../base/base';
 
 SimpleSchema.extendOptions(['autoform']);
 
-const Systems = new Mongo.Collection('Systems');
+export const Systems = new Mongo.Collection('Systems');
 
-const SystemsSchema = new SimpleSchema({
+export const SystemsSchema = new SimpleSchema({
   name: {
     label: 'Name',
     type: String,
@@ -65,6 +64,8 @@ const SystemsSchema = new SimpleSchema({
     },
   },
 });
+
+Systems.attachSchema(SystemsSchema);
 
 if (Meteor.isServer) {
   Meteor.publish('Systems', function systemsPublication() {

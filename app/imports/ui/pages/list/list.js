@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { BaseUnits } from '../../../api/base/base';
+import { BaseUnits } from '../../../api/base/base.js';
 
 import './list.html';
 

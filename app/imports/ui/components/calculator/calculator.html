@@ -8,10 +8,9 @@
             <div class="div_display" id="calculator_display" contenteditable="true">Welcome to the Calculation Utility.</div> </th>
           <th class="th_button">
             <select class="cselect" id="to_system" style="background-color: orange; width: 101px;" oninput="convert();">
-                {{#each sys in Systems}}
+                {{#each sys in systemsCollection}}
                   <option value={{sys.name}}>{{sys.name}}</option>
                 {{/each}}
-      
               </select>
           </th>
 

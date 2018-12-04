@@ -122,6 +122,16 @@ class AbstractCompound { // Allows for easy arithmetic with any combination of u
     }
     return true;
   }
+  toString(){
+    let str = "";
+    let keys = Object.keys(this.powMap);
+    let key;
+    for(let i = 0; i < keys.length; i++){
+      key = keys[i];
+      str += (key+"^"+this.powMap[key]);
+    }
+    return str;
+  }
 }
 
 
@@ -254,6 +264,10 @@ class Value {
       }
     }
   }
+  toString(){
+    let units = this.units.toString();
+    return this.quantity+units;
+  }
 }
 
 
@@ -353,7 +367,6 @@ function getAbstractConversion(systems, desiredSystemName, abstractCompound) {
   const newUnitPowerList = [];
   const desiredSystem = systems[desiredSystemName];
   if (keys.length === 0) {
-    console.log('Ayyye, there be no units here?');
     return [1, 0, new AbstractCompound([])];
   }
   if (desiredSystem === undefined) {
@@ -588,7 +601,6 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
     if (desiredSystemName !== undefined && desiredSystemName !== '') {
       val1NewAbstract = getAbstractConversion(systems, desiredSystemName, val1.units);
       if (val1NewAbstract[2] === undefined) {
-        console.log('Abandoning Ship captainnnn ahhhh');
         newval = solve(new Expression(expressionSave), systems, baseUnits, compoundUnits);
         newabstract = getAbstractConversion(systems, desiredSystemName, newval.units);
         if (newabstract[2] !== undefined) {
@@ -596,17 +608,12 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
         }
         return newval;
       }
-      console.log('The old val1 :(');
-      console.log(val1.quantity);
       val1 = new Value(val1.quantity * val1NewAbstract[0] + val1NewAbstract[1], val1NewAbstract[2]);
-      console.log('The new value 1, wooooooooo');
-      console.log(val1.quantity);
       if (val2 === undefined || isNaN(val2.quantity) || val2.quantity === null) {
         return val1;
       }
       val2NewAbstract = getAbstractConversion(systems, desiredSystemName, val2.units);
       if (val2NewAbstract[2] === undefined) {
-        console.log('Abandoning Ship captainnnn ahhhh');
         newval = solve(new Expression(expressionSave), systems, baseUnits, compoundUnits);
         newabstract = getAbstractConversion(systems, desiredSystemName, newval.units);
         if (newabstract[2] !== undefined) {
@@ -614,11 +621,7 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
         }
         return newval;
       }
-      console.log('The old val2 :(');
-      console.log(val2.quantity);
       val2 = new Value(val2.quantity * val2NewAbstract[0] + val2NewAbstract[1], val2NewAbstract[2]);
-      console.log('The new value 2, wooooooooo');
-      console.log(val2.quantity);
 
     }
     if (precidence(op1) >= precidence(op2)) {
@@ -723,33 +726,27 @@ console.log(convertComp(newton, poundforce, 2.2480899554)[0]);
 const test1 = new Expression('(5kg^1)^3*(15*16+12)');
 console.log(`Solving: ${test1.val}`);
 const ans1 = solve(test1, systems1, baseunits, compoundunits);
-console.log(ans1.quantity);
-console.log(ans1.units);
+console.log(ans1.toString());
 const test2 = new Expression('5kg^1^3*252');
 console.log(`Solving: ${test2.val}`);
 const ans2 = solve(test2, systems1, baseunits, compoundunits);
-console.log(ans2.quantity);
-console.log(ans2.units);
+console.log(ans2.toString());
 const test3 = new Expression('5kg^1^3*(252*(16m^-3+5m^-3)-7m^-3)');
 console.log(`Solving: ${test3.val}`);
 const ans3 = solve(test3, systems1, baseunits, compoundunits, 'Imperial');
-console.log(ans3.quantity);
-console.log(ans3.units);
+console.log(ans3.toString());
 const test4 = new Expression('5kg^1^3*(252*(((16m^-3+5m^-3)))-7m^-3)');
 console.log(`Solving: ${test4.val}`);
 const ans4 = solve(test4, systems1, baseunits, compoundunits);
-console.log(ans4.quantity);
-console.log(ans4.units);
+console.log(ans4.toString());
 const test5 = new Expression('5N^1^3*(252*(((16N^-2+5N^-2)))-7N^-2)');
 console.log(`Solving: ${test5.val}`);
 const ans5 = solve(test5, systems1, baseunits, compoundunits, 'Imperial');
-console.log(ans5.quantity);
-console.log(ans5.units);
-const test6 = new Expression('5N*6^2)');
+console.log(ans5.toString());
+const test6 = new Expression('5N*6*12m)');
 console.log(`Solving: ${test6.val}`);
-const ans6 = solve(test6, systems1, baseunits, compoundunits);
-console.log(ans6.quantity);
-console.log(ans6.units);
+const ans6 = solve(test6, systems1, baseunits, compoundunits, 'Imperial');
+console.log(ans6.toString());
 
 // unitTest();
 

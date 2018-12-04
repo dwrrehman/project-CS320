@@ -317,7 +317,7 @@ function convertComp(ToCompound, FromCompound, value) {
           if (ToCompound.UnitpowerList[i].unit.givenName !== FromCompound.UnitpowerList[j].unit.givenName) {
             const result = BaseunitConverter(desired, FromCompound.UnitpowerList[j].unit.system, [], 1.0, 0.0);
             compResult.conversions.push([new UnitConversions(desired.to, desired.from, result[2], result[1]), currentPower]);
-            if (result[1] !== 0) {
+            if (result[2] !== 0) {
               shiftFlag = true;
             }
             if (!result[0] || (shiftFlag && compResult.conversions.length > 1)) {

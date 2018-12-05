@@ -38,7 +38,7 @@ class UnitPower {
 }
 
 class CompoundUnit {
-  constructor(givenName, abbreviation, description, GivenType, UnitpowerList, system) {
+  constructor(givenName, abbreviation, description, GivenType, UnitpowerList, system, baseUnits) {
     this.givenName = givenName; // String
     this.abbreviation = abbreviation; // String
     this.description = description; // String
@@ -53,6 +53,8 @@ class CompoundUnit {
         newunitpowers.push(new UnitPower(UnitpowerList.unitMap[key], UnitpowerList.powMap[key]));
       }
       this.UnitpowerList = newunitpowers;
+    } else if (typeof (UnitpowerList) === 'string') {
+      this.UnitpowerList = getAbstractCompound(new Expression(UnitpowerList),baseUnits);
     }
     this.GivenType = GivenType; // String
     this.system = system; // Actual system object.
@@ -130,7 +132,7 @@ class UnitConversions {
 
 class CompoundUnitConversions {
   constructor(to, from) {
-    this.conversions = []; // This should be an array of [UnitConversions, int] where the int is a power.
+    this.conversions = []; // This should be an array of [UnitConversions, float] where the float is a power.
     this.to = to; // To and from should be compound units.
     this.from = from;
     this.invalid = false;
@@ -731,6 +733,10 @@ console.log(ans7.toString());
 // unitTest();
 
 /* END OF TEST CODE */
+
+function Solve(string){
+  return solve(new Expression(string), system1, baseunits, compoundunits);
+}
 
 // ------------------- calculator code: ---------------------------------
 

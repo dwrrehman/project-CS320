@@ -17,6 +17,8 @@ Template.calculator.helpers({
   solve(string) {
   	Base.Solve(string);
   },
+
+
 });
 
 

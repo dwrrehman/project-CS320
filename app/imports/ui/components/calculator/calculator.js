@@ -6,6 +6,9 @@ import { Base } from '../../../../client/base.js';
 import './calculator.html';
 import '../../stylesheets/calculator.css';
 
+
+
+
 Template.calculator.onCreated(function addOnCreated() {
   Meteor.subscribe('Systems');
 });
@@ -13,10 +16,6 @@ Template.calculator.onCreated(function addOnCreated() {
 Template.calculator.helpers({
   systemsCollection() {
     return Systems.find();
-  },
-
-  solve(string) {
-  	Base.Solve(string);
   },
 
   receive(string) {
@@ -33,12 +32,30 @@ Template.calculator.helpers({
     }
     return displayString;
   },
+
 });
 
 Template.calculator.events({
   'click .clearbutton'(event) {
     console.log('SUCCESS');
   },
+
+  'click #equals_button'(event) {
+
+  	  document.getElementById('calculator_display').innerText = "hello world";
+  	  let cat = document.getElementById('calculator_display').innerText;
+
+  	  Solve(cat);
+  },
 });
+
+
+
+
+
+
+
+
+
 
 

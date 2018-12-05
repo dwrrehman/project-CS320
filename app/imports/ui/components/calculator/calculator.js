@@ -14,11 +14,31 @@ Template.calculator.helpers({
   systemsCollection() {
     return Systems.find();
   },
+
   solve(string) {
   	Base.Solve(string);
   },
 
+  receive(string) {
+    let displayString = '';
 
+    if (string.length === 1) {
+      displayString += string;
+    } else {
+      if (string === 'clear') {
+        displayString = '';
+      } else {
+        displayString = '';
+      }
+    }
+    return displayString;
+  },
+});
+
+Template.calculator.events({
+  'click .clearbutton'(event) {
+    console.log('SUCCESS');
+  },
 });
 
 

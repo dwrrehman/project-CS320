@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Systems } from '../../../api/systems/systems.js';
-import { Base } from '../../../../client/base.js';
 
+import { Base } from '../../../../client/base.js';
 import './calculator.html';
 import '../../stylesheets/calculator.css';
 
@@ -33,6 +33,8 @@ Template.calculator.helpers({
     return displayString;
   },
 
+
+
 });
 
 Template.calculator.events({
@@ -41,11 +43,12 @@ Template.calculator.events({
   },
 
   'click #equals_button'(event) {
-
-  	  document.getElementById('calculator_display').innerText = "hello world";
-  	  let cat = document.getElementById('calculator_display').innerText;
-
-  	  Solve(cat);
+  	  let cat = document.getElementById('calculator_display').innerText;	
+  	  console.log(cat);
+  	  var t = Base.Solve(cat).toString();
+  	  if (t)
+  	  	document.getElementById('calculator_display').innerText = t; 	  
+  	  else console.log("Error:" + t);
   },
 });
 

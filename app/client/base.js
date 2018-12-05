@@ -1,3 +1,67 @@
+export const Base = {
+
+  Solve(string){
+    const baseunits = new UnitMap();
+    const compoundunits = new UnitMap();
+    const systems1 = new SystemMap();
+
+    const metric = new System('Metric', [], [], [], [], [], []);
+    systems1.add(metric);
+    const imperial = new System('Imperial', [], [], [], [], [], []);
+    systems1.add(imperial);
+    const smootric = new System('Smootric', [], [], [], [], [], []);
+    systems1.add(smootric);
+    const feathers = new System('feathers', [], [], [], [], [], []);
+    systems1.add(feathers);
+
+    const meter = new BaseUnit('meter', 'm', 'The length of a meter stick', 'length', metric);
+    baseunits.add(meter);
+    const foot = new BaseUnit('foot', 'ft', 'Less smelly, but about as long as a large human foot.', 'length', imperial);
+    baseunits.add(foot);
+    const smoot = new BaseUnit('smoot', 'smt', "replace 'f' with 'sm' and you get a smoot.", 'length', smootric);
+    baseunits.add(smoot);
+    const flock = new BaseUnit('flock', 'fl', "I don't even know.", 'length', feathers);
+    baseunits.add(flock);
+    const celsius = new BaseUnit('celsius', 'dC', 'A unit of temperature in the metric system', 'temperature', metric);
+    baseunits.add(celsius);
+    const fahrenheit = new BaseUnit('fahrenheit', 'dF', 'A unit of temperature in the imperial system', 'temperature', imperial);
+    baseunits.add(fahrenheit);
+    const warmth = new BaseUnit('warmth', 'dW', 'A unit of temperature in the feathers system', 'temperature', feathers);
+    baseunits.add(warmth);
+    const secondM = new BaseUnit('second', 's', 'THE unit of time', 'time', metric);
+    baseunits.add(secondM);
+    const secondI = new BaseUnit('second', 's', 'THE unit of time', 'time', imperial);
+    const kilogram = new BaseUnit('kilogram', 'kg', 'The metric unit of mass', 'mass', metric);
+    baseunits.add(kilogram);
+    const slug = new BaseUnit('slug', 'slug', 'The imperial unit of mass', 'mass', imperial);
+    baseunits.add(slug);
+
+    const metertofoot = new UnitConversions(foot, meter, 0, 3.28084);
+    const foottometer = new UnitConversions(meter, foot, 0, 1.0 / 3.28084);
+    const foottosmoot = new UnitConversions(smoot, foot, 0, 42.0);
+    const foottoflock = new UnitConversions(flock, foot, 0, 23.5);
+    const flocktofoot = new UnitConversions(foot, flock, 0, 1 / 23.5);
+    const smoottofoot = new UnitConversions(foot, smoot, 0, 1 / 42.0);
+    const celsiustofahrenheit = new UnitConversions(fahrenheit, celsius, 32.0, 9.0 / 5.0);
+    const fahrenheittowarmth = new UnitConversions(warmth, fahrenheit, 12.0, 3.0 / 5.0);
+    const kilogramtoslug = new UnitConversions(slug, kilogram, 0, 1.0 / 14.59390);
+    const slugtokilogram = new UnitConversions(kilogram, slug, 0, 14.59390);
+
+    metric.length.push(metertofoot);
+    metric.mass.push(kilogramtoslug);
+    metric.temperature.push(celsiustofahrenheit);
+    imperial.temperature.push(fahrenheittowarmth);
+    imperial.length.push(foottometer);
+    imperial.length.push(foottosmoot);
+    imperial.length.push(foottoflock);
+    imperial.mass.push(slugtokilogram);
+    feathers.length.push(flocktofoot);
+    smootric.length.push(smoottofoot);
+
+
+    return solve(new Expression(string), systems1, baseunits, compoundunits);
+  }
+}
 /* eslint-disable max-len,no-use-before-define,no-param-reassign,no-restricted-globals,camelcase */
 // this file contains the algorithmic javascritpt code for the project, as well as some of the view-switching code.
 
@@ -616,7 +680,6 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
   return val1;
 }
 /* TEST CODE FOR BASE UNIT CONVERTER */
-
 const baseunits = new UnitMap();
 const compoundunits = new UnitMap();
 const systems1 = new SystemMap();
@@ -734,9 +797,7 @@ console.log(ans7.toString());
 
 /* END OF TEST CODE */
 
-function Solve(string){
-  return solve(new Expression(string), system1, baseunits, compoundunits);
-}
+
 
 // ------------------- calculator code: ---------------------------------
 
@@ -786,3 +847,4 @@ function convert() {
 
   document.getElementById('converter_result').value = `${result} ${to}`;
 }
+

@@ -5,6 +5,14 @@ import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform']);
 
 export const BaseUnits = new Mongo.Collection('BaseUnits');
+BaseUnits.allow({
+  insert: function () {
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+});
 
 export const BaseUnitsSchema = new SimpleSchema({
   name: {

@@ -5,7 +5,7 @@ import { Template } from 'meteor/templating';
 import { BaseUnits } from '../../../api/base/base.js';
 
 import './add.html';
-import '../../ui/stylesheets/add.css';
+import '../../stylesheets/add.css';
 
 Template.add.onCreated(function addOnCreated() {
   Meteor.subscribe('BaseUnits');

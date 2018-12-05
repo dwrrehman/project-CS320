@@ -8,7 +8,7 @@ import { Systems } from '../../api/systems/systems.js';
 const systemSeeds = [
   {
     name: 'Metric',
-    length: 'm',
+    length: {},
     mass: 'kg',
     time: 's',
     charge: 'something',
@@ -17,7 +17,7 @@ const systemSeeds = [
   },
   {
     name: 'Imperial',
-    length: 'foot',
+    length: {},
     mass: 'lbs',
     time: 's',
     charge: 'something',

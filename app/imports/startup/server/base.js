@@ -1,5 +1,6 @@
 import { _ } from 'meteor/underscore';
 import { BaseUnits } from '../../api/base/base.js';
+import { Systems } from '../../api/systems/systems.js';
 
 /**
  * A list of BaseUnits to pre-fill the Collection.
@@ -11,12 +12,13 @@ const baseSeeds = [
     abbreviation: 'm',
     description: 'Standard SI unit of length',
     type: 'length',
-    conversion: {
+    conversion: 'thing',
+      /* {
       factor: 3.28084,
       shift: 0,
       to: 'Feet',
       from: 'Meter',
-    },
+    },*/
     system: 'Metric',
   },
   {
@@ -24,12 +26,13 @@ const baseSeeds = [
     abbreviation: 'ft',
     description: 'Standard Imperial unit of length',
     type: 'length',
-    conversion: {
+    conversion: 'thing',
+    /*{
       factor: 0.3048,
       shift: 0,
       to: 'Meter',
       from: 'Foot',
-    },
+    },*/
     system: 'Imperial',
   },
 ];
@@ -42,3 +45,5 @@ if (BaseUnits.find().count() === 0) {
     BaseUnits.insert(baseunit);
   });
 }
+
+

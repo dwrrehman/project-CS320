@@ -37,8 +37,7 @@ export const BaseUnitsSchema = new SimpleSchema({
   },
   conversion: {
     label: 'Conversion',
-    type: Object,
-    blackbox: true,
+    type: String,
   },
   system: {
     label: 'System',

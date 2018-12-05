@@ -17,11 +17,9 @@ export const SystemsSchema = new SimpleSchema({
   },
   length: {
     label: 'Length',
-    type: String,
+    type: Object,
     optional: false,
-    autoform: {
-      placeholder: 'Length',
-    },
+    blackbox: true,
   },
   mass: {
     label: 'Mass',

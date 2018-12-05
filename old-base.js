@@ -1,7 +1,23 @@
 /* eslint-disable max-len,no-use-before-define,no-param-reassign,no-restricted-globals,camelcase */
 // this file contains the algorithmic javascritpt code for the project, as well as some of the view-switching code.
 
+
 const conversion_precision = 5;// digits past the decimal point.
+
+
+/*
+
+	Need to define the following Classes (refer to class diagram for details)
+	-Expression | a string, supposed to be a valid mathematical
+	expression, and its corresponding solution.
+	-Value | a double with an associated unit.
+	-Unit | ...
+*/
+
+
+const bin_variables = [];
+const bin_constants = [];
+
 
 // --------------------------- converter code: ---------------------------------
 
@@ -36,6 +52,7 @@ class UnitPower {
     this.power = power;
   }
 }
+
 
 class CompoundUnit {
   constructor(givenName, abbreviation, description, GivenType, UnitpowerList, system) {
@@ -730,14 +747,74 @@ console.log(ans7.toString());
 
 // unitTest();
 
+
 /* END OF TEST CODE */
 
-// ------------------- calculator code: ---------------------------------
+
+/* factor = baseunit_converter(pair,metric,vis,1.0,0.0);
+var metertosmoot = new UnitConversions(smoot,meter,factor[2],factor[1]);
+metric.length.push(metertosmoot)
+var smoottometer = new UnitConversions(meter,smoot,-factor[2],1/factor[1]);
+smootric.length.push(smoottometer);
+console.log(factor[1]);
+*/
+
+
+// variables and constants: bins :
+
+// a ds that could be a var or a const.
+function bin(givenName, given_data) {
+  this.givenName = givenName;
+  this.given_data = given_data;
+}
+
+
+// adders:
+
+function add_variable(givenName, given_data) {
+  if (givenName === undefined && given_data === undefined) return;
+  bin_variables.push(bin(givenName, given_data));
+}
+
+function add_constant(givenName, given_data) {
+  if (givenName === undefined && given_data === undefined) return;
+  bin_constants.push(bin(givenName, given_data));
+}
+
+
+// / calcilator stuff:
 
 
 let display_string = '';
 
 function receive(string) {
+  if (string == 'store') {
+    const bin_type = prompt('Specify the bin type: (variable/constant)', 'variable');
+    const givenName = prompt('Specify the name of the bin: ');
+
+    const raw_data = document.getElementById('calculator_display').innerText;
+    const num_data = Number(raw_data);
+    if (isNaN(num_data)) {
+      alert(`cannot store: ${raw_data}`);
+      return;
+    }
+
+    if (bin_type == 'variable') {
+      add_variable(givenName, num_data);
+      alert('Stored Successfully');
+    } else if (bin_type == 'constant') {
+      add_constant(givenName, num_data);
+      alert('Stored Successfully');
+    } else {
+      alert(`cannot use bin type: ${bin_type}`);
+    }
+    return;
+  }
+
+  if (string == 'load') {
+    console.log('found load');
+  }
+
   if (string.length == 1) {
     display_string += string;
   } else if (string == 'clear') {
@@ -748,7 +825,9 @@ function receive(string) {
   document.getElementById('calculator_display').innerText = display_string;
 }
 
-// ------------------- main.html code: ---------------------------------
+
+// / ------------------- main.html code: ---------------------------------
+
 
 function convert() {
   let result = null;
@@ -756,7 +835,7 @@ function convert() {
 
   input = input.replace(/,/g, '');
 
-  if (input === '' || input == null) {
+  if (input == '' || input == null) {
     document.getElementById('converter_result').value = null;
     return;
   }
@@ -770,7 +849,7 @@ function convert() {
 
   // do conversion;
 
-  if (isNaN(result) || result == null || result === undefined) {
+  if (isNaN(result) || result == null || result == undefined) {
     document.getElementById('converter_result').value = null;
     return;
   }
@@ -779,4 +858,31 @@ function convert() {
   result = Number(result);
 
   document.getElementById('converter_result').value = `${result} ${to}`;
+}
+
+
+// / --------- add.html code: --------------          [OLD and invalid now]
+
+function validate(formula) {
+  const result = true;
+  return result;
+}
+
+function store_new_unit() {
+
+}
+
+function submit_new_unit() {
+  const formula = document.getElementById('formula').text;
+  // unimplemented
+  if (validate(formula)) {
+    store_new_unit();
+
+    alert('Successfully added new unit.');
+
+    displaymode = convert_displaymode;
+    draw();
+  } else {
+    alert('error in parsing defintition!');
+  }
 }

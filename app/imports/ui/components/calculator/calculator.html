@@ -10,10 +10,9 @@
             <div class="div_display" id="calculator_display" contenteditable="true">Welcome to the Calculation Utility.</div> </th>
           <th class="th_button">
             <select class="cselect" id="to_system" style="background-color: orange; width: 101px;" oninput="convert();">
-                {{#each sys in Systems}}
+                {{#each sys in systemsCollection}}
                   <option value={{sys.name}}>{{sys.name}}</option>
                 {{/each}}
-      
               </select>
           </th>
 
@@ -78,6 +77,8 @@
             onclick="document.getElementById('calculator_display').innerText = solve(new Expression(document.getElementById('calculator_display').innerText), systems1, baseunits, compoundunits).toString();">=</button></th>
         </tr>
       </table>
+      <button class="standard_button" id="add_button" onclick="FlowRouter.go('App.add')">add</button>
+      <button class="standard_button" id="list_button" onclick="FlowRouter.go('App.list')">list</button>
     </div>
   </div>
 </template>

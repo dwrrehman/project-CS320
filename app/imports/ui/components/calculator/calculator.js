@@ -1,12 +1,17 @@
-import './calculator.html';
-import '../../../../app/clients/base.js'
-import '../../stylesheets/calculator.css';
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { Systems } from '../../../api/systems/systems.js'
+import { Systems } from '../../../api/systems/systems.js';
+import '../../../../client/base.js';
 
-Template.calculator.helpers({
-	SystemsCollection() {
-		return Systems.find();
-	}
+import './calculator.html';
+import '../../stylesheets/calculator.css';
+
+Template.calculator.onCreated(function addOnCreated() {
+  Meteor.subscribe('Systems');
 });
 
+Template.calculator.helpers({
+  systemsCollection() {
+    return Systems.find();
+  },
+});

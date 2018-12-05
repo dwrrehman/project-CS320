@@ -10,7 +10,6 @@ export const BaseUnitsSchema = new SimpleSchema({
   name: {
     label: 'Name',
     type: String,
-    optional: false,
     autoform: {
       placeholder: 'Name',
     },
@@ -18,7 +17,6 @@ export const BaseUnitsSchema = new SimpleSchema({
   abbreviation: {
     label: 'Abbreviation',
     type: String,
-    optional: false,
     autoform: {
       placeholder: 'Abbreviation',
     },
@@ -26,7 +24,6 @@ export const BaseUnitsSchema = new SimpleSchema({
   description: {
     label: 'Description',
     type: String,
-    optional: false,
     autoform: {
       placeholder: 'Description',
     },
@@ -34,18 +31,18 @@ export const BaseUnitsSchema = new SimpleSchema({
   type: {
     label: 'Type',
     type: String,
-    optional: false,
     autoform: {
       placeholder: 'Type',
     },
   },
+  conversion: {
+    label: 'Conversion',
+    type: Object,
+    blackbox: true,
+  },
   system: {
     label: 'System',
     type: String,
-    optional: false,
-    autoform: {
-      placeholder: 'System',
-    },
   },
 });
 

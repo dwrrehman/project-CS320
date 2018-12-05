@@ -1,67 +1,7 @@
-export const Base = {
+import { Systems }   from '../imports/api/systems/systems.js'; 
+import { BaseUnits } from '../imports/api/base/base.js'; 
+//import { Compounds } from '../imports/api/compounds/compounds.js'; 
 
-  Solve(string){
-    const baseunits = new UnitMap();
-    const compoundunits = new UnitMap();
-    const systems1 = new SystemMap();
-
-    const metric = new System('Metric', [], [], [], [], [], []);
-    systems1.add(metric);
-    const imperial = new System('Imperial', [], [], [], [], [], []);
-    systems1.add(imperial);
-    const smootric = new System('Smootric', [], [], [], [], [], []);
-    systems1.add(smootric);
-    const feathers = new System('feathers', [], [], [], [], [], []);
-    systems1.add(feathers);
-
-    const meter = new BaseUnit('meter', 'm', 'The length of a meter stick', 'length', metric);
-    baseunits.add(meter);
-    const foot = new BaseUnit('foot', 'ft', 'Less smelly, but about as long as a large human foot.', 'length', imperial);
-    baseunits.add(foot);
-    const smoot = new BaseUnit('smoot', 'smt', "replace 'f' with 'sm' and you get a smoot.", 'length', smootric);
-    baseunits.add(smoot);
-    const flock = new BaseUnit('flock', 'fl', "I don't even know.", 'length', feathers);
-    baseunits.add(flock);
-    const celsius = new BaseUnit('celsius', 'dC', 'A unit of temperature in the metric system', 'temperature', metric);
-    baseunits.add(celsius);
-    const fahrenheit = new BaseUnit('fahrenheit', 'dF', 'A unit of temperature in the imperial system', 'temperature', imperial);
-    baseunits.add(fahrenheit);
-    const warmth = new BaseUnit('warmth', 'dW', 'A unit of temperature in the feathers system', 'temperature', feathers);
-    baseunits.add(warmth);
-    const secondM = new BaseUnit('second', 's', 'THE unit of time', 'time', metric);
-    baseunits.add(secondM);
-    const secondI = new BaseUnit('second', 's', 'THE unit of time', 'time', imperial);
-    const kilogram = new BaseUnit('kilogram', 'kg', 'The metric unit of mass', 'mass', metric);
-    baseunits.add(kilogram);
-    const slug = new BaseUnit('slug', 'slug', 'The imperial unit of mass', 'mass', imperial);
-    baseunits.add(slug);
-
-    const metertofoot = new UnitConversions(foot, meter, 0, 3.28084);
-    const foottometer = new UnitConversions(meter, foot, 0, 1.0 / 3.28084);
-    const foottosmoot = new UnitConversions(smoot, foot, 0, 42.0);
-    const foottoflock = new UnitConversions(flock, foot, 0, 23.5);
-    const flocktofoot = new UnitConversions(foot, flock, 0, 1 / 23.5);
-    const smoottofoot = new UnitConversions(foot, smoot, 0, 1 / 42.0);
-    const celsiustofahrenheit = new UnitConversions(fahrenheit, celsius, 32.0, 9.0 / 5.0);
-    const fahrenheittowarmth = new UnitConversions(warmth, fahrenheit, 12.0, 3.0 / 5.0);
-    const kilogramtoslug = new UnitConversions(slug, kilogram, 0, 1.0 / 14.59390);
-    const slugtokilogram = new UnitConversions(kilogram, slug, 0, 14.59390);
-
-    metric.length.push(metertofoot);
-    metric.mass.push(kilogramtoslug);
-    metric.temperature.push(celsiustofahrenheit);
-    imperial.temperature.push(fahrenheittowarmth);
-    imperial.length.push(foottometer);
-    imperial.length.push(foottosmoot);
-    imperial.length.push(foottoflock);
-    imperial.mass.push(slugtokilogram);
-    feathers.length.push(flocktofoot);
-    smootric.length.push(smoottofoot);
-
-
-    return solve(new Expression(string), systems1, baseunits, compoundunits);
-  }
-}
 /* eslint-disable max-len,no-use-before-define,no-param-reassign,no-restricted-globals,camelcase */
 // this file contains the algorithmic javascritpt code for the project, as well as some of the view-switching code.
 
@@ -680,123 +620,124 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
   return val1;
 }
 /* TEST CODE FOR BASE UNIT CONVERTER */
-const baseunits = new UnitMap();
-const compoundunits = new UnitMap();
-const systems1 = new SystemMap();
 
-const metric = new System('Metric', [], [], [], [], [], []);
-systems1.add(metric);
-const imperial = new System('Imperial', [], [], [], [], [], []);
-systems1.add(imperial);
-const smootric = new System('Smootric', [], [], [], [], [], []);
-systems1.add(smootric);
-const feathers = new System('feathers', [], [], [], [], [], []);
-systems1.add(feathers);
-
-const meter = new BaseUnit('meter', 'm', 'The length of a meter stick', 'length', metric);
-baseunits.add(meter);
-const foot = new BaseUnit('foot', 'ft', 'Less smelly, but about as long as a large human foot.', 'length', imperial);
-baseunits.add(foot);
-const smoot = new BaseUnit('smoot', 'smt', "replace 'f' with 'sm' and you get a smoot.", 'length', smootric);
-baseunits.add(smoot);
-const flock = new BaseUnit('flock', 'fl', "I don't even know.", 'length', feathers);
-baseunits.add(flock);
-const celsius = new BaseUnit('celsius', 'dC', 'A unit of temperature in the metric system', 'temperature', metric);
-baseunits.add(celsius);
-const fahrenheit = new BaseUnit('fahrenheit', 'dF', 'A unit of temperature in the imperial system', 'temperature', imperial);
-baseunits.add(fahrenheit);
-const warmth = new BaseUnit('warmth', 'dW', 'A unit of temperature in the feathers system', 'temperature', feathers);
-baseunits.add(warmth);
-const secondM = new BaseUnit('second', 's', 'THE unit of time', 'time', metric);
-baseunits.add(secondM);
-const secondI = new BaseUnit('second', 's', 'THE unit of time', 'time', imperial);
-const kilogram = new BaseUnit('kilogram', 'kg', 'The metric unit of mass', 'mass', metric);
-baseunits.add(kilogram);
-const slug = new BaseUnit('slug', 'slug', 'The imperial unit of mass', 'mass', imperial);
-baseunits.add(slug);
-
-const metertofoot = new UnitConversions(foot, meter, 0, 3.28084);
-const foottometer = new UnitConversions(meter, foot, 0, 1.0 / 3.28084);
-const foottosmoot = new UnitConversions(smoot, foot, 0, 42.0);
-const foottoflock = new UnitConversions(flock, foot, 0, 23.5);
-const flocktofoot = new UnitConversions(foot, flock, 0, 1 / 23.5);
-const smoottofoot = new UnitConversions(foot, smoot, 0, 1 / 42.0);
-const celsiustofahrenheit = new UnitConversions(fahrenheit, celsius, 32.0, 9.0 / 5.0);
-const fahrenheittowarmth = new UnitConversions(warmth, fahrenheit, 12.0, 3.0 / 5.0);
-const kilogramtoslug = new UnitConversions(slug, kilogram, 0, 1.0 / 14.59390);
-const slugtokilogram = new UnitConversions(kilogram, slug, 0, 14.59390);
-
-metric.length.push(metertofoot);
-metric.mass.push(kilogramtoslug);
-metric.temperature.push(celsiustofahrenheit);
-imperial.temperature.push(fahrenheittowarmth);
-imperial.length.push(foottometer);
-imperial.length.push(foottosmoot);
-imperial.length.push(foottoflock);
-imperial.mass.push(slugtokilogram);
-feathers.length.push(flocktofoot);
-smootric.length.push(smoottofoot);
+  var baseunits = new UnitMap();
+  var compoundunits = new UnitMap();
+  var systems1 = new SystemMap();
 
 
-const pair = new UnitPair(smoot, meter);
+// const metric = new System('Metric', [], [], [], [], [], []);
+// systems1.add(metric);
+// const imperial = new System('Imperial', [], [], [], [], [], []);
+// systems1.add(imperial);
+// const smootric = new System('Smootric', [], [], [], [], [], []);
+// systems1.add(smootric);
+// const feathers = new System('feathers', [], [], [], [], [], []);
+// systems1.add(feathers);
+
+// const meter = new BaseUnit('meter', 'm', 'The length of a meter stick', 'length', metric);
+// baseunits.add(meter);
+// const foot = new BaseUnit('foot', 'ft', 'Less smelly, but about as long as a large human foot.', 'length', imperial);
+// baseunits.add(foot);
+// const smoot = new BaseUnit('smoot', 'smt', "replace 'f' with 'sm' and you get a smoot.", 'length', smootric);
+// baseunits.add(smoot);
+// const flock = new BaseUnit('flock', 'fl', "I don't even know.", 'length', feathers);
+// baseunits.add(flock);
+// const celsius = new BaseUnit('celsius', 'dC', 'A unit of temperature in the metric system', 'temperature', metric);
+// baseunits.add(celsius);
+// const fahrenheit = new BaseUnit('fahrenheit', 'dF', 'A unit of temperature in the imperial system', 'temperature', imperial);
+// baseunits.add(fahrenheit);
+// const warmth = new BaseUnit('warmth', 'dW', 'A unit of temperature in the feathers system', 'temperature', feathers);
+// baseunits.add(warmth);
+// const secondM = new BaseUnit('second', 's', 'THE unit of time', 'time', metric);
+// baseunits.add(secondM);
+// const secondI = new BaseUnit('second', 's', 'THE unit of time', 'time', imperial);
+// const kilogram = new BaseUnit('kilogram', 'kg', 'The metric unit of mass', 'mass', metric);
+// baseunits.add(kilogram);
+// const slug = new BaseUnit('slug', 'slug', 'The imperial unit of mass', 'mass', imperial);
+// baseunits.add(slug);
+
+// const metertofoot = new UnitConversions(foot, meter, 0, 3.28084);
+// const foottometer = new UnitConversions(meter, foot, 0, 1.0 / 3.28084);
+// const foottosmoot = new UnitConversions(smoot, foot, 0, 42.0);
+// const foottoflock = new UnitConversions(flock, foot, 0, 23.5);
+// const flocktofoot = new UnitConversions(foot, flock, 0, 1 / 23.5);
+// const smoottofoot = new UnitConversions(foot, smoot, 0, 1 / 42.0);
+// const celsiustofahrenheit = new UnitConversions(fahrenheit, celsius, 32.0, 9.0 / 5.0);
+// const fahrenheittowarmth = new UnitConversions(warmth, fahrenheit, 12.0, 3.0 / 5.0);
+// const kilogramtoslug = new UnitConversions(slug, kilogram, 0, 1.0 / 14.59390);
+// const slugtokilogram = new UnitConversions(kilogram, slug, 0, 14.59390);
+
+// metric.length.push(metertofoot);
+// metric.mass.push(kilogramtoslug);
+// metric.temperature.push(celsiustofahrenheit);
+// imperial.temperature.push(fahrenheittowarmth);
+// imperial.length.push(foottometer);
+// imperial.length.push(foottosmoot);
+// imperial.length.push(foottoflock);
+// imperial.mass.push(slugtokilogram);
+// feathers.length.push(flocktofoot);
+// smootric.length.push(smoottofoot);
 
 
-console.log(`Answer: ${convertUnit(pair, 3)}`); // Convert 3 meters into smoots.
-// The new path should exist when the second call is made.
-console.log(`Answer: ${convertUnit(pair, 4)}`); // Convert 4 meters into smoots.(should use new path.)
+// const pair = new UnitPair(smoot, meter);
 
-console.log(`Answer: ${convertUnit(new UnitPair(meter, smoot), 413.38584)}`); // Convert 413.38584 smoots into meters, should be 3 meters.
 
-console.log(`Answer: ${convertUnit(new UnitPair(meter, flock), 100)}`);
+// console.log(`Answer: ${convertUnit(pair, 3)}`); // Convert 3 meters into smoots.
+// // The new path should exist when the second call is made.
+// console.log(`Answer: ${convertUnit(pair, 4)}`); // Convert 4 meters into smoots.(should use new path.)
 
-console.log('12 celsius to fahrenheit');
-console.log(`Answer: ${convertUnit(new UnitPair(fahrenheit, celsius), 12)}`);
-console.log('10 celsius to warmth');
-console.log(`Answer: ${convertUnit(new UnitPair(warmth, celsius), 10)}`);
-/* COMPOUND UNIT CONVERSION TESTING */
+// console.log(`Answer: ${convertUnit(new UnitPair(meter, smoot), 413.38584)}`); // Convert 413.38584 smoots into meters, should be 3 meters.
 
-const newton = new CompoundUnit('Newton', 'N', 'A unit of force', 'force', [new UnitPower(kilogram, 1), new UnitPower(meter, 1), new UnitPower(secondM, -2)], metric);
-compoundunits.add(newton);
-const poundforce = new CompoundUnit('poundforce', 'lbf', 'The imperial unit of force', 'force', [new UnitPower(slug, 1), new UnitPower(foot, 1), new UnitPower(secondI, -2)], imperial);
-compoundunits.add(poundforce);
-console.log('from 10 newton to poundforce');
-console.log(convertComp(poundforce, newton, 10)[0]);
-console.log('from 2.2480899554 poundforce to newton');
-console.log(convertComp(newton, poundforce, 2.2480899554)[0]);
-/* Solving Tests */
-const test1 = new Expression('(5kg^1)^3*(15*16+12)');
-console.log(`Solving: ${test1.val}`);
-const ans1 = solve(test1, systems1, baseunits, compoundunits);
-console.log(ans1.toString());
-const test2 = new Expression('5kg^1^3*252');
-console.log(`Solving: ${test2.val}`);
-const ans2 = solve(test2, systems1, baseunits, compoundunits);
-console.log(ans2.toString());
-const test3 = new Expression('5kg^1^3*(252*(16m^-3+5m^-3)-7m^-3)');
-console.log(`Solving: ${test3.val}`);
-const ans3 = solve(test3, systems1, baseunits, compoundunits, 'Imperial');
-console.log(ans3.toString());
-const test4 = new Expression('5kg^1^3*(252*(((16m^-3+5m^-3)))-7m^-3)');
-console.log(`Solving: ${test4.val}`);
-const ans4 = solve(test4, systems1, baseunits, compoundunits);
-console.log(ans4.toString());
-const test5 = new Expression('5N^1^3*(252*(((16N^-2+5N^-2)))-7N^-2)');
-console.log(`Solving: ${test5.val}`);
-const ans5 = solve(test5, systems1, baseunits, compoundunits, 'Imperial');
-console.log(ans5.toString());
-const test6 = new Expression('5N*6*12m');
-console.log(`Solving: ${test6.val}`);
-const ans6 = solve(test6, systems1, baseunits, compoundunits, 'Imperial');
-console.log(ans6.toString());
-const test7 = new Expression('5 N  * 6 * 12 m');
-console.log(`Solving: ${test7.val}`);
-const ans7 = solve(test7, systems1, baseunits, compoundunits, 'Imperial');
-console.log(ans7.toString());
+// console.log(`Answer: ${convertUnit(new UnitPair(meter, flock), 100)}`);
 
-// unitTest();
+// console.log('12 celsius to fahrenheit');
+// console.log(`Answer: ${convertUnit(new UnitPair(fahrenheit, celsius), 12)}`);
+// console.log('10 celsius to warmth');
+// console.log(`Answer: ${convertUnit(new UnitPair(warmth, celsius), 10)}`);
+// /* COMPOUND UNIT CONVERSION TESTING 
 
-/* END OF TEST CODE */
+// const newton = new CompoundUnit('Newton', 'N', 'A unit of force', 'force', [new UnitPower(kilogram, 1), new UnitPower(meter, 1), new UnitPower(secondM, -2)], metric);
+// compoundunits.add(newton);
+// const poundforce = new CompoundUnit('poundforce', 'lbf', 'The imperial unit of force', 'force', [new UnitPower(slug, 1), new UnitPower(foot, 1), new UnitPower(secondI, -2)], imperial);
+// compoundunits.add(poundforce);
+// console.log('from 10 newton to poundforce');
+// console.log(convertComp(poundforce, newton, 10)[0]);
+// console.log('from 2.2480899554 poundforce to newton');
+// console.log(convertComp(newton, poundforce, 2.2480899554)[0]);
+// /* Solving Tests */
+// const test1 = new Expression('(5kg^1)^3*(15*16+12)');
+// console.log(`Solving: ${test1.val}`);
+// const ans1 = solve(test1, systems1, baseunits, compoundunits);
+// console.log(ans1.toString());
+// const test2 = new Expression('5kg^1^3*252');
+// console.log(`Solving: ${test2.val}`);
+// const ans2 = solve(test2, systems1, baseunits, compoundunits);
+// console.log(ans2.toString());
+// const test3 = new Expression('5kg^1^3*(252*(16m^-3+5m^-3)-7m^-3)');
+// console.log(`Solving: ${test3.val}`);
+// const ans3 = solve(test3, systems1, baseunits, compoundunits, 'Imperial');
+// console.log(ans3.toString());
+// const test4 = new Expression('5kg^1^3*(252*(((16m^-3+5m^-3)))-7m^-3)');
+// console.log(`Solving: ${test4.val}`);
+// const ans4 = solve(test4, systems1, baseunits, compoundunits);
+// console.log(ans4.toString());
+// const test5 = new Expression('5N^1^3*(252*(((16N^-2+5N^-2)))-7N^-2)');
+// console.log(`Solving: ${test5.val}`);
+// const ans5 = solve(test5, systems1, baseunits, compoundunits, 'Imperial');
+// console.log(ans5.toString());
+// const test6 = new Expression('5N*6*12m');
+// console.log(`Solving: ${test6.val}`);
+// const ans6 = solve(test6, systems1, baseunits, compoundunits, 'Imperial');
+// console.log(ans6.toString());
+// const test7 = new Expression('5 N  * 6 * 12 m');
+// console.log(`Solving: ${test7.val}`);
+// const ans7 = solve(test7, systems1, baseunits, compoundunits, 'Imperial');
+// console.log(ans7.toString());
 
+// // unitTest();
+
+// /* END OF TEST CODE */
 
 
 // ------------------- calculator code: ---------------------------------
@@ -848,3 +789,16 @@ function convert() {
   document.getElementById('converter_result').value = `${result} ${to}`;
 }
 
+
+export const Base = {
+
+  Init() {
+    Systems.find().forEach(function(i){systems1.add(i);});    
+    BaseUnits.find().forEach(function(i){baseunits.add(i);});
+  },
+
+  Solve(string, systemname) {
+    return solve(new Expression(string), systems1, baseunits, compoundunits, systemname);  
+  },
+
+}

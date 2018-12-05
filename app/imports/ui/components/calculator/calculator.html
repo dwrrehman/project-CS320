@@ -8,7 +8,7 @@
           <th class="th_display">
             <div class="div_display" id="calculator_display" contenteditable="true">Welcome to the Calculation Utility.</div> </th>
           <th class="th_button">
-            <select class="cselect" id="to_system" style="background-color: orange; width: 101px;" oninput="convert();">
+            <select class="cselect" id="to_system" style="font-size: 15px; background-color: orange; width: 101px;" oninput="convert();">
                 {{#each sys in systemsCollection}}
                   <option value={{sys.name}}>{{sys.name}}</option>
                 {{/each}}
@@ -28,9 +28,9 @@
           <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">&gt;</button></th>
           <th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('divide');">÷</button></th>
 
-          <th class="th_button"><button class="cbutton" onclick="receive('7');">7</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('8');">8</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('9');">9</button></th>
+          <th class="th_button"><button class="cbutton" id="7button"">7</button></th>
+          <th class="th_button"><button class="cbutton" id="8button">8</button></th>
+          <th class="th_button"><button class="cbutton" id="9button">9</button></th>
         </tr>
         <tr>
           <th class="th_button" style="background-color: #9542f4;"><button class="cbutton">u</button></th>
@@ -42,9 +42,9 @@
           <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">}</button></th>
           <th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('multiply');">&times;</button></th>
 
-          <th class="th_button"><button class="cbutton" onclick="receive('4');">4</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('5');">5</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('6');">6</button></th>
+          <th class="th_button"><button class="cbutton" id="4button"">4</button></th>
+          <th class="th_button"><button class="cbutton" id="5button"">5</button></th>
+          <th class="th_button"><button class="cbutton" id="6button"">6</button></th>
         </tr>
         <tr>
           <th class="th_button" style="background-color: #9542f4;"><button class="cbutton" style="font-size: 15px" onclick="receive('load');">load</button></th>
@@ -56,22 +56,22 @@
           <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">]</button></th>
           <th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('subtract');">-</button></th>
 
-          <th class="th_button"><button class="cbutton" onclick="receive('1');">1</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('2');">2</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('3');">3</button></th>
+          <th class="th_button"><button class="cbutton" id="1button">1</button></th>
+          <th class="th_button"><button class="cbutton" id="2button">2</button></th>
+          <th class="th_button"><button class="cbutton" id="3button">3</button></th>
         </tr>
         <tr>
           <th class="th_button" style="background-color: #9542f4;"><button class="cbutton" style="font-size: 15px" onclick="receive('store');">store</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('4');">&</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('4');">|</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('4');">,</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('4');">.</button></th>
-          <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;" onclick="receive('4');">(</button></th>
+          <th class="th_button"><button class="cbutton" >&</button></th>
+          <th class="th_button"><button class="cbutton" >|</button></th>
+          <th class="th_button"><button class="cbutton" >,</button></th>
+          <th class="th_button"><button class="cbutton" id="dotbutton">.</button></th>
+          <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">(</button></th>
           <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;" onclick="receive('4');">)</button></th>
           <th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('add');">+</button></th>
 
           <th class="th_button"><button class="cbutton" style="background-color: #377be8;" onclick="receive('exponentiate');">^</button></th>
-          <th class="th_button"><button class="cbutton" onclick="receive('0');">0</button></th>
+          <th class="th_button"><button class="cbutton" id="0button"">0</button></th>
           <th class="th_button" id="equals_button" style="background-color: #1dd686;"><button class="cbutton" 
           >=</button></th>
         </tr>

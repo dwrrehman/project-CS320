@@ -75,7 +75,7 @@ table {
   color: black;
   background-color: white;
 
-  content-editable
+  content-editable: true;
 }
 
 .th_display {

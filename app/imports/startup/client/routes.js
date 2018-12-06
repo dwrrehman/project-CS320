@@ -9,6 +9,7 @@ import '../../ui/components/converter/converter.js';
 import '../../ui/pages/add-unit/add-unit.js';
 import '../../ui/pages/add-conversion/add-conversion.js';
 import '../../ui/pages/edit-unit/edit-unit.js';
+import '../../ui/pages/add-compound/add-compound.js';
 import '../../ui/pages/list/list.js';
 import '../../ui/pages/not-found/not-found.js';
 
@@ -38,6 +39,13 @@ FlowRouter.route('/edit-unit/:_id', {
   name: 'App.edit_unit',
   action() {
     BlazeLayout.render('App_body', { main: 'edit_unit' });
+  },
+});
+
+FlowRouter.route('/add-compound', {
+  name: 'App.add_compound',
+  action() {
+    BlazeLayout.render('App_body', { main: 'add_compound' });
   },
 });
 

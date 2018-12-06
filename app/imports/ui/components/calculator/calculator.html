@@ -6,20 +6,19 @@
         <tr>
           <th class="th_button" style="border-bottom: none; background-color: orange;"><button class="clearbutton"><b>c</b></button></th>
           <th class="th_display">
-            <div class="div_display" id="calculator_display" contenteditable="true">Welcome to the Calculation Utility.</div> </th>
+            <div class="div_display" id="calculator_display" contenteditable="true"></div> </th>
           <th class="th_button">
             <select class="cselect" id="to_system" style="font-size: 15px; background-color: orange; width: 101px;">
                 {{#each sys in systemsCollection}}
                   <option value={{sys.name}}>{{sys.name}}</option>
                 {{/each}}
-              </select>
-          </th>
-
+              </select>              
+          </th>        
         </tr>
       </table>
       <table>
         <tr>
-          <th class="th_button" style="background-color: #9542f4;"><button style="font-size: 15px" class="cbutton">add</button></th>
+          <th class="th_button"><button style="font-size: 15px; background-color: #9542f4;" id="addsystem_button" class="cbutton">add<br>system</button></th>
           <th class="th_button"><button class="cbutton" id="mbutton">m</button></th>
           <th class="th_button"><button class="cbutton" id="sbutton">s</button></th>
           <th class="th_button"><button class="cbutton" id="kgbutton">kg</button></th>
@@ -31,7 +30,8 @@
           <th class="th_button"><button class="cbutton" id="7button">7</button></th>
           <th class="th_button"><button class="cbutton" id="8button">8</button></th>
           <th class="th_button"><button class="cbutton" id="9button">9</button></th>
-          <th class="th_button"><button style="font-size: 15px; background-color: lightcoral; width: 101px;" class="cbutton" onclick="FlowRouter.go('App.add_unit')" id="addunit_button">add unit</button></th>
+
+          <th class="th_button"><button style="font-size: 15px; background-color: lightcoral; width: 100px;" class="cbutton" onclick="FlowRouter.go('App.list')" id="addunit_button">units</button></th>          
         </tr>
         <tr>
           <th class="th_button" style="background-color: #9542f4;"><button  style="font-size: 15px" class="cbutton">list</button></th>
@@ -46,7 +46,7 @@
           <th class="th_button"><button class="cbutton" id="4button">4</button></th>
           <th class="th_button"><button class="cbutton" id="5button">5</button></th>
           <th class="th_button"><button class="cbutton" id="6button">6</button></th>
-          <th class="th_button"><button style="font-size: 15px; background-color: lightcoral; width: 101px;" class="cbutton" id="addsystem_button">add system</button></th>
+          <th class="th_button"><button style="font-size: 15px; background-color: lightcoral; width: 101px;" class="cbutton" onclick="FlowRouter.go('App.add_unit')" id="addunit_button">add unit</button></th>                  
         </tr>
         <tr>
           <th class="th_button" style="background-color: #9542f4;"><button class="cbutton" style="font-size: 15px" >load</button></th>
@@ -76,10 +76,9 @@
 
           <th class="th_button"><button class="cbutton" id="expbutton" style="background-color: #377be8;">^</button></th>
           <th class="th_button"><button class="cbutton" id="0button">0</button></th>
-          <th class="th_button" id="equals_button" style="background-color: #1dd686;"><button class="cbutton"
-          >=</button></th>
+          <th class="th_button" id="equals_button" style="background-color: #1dd686;"><button class="cbutton">=</button></th>
+          <th class="th_button"><button style="font-size: 15px; background-color: lightcoral; width: 101px;" class="cbutton" onclick="FlowRouter.go('App.add_compound')" id="addunit_button">add compound unit</button></th>          
           
-          <th class="th_button"><button style="font-size: 15px; background-color: lightcoral; width: 101px;" class="cbutton" onclick="FlowRouter.go('App.list')" id="addunit_button">units</button></th>      
         </tr>
       </table>
     </div>

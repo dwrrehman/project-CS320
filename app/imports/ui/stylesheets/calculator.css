@@ -1,5 +1,4 @@
 #calculator_div {
-
   align-content: center;
   align-self: center;
   align-items: center;
@@ -12,25 +11,10 @@
   border-bottom: none;
 
   width: auto;
-  height: 400px;
-
-  margin: 0;
-  padding-top: 0;
-  padding-right: 20px;
-  padding-left: 20px;
-  padding-bottom: 0;
-}
-
-#converter_div {
-  background-color: #cceeff;
-  border: solid;
-  border-color: gray;
-
-  width: auto;
   height: auto;
 
   margin: 0;
-  padding-top: 10px;
+  padding-top: 0;
   padding-right: 20px;
   padding-left: 20px;
   padding-bottom: 0;
@@ -60,13 +44,14 @@ table {
 
   margin: 0;
   padding: 5px;
+  padding-right: 20px;
 
   overflow: auto;
 
-  width: 599px;
-  height: 40px;
+  width: 784px;
+  height: 60px;
 
-  font-size: 20px;
+  font-size: 30px;
   font-family: Courier New;
   text-align: right;
 
@@ -74,8 +59,6 @@ table {
 
   color: black;
   background-color: white;
-
-  content-editable: true;
 }
 
 .th_display {
@@ -86,8 +69,8 @@ table {
   margin: 0;
   padding: 0;
 
-  width: 240px;
-  height: 60px;
+  width: 540px;
+  height: 80px;
 
   color: inherit;
   background-color: white;
@@ -100,8 +83,8 @@ table {
   margin: 0;
   padding: 0;
 
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 
   color: inherit;
   background-color: #DDDDDD;
@@ -120,12 +103,13 @@ table {
   font-size: 20px;
   font-family: Courier New;
 
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }
 
 .cselect {
   border: none;
+  border-radius: 0px;
   margin: 0;
   padding: 0;
   cursor: pointer;
@@ -137,8 +121,8 @@ table {
   font-size: 20px;
   font-family: Courier New;
 
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }
 
 .th_clearbutton {
@@ -148,8 +132,8 @@ table {
   margin: 0;
   padding: 0;
 
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 
   background-color: orange;
 }
@@ -166,6 +150,6 @@ table {
   color: gray;
   background-color: inherit;
 
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }

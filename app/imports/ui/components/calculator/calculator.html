@@ -4,11 +4,11 @@
     <div id="calculator_div">
       <table>
         <tr>
-          <th class="th_button" style="border-bottom: none; background-color: orange;"><button class="clearbutton" onclick="{{receive 'clear'}}"><b>c</b></button></th>
+          <th class="th_button" style="border-bottom: none; background-color: orange;"><button class="clearbutton"><b>c</b></button></th>
           <th class="th_display">
             <div class="div_display" id="calculator_display" contenteditable="true">Welcome to the Calculation Utility.</div> </th>
           <th class="th_button">
-            <select class="cselect" id="to_system" style="font-size: 15px; background-color: orange; width: 101px;" oninput="convert();">
+            <select class="cselect" id="to_system" style="font-size: 15px; background-color: orange; width: 101px;">
                 {{#each sys in systemsCollection}}
                   <option value={{sys.name}}>{{sys.name}}</option>
                 {{/each}}
@@ -19,65 +19,68 @@
       </table>
       <table>
         <tr>
-          <th class="th_button" style="background-color: #9542f4;"><button class="cbutton">u</button></th>
-          <th class="th_button"><button class="cbutton"></button></th>
-          <th class="th_button"><button class="cbutton">u</button></th>
-          <th class="th_button"><button class="cbutton">u</button></th>
-          <th class="th_button"><button class="cbutton">u</button></th>
-          <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">&lt;</button></th>
-          <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">&gt;</button></th>
-          <th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('divide');">÷</button></th>
+          <th class="th_button" style="background-color: #9542f4;"><button style="font-size: 15px" class="cbutton">add</button></th>
+          <th class="th_button"><button class="cbutton" id="mbutton">m</button></th>
+          <th class="th_button"><button class="cbutton" id="sbutton">s</button></th>
+          <th class="th_button"><button class="cbutton" id="kgbutton">kg</button></th>
+          <th class="th_button"><button class="cbutton" id="Nbutton">N</button></th>
+          <th class="th_button"><button class="cbutton" id="op3_button" style="background-color: #A3D3D3;">&lt;</button></th>
+          <th class="th_button"><button class="cbutton" id="cl3_button" style="background-color: #A3D3D3;">&gt;</button></th>
+          <th class="th_button" style="background-color: #377be8;"><button id="divbutton" class="cbutton">÷</button></th>
 
-          <th class="th_button"><button class="cbutton" id="7button"">7</button></th>
+          <th class="th_button"><button class="cbutton" id="7button">7</button></th>
           <th class="th_button"><button class="cbutton" id="8button">8</button></th>
           <th class="th_button"><button class="cbutton" id="9button">9</button></th>
+          <th class="th_button"><button style="font-size: 15px; background-color: lightcoral; width: 101px;" class="cbutton" onclick="FlowRouter.go('App.add')" id="addunit_button">add unit</button></th>
         </tr>
         <tr>
-          <th class="th_button" style="background-color: #9542f4;"><button class="cbutton">u</button></th>
-          <th class="th_button"><button class="cbutton">tan</button></th>
-          <th class="th_button"><button class="cbutton">cos</button></th>
-          <th class="th_button"><button class="cbutton">sin</button></th>
-          <th class="th_button"><button class="cbutton">sqrt</button></th>
-          <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">{</button></th>
-          <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">}</button></th>
-          <th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('multiply');">&times;</button></th>
+          <th class="th_button" style="background-color: #9542f4;"><button  style="font-size: 15px" class="cbutton">list</button></th>
+          <th class="th_button"><button style="font-size: 15px" class="cbutton">tan()</button></th>
+          <th class="th_button"><button style="font-size: 15px" class="cbutton">cos()</button></th>
+          <th class="th_button"><button style="font-size: 15px" class="cbutton">sin()</button></th>
+          <th class="th_button"><button style="font-size: 15px" class="cbutton">√()</button></th>
+          <th class="th_button"><button class="cbutton" id="bracketop_button" style="background-color: #A3D3D3;">{</button></th>
+          <th class="th_button"><button class="cbutton" id="bracketcl_button" style="background-color: #A3D3D3;">}</button></th>
+          <th class="th_button" id="mulbutton" style="background-color: #377be8;"><button class="cbutton">&times;</button></th>
 
-          <th class="th_button"><button class="cbutton" id="4button"">4</button></th>
-          <th class="th_button"><button class="cbutton" id="5button"">5</button></th>
-          <th class="th_button"><button class="cbutton" id="6button"">6</button></th>
+          <th class="th_button"><button class="cbutton" id="4button">4</button></th>
+          <th class="th_button"><button class="cbutton" id="5button">5</button></th>
+          <th class="th_button"><button class="cbutton" id="6button">6</button></th>
+          <th class="th_button"><button style="font-size: 13px; background-color: lightcoral; width: 101px;" class="cbutton" onclick="var cat = prompt('Please Provide the System Name: ', 'metric');alert('Successfully added system.');" id="addsystem_button">add system</button></th>
         </tr>
         <tr>
-          <th class="th_button" style="background-color: #9542f4;"><button class="cbutton" style="font-size: 15px" onclick="receive('load');">load</button></th>
+          <th class="th_button" style="background-color: #9542f4;"><button class="cbutton" style="font-size: 15px" >load</button></th>
           <th class="th_button"><button class="cbutton">abs</button></th>
-          <th class="th_button"><button class="cbutton">exp</button></th>
-          <th class="th_button"><button class="cbutton">e</button></th>
-          <th class="th_button"><button class="cbutton">pi</button></th>
-          <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">[</button></th>
-          <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">]</button></th>
-          <th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('subtract');">-</button></th>
+          <th class="th_button"><button class="cbutton">ln</button></th>
+          <th class="th_button"><button class="cbutton"><i>pi</i></button></th>
+          <th class="th_button"><button class="cbutton"><i>e</i></button></th>
+          
+          <th class="th_button"><button class="cbutton" id="op2button" style="background-color: #A3D3D3;">[</button></th>
+          <th class="th_button"><button class="cbutton" id="cl2button" style="background-color: #A3D3D3;">]</button></th>
+          <th class="th_button" id="subbutton" style="background-color: #377be8;"><button class="cbutton">-</button></th>
 
           <th class="th_button"><button class="cbutton" id="1button">1</button></th>
           <th class="th_button"><button class="cbutton" id="2button">2</button></th>
           <th class="th_button"><button class="cbutton" id="3button">3</button></th>
+          <th class="th_button"><button style="font-size: 13px; background-color: lightcoral; width: 101px;" class="cbutton" onclick="FlowRouter.go('App.edit')" id="addunit_button">edit system</button></th>
         </tr>
         <tr>
-          <th class="th_button" style="background-color: #9542f4;"><button class="cbutton" style="font-size: 15px" onclick="receive('store');">store</button></th>
+          <th class="th_button" style="background-color: #9542f4;"><button class="cbutton" id="loadbutton" style="font-size: 15px">store</button></th>
           <th class="th_button"><button class="cbutton" >&</button></th>
           <th class="th_button"><button class="cbutton" >|</button></th>
           <th class="th_button"><button class="cbutton" >,</button></th>
           <th class="th_button"><button class="cbutton" id="dotbutton">.</button></th>
-          <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;">(</button></th>
-          <th class="th_button"><button class="cbutton" style="background-color: #A3D3D3;" onclick="receive('4');">)</button></th>
-          <th class="th_button" style="background-color: #377be8;"><button class="cbutton" onclick="receive('add');">+</button></th>
+          <th class="th_button"><button class="cbutton" id="op1button" style="background-color: #A3D3D3;">(</button></th>
+          <th class="th_button"><button class="cbutton" id="cl1button" style="background-color: #A3D3D3;">)</button></th>
+          <th class="th_button" id="addbutton" style="background-color: #377be8;"><button class="cbutton">+</button></th>
 
-          <th class="th_button"><button class="cbutton" style="background-color: #377be8;" onclick="receive('exponentiate');">^</button></th>
-          <th class="th_button"><button class="cbutton" id="0button"">0</button></th>
+          <th class="th_button"><button class="cbutton" id="expbutton" style="background-color: #377be8;">^</button></th>
+          <th class="th_button"><button class="cbutton" id="0button">0</button></th>
           <th class="th_button" id="equals_button" style="background-color: #1dd686;"><button class="cbutton" 
           >=</button></th>
+          <th class="th_button"><button style="font-size: 15px; background-color: lightcoral; width: 101px;" class="cbutton" onclick="FlowRouter.go('App.list')" id="addunit_button">systems</button></th>
         </tr>
       </table>
-      <button class="standard_button" id="add_button" onclick="FlowRouter.go('App.add')">add</button>
-      <button class="standard_button" id="list_button" onclick="FlowRouter.go('App.list')">list</button>
     </div>
   </div>
 </template>

@@ -15,7 +15,7 @@ class UnitMap {
       this[unit.abbreviation] = unit;
     } else {
       console.log('Unit with that abbreviation already exists.');
-
+      alert('Unit with that abbreviation already exists.');
       console.log(this[unit.abbreviation]);
     }
   }
@@ -27,7 +27,7 @@ class SystemMap {
       this[system.givenName] = system;
     } else {
       console.log('System with that name already exists.');
-
+      alert('System with that name already exists.');
       console.log(this[system.givenName]);
     }
   }
@@ -207,6 +207,7 @@ class Value {
       this.quantity += val.quantity;
     } else {
       console.log('Error: Addition of two different units. Value.add();');
+      alert('Error: Addition of two different units.');
     }
   }
 
@@ -319,6 +320,7 @@ function convertComp(ToCompound, FromCompound, value) {
             }
             if (!result[0] || (shiftFlag && compResult.conversions.length > 1)) {
               console.log(`Error: convertComp(): base unit conversion failure! Converting ${desired.from.givenName} to ${desired.to.givenName}`);
+              alert(`Error: convertComp(): base unit conversion failure! Converting ${desired.from.givenName} to ${desired.to.givenName}`);
               return [0, undefined];
             }
           }
@@ -327,6 +329,7 @@ function convertComp(ToCompound, FromCompound, value) {
     }
     if (!found) {
       console.log('Error: convertComp(): could not find base unit in from compound.');
+      alert('Error: convertComp(): could not find base unit in from compound.');
       return [0, undefined];
     }
   }
@@ -441,6 +444,7 @@ function removeParen(expression) {
     }
   }
   console.log('ERROR: Non matching parenthesis');
+  alert('ERROR: Non matching parenthesis');
   return 1;
 }
 
@@ -619,6 +623,17 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
   }
   return val1;
 }
+
+
+
+
+
+
+
+
+
+
+
 /* TEST CODE FOR BASE UNIT CONVERTER */
 
   var baseunits = new UnitMap();
@@ -740,62 +755,73 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
 // /* END OF TEST CODE */
 
 
-// ------------------- calculator code: ---------------------------------
-
-
-let display_string = '';
-
-function receive(string) {
-  if (string.length == 1) {
-    display_string += string;
-  } else if (string == 'clear') {
-    display_string = '';
-  } else {
-    display_string = '';
-  }
-  document.getElementById('calculator_display').innerText = display_string;
-}
-
-// ------------------- main.html code: ---------------------------------
-
-function convert() {
-  let result = null;
-  let input = document.getElementById('converter_input').value;
-
-  input = input.replace(/,/g, '');
-
-  if (input === '' || input == null) {
-    document.getElementById('converter_result').value = null;
-    return;
-  }
-
-  // temp dummy code :
-  result = Number(input) * Number(input);
-
-  // get the units the user picked.
-  const from = document.getElementById('from_unit').value;
-  const to = document.getElementById('to_unit').value;
-
-  // do conversion;
-
-  if (isNaN(result) || result == null || result === undefined) {
-    document.getElementById('converter_result').value = null;
-    return;
-  }
-
-  result = result.toFixed(conversion_precision);
-  result = Number(result);
-
-  document.getElementById('converter_result').value = `${result} ${to}`;
-}
-
 
 export const Base = {
 
   Init() {
-    Systems.find().forEach(function(i){systems1.add(i);});    
-    BaseUnits.find().forEach(function(i){baseunits.add(i);});
-  },
+    //Systems.find().forEach(function(i){systems1.add(i);});    
+    //BaseUnits.find().forEach(function(i){baseunits.add(i);});
+
+    const metric = new System('Metric', [], [], [], [], [], []);
+    systems1.add(metric);
+    const imperial = new System('Imperial', [], [], [], [], [], []);
+    systems1.add(imperial);
+    const smootric = new System('Smootric', [], [], [], [], [], []);
+    systems1.add(smootric);
+    const feathers = new System('feathers', [], [], [], [], [], []);
+    systems1.add(feathers);
+
+    const meter = new BaseUnit('meter', 'm', 'The length of a meter stick', 'length', metric);
+    baseunits.add(meter);
+    const foot = new BaseUnit('foot', 'ft', 'Less smelly, but about as long as a large human foot.', 'length', imperial);
+    baseunits.add(foot);
+    const smoot = new BaseUnit('smoot', 'smt', "replace 'f' with 'sm' and you get a smoot.", 'length', smootric);
+    baseunits.add(smoot);
+    const flock = new BaseUnit('flock', 'fl', "I don't even know.", 'length', feathers);
+    baseunits.add(flock);
+    const celsius = new BaseUnit('celsius', 'dC', 'A unit of temperature in the metric system', 'temperature', metric);
+    baseunits.add(celsius);
+    const fahrenheit = new BaseUnit('fahrenheit', 'dF', 'A unit of temperature in the imperial system', 'temperature', imperial);
+    baseunits.add(fahrenheit);
+    const warmth = new BaseUnit('warmth', 'dW', 'A unit of temperature in the feathers system', 'temperature', feathers);
+    baseunits.add(warmth);
+    const secondM = new BaseUnit('second', 's', 'THE unit of time', 'time', metric);
+    baseunits.add(secondM);
+    const secondI = new BaseUnit('second', 's', 'THE unit of time', 'time', imperial);
+    const kilogram = new BaseUnit('kilogram', 'kg', 'The metric unit of mass', 'mass', metric);
+    baseunits.add(kilogram);
+    const slug = new BaseUnit('slug', 'slug', 'The imperial unit of mass', 'mass', imperial);
+    baseunits.add(slug);
+
+    const metertofoot = new UnitConversions(foot, meter, 0, 3.28084);
+    const foottometer = new UnitConversions(meter, foot, 0, 1.0 / 3.28084);
+    const foottosmoot = new UnitConversions(smoot, foot, 0, 42.0);
+    const foottoflock = new UnitConversions(flock, foot, 0, 23.5);
+    const flocktofoot = new UnitConversions(foot, flock, 0, 1 / 23.5);
+    const smoottofoot = new UnitConversions(foot, smoot, 0, 1 / 42.0);
+    const celsiustofahrenheit = new UnitConversions(fahrenheit, celsius, 32.0, 9.0 / 5.0);
+    const fahrenheittowarmth = new UnitConversions(warmth, fahrenheit, 12.0, 3.0 / 5.0);
+    const kilogramtoslug = new UnitConversions(slug, kilogram, 0, 1.0 / 14.59390);
+    const slugtokilogram = new UnitConversions(kilogram, slug, 0, 14.59390);
+
+    metric.length.push(metertofoot);
+    metric.mass.push(kilogramtoslug);
+    metric.temperature.push(celsiustofahrenheit);
+    imperial.temperature.push(fahrenheittowarmth);
+    imperial.length.push(foottometer);
+    imperial.length.push(foottosmoot);
+    imperial.length.push(foottoflock);
+    imperial.mass.push(slugtokilogram);
+    feathers.length.push(flocktofoot);
+    smootric.length.push(smoottofoot);
+
+    const newton = new CompoundUnit('Newton', 'N', 'A unit of force', 'force', [new UnitPower(kilogram, 1), new UnitPower(meter, 1), new UnitPower(secondM, -2)], metric);
+    compoundunits.add(newton);
+    const poundforce = new CompoundUnit('poundforce', 'lbf', 'The imperial unit of force', 'force', [new UnitPower(slug, 1), new UnitPower(foot, 1), new UnitPower(secondI, -2)], imperial);
+    compoundunits.add(poundforce);
+
+},
+
 
   Solve(string, systemname) {
     return solve(new Expression(string), systems1, baseunits, compoundunits, systemname);  

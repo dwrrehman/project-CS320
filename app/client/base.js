@@ -821,8 +821,8 @@ export const Base = {
     const fahrenheittowarmth = new UnitConversions(warmth, fahrenheit, 12.0, 3.0 / 5.0);
     const kilogramtoslug = new UnitConversions(slug, kilogram, 0, 1.0 / 14.59390);
     const slugtokilogram = new UnitConversions(kilogram, slug, 0, 14.59390);
-    const secondMtosecondI = new UnitConversions(secondI,secondM,0,1);
-    const secondItosecondM = new UnitConversions(secondM,secondI,0,1);
+    const secondMtosecondI = new UnitConversions(secondI, secondM, 0, 1);
+    const secondItosecondM = new UnitConversions(secondM, secondI, 0, 1);
 
     metric.length.push(metertofoot);
     metric.mass.push(kilogramtoslug);

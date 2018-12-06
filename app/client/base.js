@@ -389,7 +389,8 @@ function getAbstractConversion(systems, desiredSystemName, abstractCompound) {
       console.log('Given Type....-----...???!');
       console.log(currentUnit.GivenType);
       if (currentUnit.UnitpowerList === undefined) {
-        console.log('The desired system has no conversions for that type????');
+        console.log('That unit has no conversions for that system!');
+        //alert('Error: The unit: "' + currentUnit.givenName + "\" has no conversions for that system!");
         console.log(currentUnit.givenName);
         return [1, 0, undefined];
       }
@@ -619,7 +620,7 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
     val2 = getNextValue(expression, systems, baseUnits, compoundUnits);
     op2 = getOp(expression);
     if (val1 === undefined || isNaN(val1.quantity) || val1.quantity === null) {
-      console.log('What??? nothing is defined');
+      console.log('What??? nothing is defined');      
       return undefined;
     }
     if (desiredSystemName !== undefined && desiredSystemName !== '') {

@@ -5,7 +5,6 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/components/calculator/calculator.js';
-import '../../ui/components/converter/converter.js';
 import '../../ui/pages/add-unit/add-unit.js';
 import '../../ui/pages/add-conversion/add-conversion.js';
 import '../../ui/pages/edit-unit/edit-unit.js';

@@ -12,13 +12,6 @@ const baseSeeds = [
     abbreviation: 'm',
     description: 'Standard SI unit of length',
     type: 'length',
-    conversion: 'thing',
-      /* {
-      factor: 3.28084,
-      shift: 0,
-      to: 'Feet',
-      from: 'Meter',
-    },*/
     system: 'Metric',
   },
   {
@@ -26,13 +19,6 @@ const baseSeeds = [
     abbreviation: 'ft',
     description: 'Standard Imperial unit of length',
     type: 'length',
-    conversion: 'thing',
-    /*{
-      factor: 0.3048,
-      shift: 0,
-      to: 'Meter',
-      from: 'Foot',
-    },*/
     system: 'Imperial',
   },
 ];

@@ -1,6 +1,7 @@
 import { Systems } from '../imports/api/systems/systems.js';
 import { BaseUnits } from '../imports/api/base/base.js';
-// import { Compounds } from '../imports/api/compounds/compounds.js';
+import { compoundUnits } from '../imports/api/compound/compound.js';
+import { conversions } from '../imports/api/conversion/conversion.js';
 
 /* eslint-disable max-len,no-use-before-define,no-param-reassign,no-restricted-globals,camelcase */
 // this file contains the algorithmic javascritpt code for the project, as well as some of the view-switching code.
@@ -86,8 +87,8 @@ class AbstractCompound { // Allows for easy arithmetic with any combination of u
     }
   }
 
-  combine(abstract){
-    let keys = Object.keys(abstract.powMap);
+  combine(abstract) {
+    const keys = Object.keys(abstract.powMap);
     let key;
     for (let i = 0; i < keys.length; i++) {
       key = keys[i];
@@ -186,6 +187,13 @@ class System {
     this.charge = charge; // List of UnitConversions
     this.temperature = temperature; // List of UnitConversions
     this.brightness = brightness; // List of UnitConversions
+  }
+
+  add(conversion, type) {
+    if (this[type] === undefined) {
+      this[type] = [];
+    }
+    this[type].push(conversion);
   }
 }
 
@@ -386,14 +394,14 @@ function getAbstractConversion(systems, desiredSystemName, abstractCompound) {
       }
       console.log('No direct conversion, attempting basic conversion.');
       intermediateAbstract = new AbstractCompound(currentUnit.UnitpowerList);
-      console.log("New Abstract.");
+      console.log('New Abstract.');
       console.log(intermediateAbstract);
       intermediateConversion = getAbstractConversion(systems, desiredSystemName, intermediateAbstract);
       console.log(intermediateConversion);
       conversion *= intermediateConversion[0];
       shift += intermediateConversion[1];
       akeys = Object.keys(intermediateConversion[2].powMap);
-      for (let j = 0; j < akeys.length; j++){
+      for (let j = 0; j < akeys.length; j++) {
         akey = akeys[j];
         newUnitPowerList.push(new UnitPower(intermediateConversion[2].unitMap[akey], intermediateConversion[2].powMap[akey]));
       }
@@ -772,15 +780,8 @@ const systems1 = new SystemMap();
 // // unitTest();
 
 // /* END OF TEST CODE */
-
-
-export const Base = {
-
-  Init() {
-    // Systems.find().forEach(function(i){systems1.add(i);});
-    // BaseUnits.find().forEach(function(i){baseunits.add(i);});
-
-    const metric = new System('Metric', [], [], [], [], [], []);
+/*
+const metric = new System('Metric', [], [], [], [], [], []);
     systems1.add(metric);
     const imperial = new System('Imperial', [], [], [], [], [], []);
     systems1.add(imperial);
@@ -842,6 +843,38 @@ export const Base = {
     const poundforce = new CompoundUnit('poundforce', 'lbf', 'The imperial unit of force', 'force', [new UnitPower(slug, 1), new UnitPower(foot, 1), new UnitPower(secondI, -2)], imperial);
     compoundunits.add(poundforce);
     convertComp(poundforce, newton, 1.0);
+*/
+let initFlag = false;
+export const Base = {
+
+  Init() {
+    if (!initFlag) {
+      initFlag = true;
+      const sys = Systems.find();
+      const base = BaseUnits.find();
+      const comp = compoundUnits.find();
+      const conv = conversions.find();
+      let newBase;
+      let newSys;
+      let newComp;
+      let newConv;
+      sys.forEach(function (i) {
+        newSys = new System(i.name, [], [], [], [], [], []);
+        systems1.add(newSys);
+      });
+      base.forEach(function (i) {
+        newBase = new BaseUnit(i.name, i.abbreviation, i.description, i.type, systems1[i.system]);
+        baseunits.add(newBase);
+      });
+      comp.forEach(function (i) {
+        newComp = new CompoundUnit(i.name, i.abbreviation, i.description, i.type, i.units, systems1[i.system], baseunits);
+        compoundunits.add(newComp);
+      });
+      conv.forEach(function (i) {
+        newConv = UnitConversions(i.to, i.from, i.shift, i.factor);
+        systems1[i.system].add(newConv, i.type);
+      });
+    }
   },
 
 

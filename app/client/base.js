@@ -852,11 +852,12 @@ const metric = new System('Metric', [], [], [], [], [], []);
 export const Base = {
 
   Init() {
-    Meteor.subscribe('conversions');
+    Meteor.subscribe('Conversion');
     Meteor.subscribe('Systems');
     Meteor.subscribe('BaseUnits');
     Meteor.subscribe('CompoundUnits');
     const sys = Systems.find();
+    console.log(sys);
     const base = BaseUnits.find();
     const comp = compoundUnits.find();
     const conv = conversions.find();
@@ -890,6 +891,8 @@ export const Base = {
       }
     });
     console.log(systems1);
+    console.log(baseunits);
+    console.log(compoundunits);
   },
 
 

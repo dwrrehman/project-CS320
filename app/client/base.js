@@ -872,7 +872,13 @@ export const Base = {
       compoundunits.add(newComp);
     });
     conv.forEach(function (i) {
-      newConv = UnitConversions(i.to, i.from, i.shift, i.factor);
+      if (baseunits[i.fromUnit] !== undefined) {
+        newConv = UnitConversions(baseunits[i.toUnit], baseunits[i.fromUnit], i.shift, i.factor);
+      } else if (compoundunits[i.fromUnit] !== undefined) {
+        newConv = UnitConversions(compoundunits[i.toUnit], compoundunits[i.fromUnit], i.shift, i.factor);
+      } else {
+        console.log(`A conversion references an invalid unit: ${i.fromUnit} Or, ${i.toUnit}`);
+      }
       systems1[i.system].add(newConv, i.type);
     });
   },

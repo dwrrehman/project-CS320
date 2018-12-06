@@ -47,6 +47,6 @@ Template.edit_unit.events({
 
     });
 
-    FlowRouter.go('App.home');
+    FlowRouter.go('App.list');
   },
 });

@@ -1,8 +1,8 @@
+import { Meteor } from 'meteor/meteor';
 import { Systems } from '../imports/api/systems/systems.js';
 import { BaseUnits } from '../imports/api/base/base.js';
 import { compoundUnits } from '../imports/api/compound/compound.js';
 import { conversions } from '../imports/api/conversion/conversion.js';
-
 /* eslint-disable max-len,no-use-before-define,no-param-reassign,no-restricted-globals,camelcase */
 // this file contains the algorithmic javascritpt code for the project, as well as some of the view-switching code.
 
@@ -852,6 +852,10 @@ const metric = new System('Metric', [], [], [], [], [], []);
 export const Base = {
 
   Init() {
+    Meteor.subscribe('conversions');
+    Meteor.subscribe('Systems');
+    Meteor.subscribe('BaseUnits');
+    Meteor.subscribe('CompoundUnits');
     const sys = Systems.find();
     const base = BaseUnits.find();
     const comp = compoundUnits.find();
@@ -874,14 +878,15 @@ export const Base = {
     });
     conv.forEach(function (i) {
       if (baseunits[i.fromUnit] !== undefined) {
-        newConv = UnitConversions(baseunits[i.toUnit], baseunits[i.fromUnit], i.shift, i.factor);
+        newConv = new UnitConversions(baseunits[i.toUnit], baseunits[i.fromUnit], i.shift, i.factor);
       } else if (compoundunits[i.fromUnit] !== undefined) {
-        newConv = UnitConversions(compoundunits[i.toUnit], compoundunits[i.fromUnit], i.shift, i.factor);
+        newConv = new UnitConversions(compoundunits[i.toUnit], compoundunits[i.fromUnit], i.shift, i.factor);
       } else {
         console.log(`A conversion references an invalid unit: ${i.fromUnit} Or, ${i.toUnit}`);
       }
       systems1[i.system].add(newConv, i.type);
     });
+    console.log(systems1);
   },
 
 

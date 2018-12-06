@@ -1,3 +1,22 @@
 <template name="add_conversion">
-  <p>hello</p>
+  <div class="section">
+
+    <!-- <script></script> -->
+    <form class="new_conversion">
+      <input name="from_unit" style="font-size: 20px; width: 80px; height: 50px;" placeholder="From"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input name="to_unit" style="font-size: 20px; width: 80px;height: 50px;" placeholder="To"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input name="type" style="font-size: 20px; width: 80px; height: 50px;" placeholder="Type"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <hr>
+      <input name="factor" style="font-size: 20px; width: 80px; height: 50px;" placeholder="Factor"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input name="shift_amount" style="font-size: 20px; width: 80px; height: 50px;" placeholder="Shift"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <select class="cselect" name="system" style="font-size: 15px; background-color: orange; width: 100px; height: 51px;">
+        {{#each sys in systemsCollection}}
+          <option value={{sys.name}}><b>{{sys.name}}</b></option>
+        {{/each}}
+      </select>
+      <hr>
+      <hr>
+      <button class="standard_button" onclick="alert('Succesfully Added!')" type="submit" style="background-color: #1dd686; color:black; font-size: 20px; width: 200px; height: 80px;"><b>Submit</b></button>
+    </form>
+  </div>
 </template>

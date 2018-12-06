@@ -57,7 +57,8 @@ class CompoundUnit {
       }
       this.UnitpowerList = newunitpowers;
     } else if (typeof (UnitpowerList) === 'string') {
-      this.UnitpowerList = getAbstractCompound(new Expression(UnitpowerList), baseUnits);
+      this.UnitpowerList = getAbstractCompound(new Expression(UnitpowerList), baseUnits); // Don't panic
+      // getAbstractCompound actually returns a unit power list.
     }
     this.GivenType = GivenType; // String
     this.system = system; // Actual system object.

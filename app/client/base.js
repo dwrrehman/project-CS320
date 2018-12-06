@@ -17,10 +17,7 @@ class UnitMap {
   add(unit) {
     if (this[unit.abbreviation] === undefined) {
       this[unit.abbreviation] = unit;
-    } else {
-      console.log('Unit with that abbreviation already exists.');
-      console.log(this[unit.abbreviation]);
-    }
+    } 
   }
 }
 
@@ -28,10 +25,7 @@ class SystemMap {
   add(system) {
     if (this[system.givenName] === undefined) {
       this[system.givenName] = system;
-    } else {
-      console.log('System with that name already exists.');
-      console.log(this[system.givenName]);
-    }
+    } 
   }
 }
 

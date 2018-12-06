@@ -35,6 +35,14 @@ Template.calculator.events({
     document.getElementById('calculator_display').innerText = '';
   },
 
+  'click #addsystem_button'(event) {    
+    var system_name = prompt('Please Provide the System Name: ');
+    if (system_name) {      
+        Systems.insert({name: system_name});
+        alert('Successfully added system.');
+    }  
+  },
+
   'click #equals_button'(event) {      
   	  let input = document.getElementById('calculator_display').innerText;	
   	  let desiredsystem = document.getElementById('to_system').value;

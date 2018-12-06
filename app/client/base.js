@@ -180,6 +180,7 @@ class BaseUnit {
 
 class System {
   constructor(givenName, length, mass, time, charge, temperature, brightness) {
+    this.convMap = {};
     this.givenName = givenName; // String
     this.length = length; // List of UnitConversions
     this.mass = mass; // List of UnitConversions
@@ -193,7 +194,10 @@ class System {
     if (this[type] === undefined) {
       this[type] = [];
     }
-    this[type].push(conversion);
+    if (this.convMap[conversion.to] === undefined) {
+      this.convMap[conversion.to] = 1;
+      this[type].push(conversion);
+    }
   }
 }
 
@@ -844,37 +848,33 @@ const metric = new System('Metric', [], [], [], [], [], []);
     compoundunits.add(poundforce);
     convertComp(poundforce, newton, 1.0);
 */
-let initFlag = false;
 export const Base = {
 
   Init() {
-    if (!initFlag) {
-      initFlag = true;
-      const sys = Systems.find();
-      const base = BaseUnits.find();
-      const comp = compoundUnits.find();
-      const conv = conversions.find();
-      let newBase;
-      let newSys;
-      let newComp;
-      let newConv;
-      sys.forEach(function (i) {
-        newSys = new System(i.name, [], [], [], [], [], []);
-        systems1.add(newSys);
-      });
-      base.forEach(function (i) {
-        newBase = new BaseUnit(i.name, i.abbreviation, i.description, i.type, systems1[i.system]);
-        baseunits.add(newBase);
-      });
-      comp.forEach(function (i) {
-        newComp = new CompoundUnit(i.name, i.abbreviation, i.description, i.type, i.units, systems1[i.system], baseunits);
-        compoundunits.add(newComp);
-      });
-      conv.forEach(function (i) {
-        newConv = UnitConversions(i.to, i.from, i.shift, i.factor);
-        systems1[i.system].add(newConv, i.type);
-      });
-    }
+    const sys = Systems.find();
+    const base = BaseUnits.find();
+    const comp = compoundUnits.find();
+    const conv = conversions.find();
+    let newBase;
+    let newSys;
+    let newComp;
+    let newConv;
+    sys.forEach(function (i) {
+      newSys = new System(i.name, [], [], [], [], [], []);
+      systems1.add(newSys);
+    });
+    base.forEach(function (i) {
+      newBase = new BaseUnit(i.name, i.abbreviation, i.description, i.type, systems1[i.system]);
+      baseunits.add(newBase);
+    });
+    comp.forEach(function (i) {
+      newComp = new CompoundUnit(i.name, i.abbreviation, i.description, i.type, i.units, systems1[i.system], baseunits);
+      compoundunits.add(newComp);
+    });
+    conv.forEach(function (i) {
+      newConv = UnitConversions(i.to, i.from, i.shift, i.factor);
+      systems1[i.system].add(newConv, i.type);
+    });
   },
 
 

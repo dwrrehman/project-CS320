@@ -17,7 +17,16 @@ class UnitMap {
   add(unit) {
     if (this[unit.abbreviation] === undefined) {
       this[unit.abbreviation] = unit;
-    } 
+    } else {
+      const keys = Object.keys(unit);
+      let key;
+      for (let i = 0; i < keys.length; i++) {
+        key = keys[i];
+        if (unit[key] !== this[unit.abbreviation][key]) {
+          this[unit.abbreviation][key] = unit[key];
+        }
+      }
+    }
   }
 }
 
@@ -25,7 +34,7 @@ class SystemMap {
   add(system) {
     if (this[system.givenName] === undefined) {
       this[system.givenName] = system;
-    } 
+    }
   }
 }
 
@@ -390,7 +399,7 @@ function getAbstractConversion(systems, desiredSystemName, abstractCompound) {
       console.log(currentUnit.GivenType);
       if (currentUnit.UnitpowerList === undefined) {
         console.log('That unit has no conversions for that system!');
-        //alert('Error: The unit: "' + currentUnit.givenName + "\" has no conversions for that system!");
+        // alert('Error: The unit: "' + currentUnit.givenName + "\" has no conversions for that system!");
         console.log(currentUnit.givenName);
         return [1, 0, undefined];
       }
@@ -620,7 +629,7 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
     val2 = getNextValue(expression, systems, baseUnits, compoundUnits);
     op2 = getOp(expression);
     if (val1 === undefined || isNaN(val1.quantity) || val1.quantity === null) {
-      console.log('What??? nothing is defined');      
+      console.log('What??? nothing is defined');
       return undefined;
     }
     if (desiredSystemName !== undefined && desiredSystemName !== '') {
@@ -847,7 +856,7 @@ const metric = new System('Metric', [], [], [], [], [], []);
     convertComp(poundforce, newton, 1.0);
 */
 
-var shown_welcome_message = false;
+const shown_welcome_message = false;
 
 export const Base = {
 
@@ -881,17 +890,17 @@ export const Base = {
       if (baseunits[i.fromUnit] !== undefined) {
         newConv = new UnitConversions(baseunits[i.toUnit], baseunits[i.fromUnit], parseFloat(i.shift), parseFloat(i.factor));
         newConvInv = new UnitConversions(baseunits[i.fromUnit], baseunits[i.toUnit], -parseFloat(i.shift) / (parseFloat(i.factor)), 1.0 / parseFloat(i.factor));
-        systems1[i.system].add(newConv, i.type);
+        baseunits[i.fromUnit].system.add(newConv, i.type);
         console.log('Adding inverse too ??!?!?1122');
         console.log(baseunits[i.toUnit].system);
-        baseunits[i.toUnit].system.add(newConvInv,i.type);
+        baseunits[i.toUnit].system.add(newConvInv, i.type);
       } else if (compoundunits[i.fromUnit] !== undefined) {
         convertComp(compoundunits[i.toUnit], compoundunits[i.fromUnit], 1.0);
       } else {
         console.log(`A conversion references an invalid unit: ${i.fromUnit} Or, ${i.toUnit}`);
       }
     });
-    console.log('End of init......------------............')
+    console.log('End of init......------------............');
     console.log(systems1);
   },
 

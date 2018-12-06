@@ -1,16 +1,19 @@
 <template name="add">
   <div class="section">
-  {{#autoForm
-      collection=baseUnitsCollection
-      id="AddBaseUnitForm"
-      type="insert"}}
-    {{> afQuickField name="name"}}
-    {{> afQuickField name="abbreviation"}}
-    {{> afQuickField name="description"}}
-    {{> afQuickField name="type"}}
-    {{> afQuickField name="conversion"}}
-    {{> afQuickField name="system"}}
-    <button onclick="alert('Succesfully Added!'); FlowRouter.go('App.home')" type="submit">Submit</button>
-  {{/autoForm}}
+
+    <!-- <script></script> -->
+
+    <input id="unit_name" style="font-size: 20px; width: 200px; height: 50px;" placeholder="Unit Name Here..."> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input id="unit_abbrev" style="font-size: 20px; width: 80px; font-size: 20px;height: 50px;" placeholder="Abbrev."> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <select class="cselect" id="to_system" style="font-size: 15px; background-color: orange; width: 100px; height: 51px;">
+                {{#each sys in systemsCollection}}
+                  <option value={{sys.name}}><b>{{sys.name}}</b></option>
+                {{/each}}
+    </select>
+    <hr>
+    <textarea id="description_text" style="width: 500px; height: 200px; font-family: Courier; font-size: 20px;" placeholder="Unit Description Here..."></textarea>
+<hr>
+
+    <button class="standard_button" onclick="alert('Succesfully Added!'); FlowRouter.go('App.home')" type="submit" style="background-color: #1dd686; color:black; font-size: 20px; width: 200px; height: 80px;"><b>Submit</b></button>  
   </div>
 </template>

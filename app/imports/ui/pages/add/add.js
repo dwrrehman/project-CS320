@@ -3,13 +3,16 @@ import { AutoForm } from 'meteor/aldeed:autoform';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { BaseUnits } from '../../../api/base/base.js';
+import { Systems } from '../../../api/systems/systems.js';
 
 import './add.html';
 import '../../stylesheets/add.css';
 
 Template.add.onCreated(function addOnCreated() {
   Meteor.subscribe('BaseUnits');
+  Meteor.subscribe('Systems');
 });
+
 
 /* eslint-disable no-unused-vars */
 
@@ -30,8 +33,12 @@ AutoForm.hooks({
   },
 });
 
+
 Template.add.helpers({
   baseUnitsCollection() {
     return BaseUnits;
+  },
+  systemsCollection() {
+    return Systems.find();
   },
 });

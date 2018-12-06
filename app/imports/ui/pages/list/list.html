@@ -1,12 +1,21 @@
 <template name="list">
   <div class="section">
+    <tr>
     {{#each unit in baseUnitsList}}
-      <p>{{unit.name}}</p>
-      <p>{{unit.abbreviation}}</p>
-      <p>{{unit.description}}</p>
-      <p>{{unit.type}}</p>
-      <p>{{unit.system}}</p>
-      <br>
+      <th>{{unit.name}}</th>
+      
+      <th>{{unit.abbreviation}}</th>
+      
+      <th>{{unit.description}}</th>
+      
+      <th>{{unit.type}}</th>
+      
+      <th>{{unit.system}}</th>
+
+      <hr>      
     {{/each}}
+    </tr>
+
+    <button class="standard_button" onclick="FlowRouter.go('App.home')" type="submit" style="background-color: #1dd686; color:black; font-size: 10px; width: 100px; height: 20px;"><b>Done</b></button>  
   </div>
 </template>

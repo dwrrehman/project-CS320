@@ -15,7 +15,6 @@ class UnitMap {
       this[unit.abbreviation] = unit;
     } else {
       console.log('Unit with that abbreviation already exists.');
-      alert('Unit with that abbreviation already exists.');
       console.log(this[unit.abbreviation]);
     }
   }
@@ -27,7 +26,6 @@ class SystemMap {
       this[system.givenName] = system;
     } else {
       console.log('System with that name already exists.');
-      alert('System with that name already exists.');
       console.log(this[system.givenName]);
     }
   }

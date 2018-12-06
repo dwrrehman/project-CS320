@@ -5,7 +5,14 @@ import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform']);
 
 export const Systems = new Mongo.Collection('Systems');
-
+Systems.allow({
+  insert: function () {
+    return true;
+  },
+  update: function () {
+    return true;
+  },
+});
 export const SystemsSchema = new SimpleSchema({
   name: {
     label: 'Name',

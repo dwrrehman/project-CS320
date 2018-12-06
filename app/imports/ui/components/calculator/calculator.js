@@ -7,7 +7,7 @@ import './calculator.html';
 import '../../stylesheets/calculator.css';
 	
 Template.calculator.onCreated(function addOnCreated() {
-  Base.Init();
+    Base.Init();
 });
 
 Template.calculator.helpers({
@@ -19,22 +19,23 @@ Template.calculator.helpers({
 Template.calculator.events({
 
 	'keydown #calculator_display'(event) {			
-		if (event.keyCode == 13) {
+		if (event.keyCode == 13) {      
 			let input = document.getElementById('calculator_display').innerText;	
-  	  		let desiredsystem = document.getElementById('to_system').value;
-  	  		console.log("Received Input: " + input);
-  	  		console.log("Received Desired System: " + desiredsystem);
-  	  		var t = Base.Solve(input, desiredsystem)  	  
-  	  		if (t) document.getElementById('calculator_display').innerText = t.toString();
-  	  		else alert("Invalid input format!");
+  		let desiredsystem = document.getElementById('to_system').value;
+  		console.log("Received Input: " + input);
+  		console.log("Received Desired System: " + desiredsystem);
+  		var t = Base.Solve(input, desiredsystem)  	  
+  		if (t) document.getElementById('calculator_display').innerText = t.toString();
+  		else alert("Invalid input format!");
 		}
 	},
 
   'click .clearbutton'(event) {
+    Base.Init(); /// this is bad, but tbh its the only thing that works right now, to populate the local database.
     document.getElementById('calculator_display').innerText = '';
   },
 
-  'click #equals_button'(event) {
+  'click #equals_button'(event) {      
   	  let input = document.getElementById('calculator_display').innerText;	
   	  let desiredsystem = document.getElementById('to_system').value;
   	  console.log("Received Input: " + input);

@@ -855,9 +855,8 @@ export const Base = {
     Meteor.subscribe('Conversion');
     Meteor.subscribe('Systems');
     Meteor.subscribe('BaseUnits');
-    Meteor.subscribe('CompoundUnits');
-    const sys = Systems.find();
-    console.log(sys);
+    Meteor.subscribe('CompoundUnits');    
+    const sys = Systems.find();    
     const base = BaseUnits.find();
     const comp = compoundUnits.find();
     const conv = conversions.find();
@@ -889,12 +888,8 @@ export const Base = {
       } else {
         console.log(`A conversion references an invalid unit: ${i.fromUnit} Or, ${i.toUnit}`);
       }
-    });
-    console.log(systems1);
-    console.log(baseunits);
-    console.log(compoundunits);
+    });    
   },
-
 
   Solve(string, systemname) {
     return solve(new Expression(string), systems1, baseunits, compoundunits, systemname);

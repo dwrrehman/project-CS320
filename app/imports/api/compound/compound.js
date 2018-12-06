@@ -4,8 +4,8 @@ import SimpleSchema from 'simpl-schema';
 
 SimpleSchema.extendOptions(['autoform']);
 
-export const BaseUnits = new Mongo.Collection('BaseUnits');
-BaseUnits.allow({
+export const compoundUnits = new Mongo.Collection('CompoundUnits');
+compoundUnits.allow({
   insert: function () {
     return true;
   },
@@ -14,7 +14,7 @@ BaseUnits.allow({
   },
 });
 
-export const BaseUnitsSchema = new SimpleSchema({
+export const CompoundUnitsSchema = new SimpleSchema({
   name: {
     label: 'Name',
     type: String,
@@ -46,13 +46,23 @@ export const BaseUnitsSchema = new SimpleSchema({
   system: {
     label: 'System',
     type: String,
+    autoform: {
+      placeholder: 'System Name',
+    },
+  },
+  units: {
+    label: 'Units',
+    type: String,
+    autoform: {
+      placeholder: 'Unit combination',
+    },
   },
 });
 
-BaseUnits.attachSchema(BaseUnitsSchema);
+compoundUnits.attachSchema(CompoundUnitsSchema);
 
 if (Meteor.isServer) {
-  Meteor.publish('BaseUnits', function baseUnitsPublication() {
-    return BaseUnits.find();
+  Meteor.publish('CompoundUnits', function compoundUnitsPublication() {
+    return compoundUnits.find();
   });
 }

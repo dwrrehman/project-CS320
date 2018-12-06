@@ -7,7 +7,6 @@ import './calculator.html';
 import '../../stylesheets/calculator.css';
 	
 Template.calculator.onCreated(function addOnCreated() {
-  Meteor.subscribe('Systems');
   Base.Init();
 });
 

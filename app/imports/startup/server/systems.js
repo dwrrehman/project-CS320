@@ -8,21 +8,9 @@ import { Systems } from '../../api/systems/systems.js';
 const systemSeeds = [
   {
     name: 'Metric',
-    length: {},
-    mass: 'kg',
-    time: 's',
-    charge: 'something',
-    temperature: 'C',
-    brightness: 'something',
   },
   {
     name: 'Imperial',
-    length: {},
-    mass: 'lbs',
-    time: 's',
-    charge: 'something',
-    temperature: 'F',
-    brightness: 'something',
   },
 ];
 

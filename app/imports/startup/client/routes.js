@@ -6,7 +6,8 @@ import '../../ui/layouts/body/body.js';
 import '../../ui/pages/home/home.js';
 import '../../ui/components/calculator/calculator.js';
 import '../../ui/components/converter/converter.js';
-import '../../ui/pages/add/add.js';
+import '../../ui/pages/add-unit/add-unit.js';
+import '../../ui/pages/add-conversion/add-conversion.js';
 import '../../ui/pages/list/list.js';
 import '../../ui/pages/not-found/not-found.js';
 
@@ -18,10 +19,17 @@ FlowRouter.route('/', {
   },
 });
 
-FlowRouter.route('/add', {
-  name: 'App.add',
+FlowRouter.route('/add-unit', {
+  name: 'App.add_unit',
   action() {
-    BlazeLayout.render('App_body', { main: 'add' });
+    BlazeLayout.render('App_body', { main: 'add_unit' });
+  },
+});
+
+FlowRouter.route('/add-conversion', {
+  name: 'App.add_conversion',
+  action() {
+    BlazeLayout.render('App_body', { main: 'add_conversion' });
   },
 });
 

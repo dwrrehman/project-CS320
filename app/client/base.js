@@ -861,8 +861,8 @@ export const Base = {
     Meteor.subscribe('Conversion');
     Meteor.subscribe('Systems');
     Meteor.subscribe('BaseUnits');
-    Meteor.subscribe('CompoundUnits');    
-    const sys = Systems.find();    
+    Meteor.subscribe('CompoundUnits');
+    const sys = Systems.find();
     const base = BaseUnits.find();
     const comp = compoundUnits.find();
     const conv = conversions.find();
@@ -890,11 +890,11 @@ export const Base = {
         systems1[i.system].add(newConv, i.type);
         baseunits[i.toUnit].system.add(newConvInv,i.type);
       } else if (compoundunits[i.fromUnit] !== undefined) {
-        console.log('Not worrying about compound units yet.');
+        convertComp(compoundunits[i.toUnit], compoundunits[i.fromUnit], 1.0);
       } else {
         console.log(`A conversion references an invalid unit: ${i.fromUnit} Or, ${i.toUnit}`);
       }
-    });    
+    });
   },
 
   Solve(string, systemname) {

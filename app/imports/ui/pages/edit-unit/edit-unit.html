@@ -1,0 +1,21 @@
+<template name="edit_unit">
+  <div class="section">
+
+    <!-- <script></script> -->
+    <form class="edit_unit">
+      <input name="unit_name" style="font-size: 20px; width: 200px; height: 50px;" value="{{getUnit.name}}"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input name="unit_abbrev" style="font-size: 20px; width: 80px;height: 50px;" value="{{getUnit.abbreviation}}"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input name="type" style="font-size: 20px; width: 80px; height: 50px;" value="{{getUnit.type}}"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <select class="cselect" name="to_system" style="font-size: 15px; background-color: orange; width: 100px; height: 51px;">
+        {{#each sys in systemsCollection}}
+          <option value={{sys.name}}><b>{{sys.name}}</b></option>
+        {{/each}}
+      </select>
+      <hr>
+      <textarea name="description_text" style="width: 500px; height: 200px; font-family: Courier; font-size: 20px;" value="{{getUnit.description}}"></textarea>
+      <hr>
+      <button class="standard_button" onclick="alert('Succesfully Added!')" type="submit" style="background-color: #1dd686; color:black; font-size: 20px; width: 200px; height: 80px;"><b>Submit</b>
+      </button>
+    </form>
+  </div>
+</template>

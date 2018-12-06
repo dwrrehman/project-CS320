@@ -1,26 +1,26 @@
 <template name="list">
   <div class="section">
     <tr>
-      <th style="background-color: orange; width: 200px; height:10px;">Name</th>      
+      <th style="background-color: orange; width: 200px; height:10px;">Name</th>
       <th style="background-color: orange; width: 200px; height:10px;">Abbreviation</th>
       <th style="background-color: orange; width: 200px; height:10px;">Description</th>
-      <th style="background-color: orange; width: 200px; height:10px;">Type</th>      
+      <th style="background-color: orange; width: 200px; height:10px;">Type</th>
       <th style="background-color: orange; width: 200px; height:10px;">System</th>
-      <th style="background-color: orange; width: 200px; height:10px;"></th>
-    </tr>  
-      <hr>                  
+      <th style="background-color: orange; width: 200px; height:10px;">Edit</th>
+    </tr>
+    <hr>
     {{#each unit in baseUnitsList}}
-    <hr>  
+    <hr>
     <tr>
-      <th style="width: 200px; height:100px;">{{unit.name}}</th>      
-      <th style="width: 200px; height:100px;">{{unit.abbreviation}}</th>      
-      <th style="width: 200px; height:100px;">{{unit.description}}</th>      
-      <th style="width: 200px; height:100px;">{{unit.type}}</th>      
+      <th style="width: 200px; height:100px;">{{unit.name}}</th>
+      <th style="width: 200px; height:100px;">{{unit.abbreviation}}</th>
+      <th style="width: 200px; height:100px;">{{unit.description}}</th>
+      <th style="width: 200px; height:100px;">{{unit.type}}</th>
       <th style="width: 200px; height:100px;">{{unit.system}}</th>
-      <th style="width: 200px; height:100px;"><a href="" onclick="FlowRouter.go('App.Edit');">Edit</a></th>
-    </tr>                
+      <th style="width: 200px; height:100px;"><a href="{{pathFor 'edit-unit/:_id' _id=unit._id}}">Edit</a></th>
+    </tr>
     {{/each}}
 
-    <button class="standard_button" onclick="FlowRouter.go('App.home')" type="submit" style="background-color: #1dd686; color:black; font-size: 10px; width: 100px; height: 20px;"><b>Done</b></button>  
+    <button class="standard_button" onclick="FlowRouter.go('App.home')" type="submit" style="background-color: #1dd686; color:black; font-size: 10px; width: 100px; height: 20px;"><b>Done</b></button>
   </div>
 </template>

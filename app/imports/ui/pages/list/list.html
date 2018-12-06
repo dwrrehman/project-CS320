@@ -1,20 +1,28 @@
 <template name="list">
   <div class="section">
     <tr>
+      <th style="background-color: orange; width: 200px; height:10px;">unit.name</th>      
+      <th style="background-color: orange; width: 200px; height:10px;">unit.abbreviation</th>
+      <th style="background-color: orange; width: 200px; height:10px;">unit.description</th>
+      <th style="background-color: orange; width: 200px; height:10px;">unit.type</th>      
+      <th style="background-color: orange; width: 200px; height:10px;">unit.system</th>
+    </tr>  
+      <hr>                  
     {{#each unit in baseUnitsList}}
-      <th>{{unit.name}}</th>
+    <hr>  
+    <tr>
+      <th style="width: 200px; height:100px;">{{unit.name}}</th>
       
-      <th>{{unit.abbreviation}}</th>
+      <th style="width: 200px; height:100px;">{{unit.abbreviation}}</th>
       
-      <th>{{unit.description}}</th>
+      <th style="width: 200px; height:100px;">{{unit.description}}</th>
       
-      <th>{{unit.type}}</th>
+      <th style="width: 200px; height:100px;">{{unit.type}}</th>
       
-      <th>{{unit.system}}</th>
+      <th style="width: 200px; height:100px;">{{unit.system}}</th>
 
-      <hr>      
-    {{/each}}
-    </tr>
+    </tr>                
+    {{/each}}    
 
     <button class="standard_button" onclick="FlowRouter.go('App.home')" type="submit" style="background-color: #1dd686; color:black; font-size: 10px; width: 100px; height: 20px;"><b>Done</b></button>  
   </div>

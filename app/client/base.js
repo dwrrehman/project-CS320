@@ -1,6 +1,6 @@
-import { Systems }   from '../imports/api/systems/systems.js'; 
-import { BaseUnits } from '../imports/api/base/base.js'; 
-//import { Compounds } from '../imports/api/compounds/compounds.js'; 
+import { Systems } from '../imports/api/systems/systems.js';
+import { BaseUnits } from '../imports/api/base/base.js';
+// import { Compounds } from '../imports/api/compounds/compounds.js';
 
 /* eslint-disable max-len,no-use-before-define,no-param-reassign,no-restricted-globals,camelcase */
 // this file contains the algorithmic javascritpt code for the project, as well as some of the view-switching code.
@@ -58,7 +58,7 @@ class CompoundUnit {
       }
       this.UnitpowerList = newunitpowers;
     } else if (typeof (UnitpowerList) === 'string') {
-      this.UnitpowerList = getAbstractCompound(new Expression(UnitpowerList),baseUnits);
+      this.UnitpowerList = getAbstractCompound(new Expression(UnitpowerList), baseUnits);
     }
     this.GivenType = GivenType; // String
     this.system = system; // Actual system object.
@@ -85,6 +85,15 @@ class AbstractCompound { // Allows for easy arithmetic with any combination of u
         delete this.powMap[unitPower.unit.abbreviation];
         delete this.unitMap[unitPower.unit.abbreviation];
       }
+    }
+  }
+
+  combine(abstract){
+    let keys = Object.keys(abstract.powMap);
+    let key;
+    for (let i = 0; i < keys.length; i++) {
+      key = keys[i];
+      this.add(new UnitPower(abstract.unitMap[key], abstract.powMap[key]));
     }
   }
 
@@ -350,8 +359,12 @@ function getAbstractConversion(systems, desiredSystemName, abstractCompound) {
   let currentSystem;
   let currentBaseConversion;
   let currentCompoundConversion;
+  let intermediateAbstract;
+  let intermediateConversion;
   const newUnitPowerList = [];
   const desiredSystem = systems[desiredSystemName];
+  let akeys;
+  let akey;
   if (keys.length === 0) {
     return [1, 0, new AbstractCompound([])];
   }
@@ -368,8 +381,25 @@ function getAbstractConversion(systems, desiredSystemName, abstractCompound) {
       console.log('Current unit has no type????');
       return [1, 0, undefined];
     } if (desiredSystem[currentUnit.GivenType] === undefined || desiredSystem[currentUnit.GivenType].length === 0) {
-      console.log('The desired system has no conversions for that type????');
-      return [1, 0, undefined];
+      if (currentUnit.UnitpowerList === undefined) {
+        console.log('The desired system has no conversions for that type????');
+        console.log(currentUnit.givenName);
+        return [1, 0, undefined];
+      }
+      console.log('No direct conversion, attempting basic conversion.');
+      intermediateAbstract = new AbstractCompound(currentUnit.UnitpowerList);
+      console.log("New Abstract.");
+      console.log(intermediateAbstract);
+      intermediateConversion = getAbstractConversion(systems, desiredSystemName, intermediateAbstract);
+      console.log(intermediateConversion);
+      conversion *= intermediateConversion[0];
+      shift += intermediateConversion[1];
+      akeys = Object.keys(intermediateConversion[2].powMap);
+      for (let j = 0; j < akeys.length; j++){
+        akey = akeys[j];
+        newUnitPowerList.push(new UnitPower(intermediateConversion[2].unitMap[akey], intermediateConversion[2].powMap[akey]));
+      }
+      continue;
     }
     currentToUnit = desiredSystem[currentUnit.GivenType][0].from;
     if (currentUnit.UnitpowerList === undefined) { // Means currentUnit is a base unit
@@ -625,20 +655,11 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
 }
 
 
-
-
-
-
-
-
-
-
-
 /* TEST CODE FOR BASE UNIT CONVERTER */
 
-  var baseunits = new UnitMap();
-  var compoundunits = new UnitMap();
-  var systems1 = new SystemMap();
+const baseunits = new UnitMap();
+const compoundunits = new UnitMap();
+const systems1 = new SystemMap();
 
 
 // const metric = new System('Metric', [], [], [], [], [], []);
@@ -710,7 +731,7 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
 // console.log(`Answer: ${convertUnit(new UnitPair(fahrenheit, celsius), 12)}`);
 // console.log('10 celsius to warmth');
 // console.log(`Answer: ${convertUnit(new UnitPair(warmth, celsius), 10)}`);
-// /* COMPOUND UNIT CONVERSION TESTING 
+// /* COMPOUND UNIT CONVERSION TESTING
 
 // const newton = new CompoundUnit('Newton', 'N', 'A unit of force', 'force', [new UnitPower(kilogram, 1), new UnitPower(meter, 1), new UnitPower(secondM, -2)], metric);
 // compoundunits.add(newton);
@@ -755,12 +776,11 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
 // /* END OF TEST CODE */
 
 
-
 export const Base = {
 
   Init() {
-    //Systems.find().forEach(function(i){systems1.add(i);});    
-    //BaseUnits.find().forEach(function(i){baseunits.add(i);});
+    // Systems.find().forEach(function(i){systems1.add(i);});
+    // BaseUnits.find().forEach(function(i){baseunits.add(i);});
 
     const metric = new System('Metric', [], [], [], [], [], []);
     systems1.add(metric);
@@ -803,6 +823,8 @@ export const Base = {
     const fahrenheittowarmth = new UnitConversions(warmth, fahrenheit, 12.0, 3.0 / 5.0);
     const kilogramtoslug = new UnitConversions(slug, kilogram, 0, 1.0 / 14.59390);
     const slugtokilogram = new UnitConversions(kilogram, slug, 0, 14.59390);
+    const secondMtosecondI = new UnitConversions(secondI,secondM,0,1);
+    const secondItosecondM = new UnitConversions(secondM,secondI,0,1);
 
     metric.length.push(metertofoot);
     metric.mass.push(kilogramtoslug);
@@ -814,17 +836,19 @@ export const Base = {
     imperial.mass.push(slugtokilogram);
     feathers.length.push(flocktofoot);
     smootric.length.push(smoottofoot);
+    imperial.time.push(secondItosecondM);
+    metric.time.push(secondMtosecondI);
 
     const newton = new CompoundUnit('Newton', 'N', 'A unit of force', 'force', [new UnitPower(kilogram, 1), new UnitPower(meter, 1), new UnitPower(secondM, -2)], metric);
     compoundunits.add(newton);
     const poundforce = new CompoundUnit('poundforce', 'lbf', 'The imperial unit of force', 'force', [new UnitPower(slug, 1), new UnitPower(foot, 1), new UnitPower(secondI, -2)], imperial);
     compoundunits.add(poundforce);
-
-},
+    convertComp(poundforce, newton, 1.0);
+  },
 
 
   Solve(string, systemname) {
-    return solve(new Expression(string), systems1, baseunits, compoundunits, systemname);  
+    return solve(new Expression(string), systems1, baseunits, compoundunits, systemname);
   },
 
-}
+};

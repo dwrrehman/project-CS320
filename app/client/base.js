@@ -864,6 +864,7 @@ export const Base = {
     let newSys;
     let newComp;
     let newConv;
+    let newConvInv;
     sys.forEach(function (i) {
       newSys = new System(i.name, [], [], [], [], [], []);
       systems1.add(newSys);
@@ -878,13 +879,15 @@ export const Base = {
     });
     conv.forEach(function (i) {
       if (baseunits[i.fromUnit] !== undefined) {
-        newConv = new UnitConversions(baseunits[i.toUnit], baseunits[i.fromUnit], i.shift, i.factor);
+        newConv = new UnitConversions(baseunits[i.toUnit], baseunits[i.fromUnit], parseFloat(i.shift), parseFloat(i.factor));
+        newConvInv = new UnitConversions(baseunits[i.fromUnit], baseunits[i.toUnit], -parseFloat(i.shift) / (parseFloat(i.factor)), 1.0 / parseFloat(i.factor));
+        systems1[i.system].add(newConv, i.type);
+        baseunits[i.toUnit].system.add(newConvInv,i.type);
       } else if (compoundunits[i.fromUnit] !== undefined) {
-        newConv = new UnitConversions(compoundunits[i.toUnit], compoundunits[i.fromUnit], i.shift, i.factor);
+        console.log('Not worrying about compound units yet.');
       } else {
         console.log(`A conversion references an invalid unit: ${i.fromUnit} Or, ${i.toUnit}`);
       }
-      systems1[i.system].add(newConv, i.type);
     });
     console.log(systems1);
   },

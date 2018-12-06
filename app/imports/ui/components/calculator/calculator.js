@@ -37,7 +37,7 @@ Template.calculator.events({
 
   'click #addsystem_button'(event) {    
     var system_name = prompt('Please Provide the System Name: ');
-    if (system_name) {      
+    if (system_name) { 
         Systems.insert({name: system_name});
         alert('Successfully added system.');
     }  

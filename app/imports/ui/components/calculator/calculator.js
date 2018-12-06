@@ -6,9 +6,18 @@ import { Base } from '../../../../client/base.js';
 import './calculator.html';
 import '../../stylesheets/calculator.css';
 	
-Template.calculator.onCreated(function addOnCreated() {
-    Base.Init();
-});
+
+Template.calculator.onCreated(function addOnCreated(){});
+
+Template.calculator.rendered = function() {
+  if (!Base.shown_welcome_message) {
+    const message = 'Welcome to the Calculation Utility.';
+    var el = this.find("#calculator_display");
+    if (el) el.innerText = message;
+    Base.shown_welcome_message = true;
+  }
+  Base.Init();
+};
 
 Template.calculator.helpers({
   systemsCollection() {

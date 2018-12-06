@@ -3,6 +3,9 @@ import { Systems } from '../imports/api/systems/systems.js';
 import { BaseUnits } from '../imports/api/base/base.js';
 import { compoundUnits } from '../imports/api/compound/compound.js';
 import { conversions } from '../imports/api/conversion/conversion.js';
+
+import '../imports/ui/components/calculator/calculator.html';
+
 /* eslint-disable max-len,no-use-before-define,no-param-reassign,no-restricted-globals,camelcase */
 // this file contains the algorithmic javascritpt code for the project, as well as some of the view-switching code.
 
@@ -849,6 +852,9 @@ const metric = new System('Metric', [], [], [], [], [], []);
     compoundunits.add(poundforce);
     convertComp(poundforce, newton, 1.0);
 */
+
+var shown_welcome_message = false;
+
 export const Base = {
 
   Init() {

@@ -883,7 +883,7 @@ export const Base = {
         newConvInv = new UnitConversions(baseunits[i.fromUnit], baseunits[i.toUnit], -parseFloat(i.shift) / (parseFloat(i.factor)), 1.0 / parseFloat(i.factor));
         systems1[i.system].add(newConv, i.type);
         console.log('Adding inverse too ??!?!?1122');
-        console.log(baseunits[i.toUnit].system)
+        console.log(baseunits[i.toUnit].system);
         baseunits[i.toUnit].system.add(newConvInv,i.type);
       } else if (compoundunits[i.fromUnit] !== undefined) {
         convertComp(compoundunits[i.toUnit], compoundunits[i.fromUnit], 1.0);

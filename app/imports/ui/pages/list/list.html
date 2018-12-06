@@ -1,12 +1,14 @@
 <template name="list">
   <div class="section">
+    
     <tr>
       <th style="background-color: orange; width: 200px; height:10px;">Name</th>
       <th style="background-color: orange; width: 200px; height:10px;">Abbreviation</th>
       <th style="background-color: orange; width: 200px; height:10px;">Description</th>
+      <th style="background-color: orange; width: 200px; height:10px;">Units</th>
       <th style="background-color: orange; width: 200px; height:10px;">Type</th>
-      <th style="background-color: orange; width: 200px; height:10px;">System</th>
-      <th style="background-color: orange; width: 200px; height:10px;">Edit</th>
+      <th style="background-color: orange; width: 200px; height:10px;">System</th>      
+      <th style="background-color: lightgray; width: 200px; height:10px;">(Base Units)</th>
     </tr>
     <hr>
     {{#each unit in baseUnitsList}}
@@ -15,19 +17,21 @@
       <th style="width: 200px; height:100px;">{{unit.name}}</th>
       <th style="width: 200px; height:100px;">{{unit.abbreviation}}</th>
       <th style="width: 200px; height:100px;">{{unit.description}}</th>
+      <th style="width: 200px; height:100px;">{{unit.abbreviation}}</th>
       <th style="width: 200px; height:100px;">{{unit.type}}</th>
       <th style="width: 200px; height:100px;">{{unit.system}}</th>
       <th style="width: 200px; height:100px;"><a href="{{pathFor 'edit-unit/:_id' _id=unit._id}}">Edit</a></th>
     </tr>
     {{/each}}
+
     <tr>
       <th style="background-color: orange; width: 200px; height:10px;">Name</th>
       <th style="background-color: orange; width: 200px; height:10px;">Abbreviation</th>
       <th style="background-color: orange; width: 200px; height:10px;">Description</th>
-      <th style="background-color: orange; width: 200px; height:10px;">Type</th>
-      <th style="background-color: orange; width: 200px; height:10px;">System</th>
       <th style="background-color: orange; width: 200px; height:10px;">Units</th>
-      <th style="background-color: orange; width: 200px; height:10px;">Edit</th>
+      <th style="background-color: orange; width: 200px; height:10px;">Type</th>
+      <th style="background-color: orange; width: 200px; height:10px;">System</th>      
+      <th style="background-color: lightgray; width: 200px; height:10px;">(Compound Units)</th>
     </tr>
     {{#each unit in compoundUnitsList}}
       <hr>
@@ -35,12 +39,14 @@
         <th style="width: 200px; height:100px;">{{unit.name}}</th>
         <th style="width: 200px; height:100px;">{{unit.abbreviation}}</th>
         <th style="width: 200px; height:100px;">{{unit.description}}</th>
-        <th style="width: 200px; height:100px;">{{unit.type}}</th>
-        <th style="width: 200px; height:100px;">{{unit.system}}</th>
         <th style="width: 200px; height:100px;">{{unit.units}}</th>
+        <th style="width: 200px; height:100px;">{{unit.type}}</th>
+        <th style="width: 200px; height:100px;">{{unit.system}}</th>        
         <th style="width: 200px; height:100px;"><a href="{{pathFor 'edit-compound/:_id' _id=unit._id}}">Edit</a></th>
       </tr>
     {{/each}}
+    <hr>
+    <br>
     <button class="standard_button" onclick="FlowRouter.go('App.home')" type="submit" style="background-color: #1dd686; color:black; font-size: 15px; width: 100px; height: 30px;"><b>Done</b></button>
   </div>
 </template>

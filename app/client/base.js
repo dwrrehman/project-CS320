@@ -674,9 +674,9 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
 
 /* TEST CODE FOR BASE UNIT CONVERTER */
 
-const baseunits = new UnitMap();
-const compoundunits = new UnitMap();
-const systems1 = new SystemMap();
+export const baseunits = new UnitMap();
+export const compoundunits = new UnitMap();
+export const systems1 = new SystemMap();
 
 
 // const metric = new System('Metric', [], [], [], [], [], []);
@@ -891,8 +891,6 @@ export const Base = {
         newConv = new UnitConversions(baseunits[i.toUnit], baseunits[i.fromUnit], parseFloat(i.shift), parseFloat(i.factor));
         newConvInv = new UnitConversions(baseunits[i.fromUnit], baseunits[i.toUnit], -parseFloat(i.shift) / (parseFloat(i.factor)), 1.0 / parseFloat(i.factor));
         baseunits[i.fromUnit].system.add(newConv, i.type);
-        console.log('Adding inverse too ??!?!?1122');
-        console.log(baseunits[i.toUnit].system);
         baseunits[i.toUnit].system.add(newConvInv, i.type);
       } else if (compoundunits[i.fromUnit] !== undefined) {
         convertComp(compoundunits[i.toUnit], compoundunits[i.fromUnit], 1.0);
@@ -900,8 +898,6 @@ export const Base = {
         console.log(`A conversion references an invalid unit: ${i.fromUnit} Or, ${i.toUnit}`);
       }
     });
-    console.log('End of init......------------............');
-    console.log(systems1);
   },
 
   Solve(string, systemname) {

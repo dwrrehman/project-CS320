@@ -5,11 +5,13 @@ import { Systems } from '../../../api/systems/systems.js';
 import { Base } from '../../../../client/base.js';
 import './calculator.html';
 import '../../stylesheets/calculator.css';
-	
 
-Template.calculator.onCreated(function addOnCreated(){});
+Template.calculator.onCreated(function addOnCreated(){
+  Base.Init();
+});
 
-Template.calculator.rendered = function() {
+
+Template.calculator.onRendered = function() {
   if (!Base.shown_welcome_message) {
     const message = 'Welcome to the Calculation Utility.';
     var el = this.find("#calculator_display");
@@ -26,15 +28,18 @@ Template.calculator.helpers({
 });
 
 Template.calculator.events({
-
-	'keydown #calculator_display'(event) {			
-		if (event.keyCode == 13) {      
-			let input = document.getElementById('calculator_display').innerText;	
+	'keydown #calculator_display'(event) {
+		if (event.keyCode == 13) {
+      Base.Init(); /// this is bad, but tbh its the only thing that works right now, to populate the local database.
+      event.preventDefault(); // Prevent the text box from recieving a new line.
+			let input = document.getElementById('calculator_display').innerText;
   		let desiredsystem = document.getElementById('to_system').value;
   		console.log("Received Input: " + input);
   		console.log("Received Desired System: " + desiredsystem);
-  		var t = Base.Solve(input, desiredsystem)  	  
-  		if (t) document.getElementById('calculator_display').innerText = t.toString();
+  		var t = Base.Solve(input, desiredsystem);
+  		if (t) {
+  		  document.getElementById('calculator_display').innerText = t.toString();
+      }
   		else alert("Invalid input format!");
 		}
 	},
@@ -52,8 +57,9 @@ Template.calculator.events({
     }  
   },
 
-  'click #equals_button'(event) {      
-  	  let input = document.getElementById('calculator_display').innerText;	
+  'click #equals_button'(event) {
+      Base.Init(); /// this is bad, but tbh its the only thing that works right now, to populate the local database.
+  	  let input = document.getElementById('calculator_display').innerText;
   	  let desiredsystem = document.getElementById('to_system').value;
   	  console.log("Received Input: " + input);
   	  console.log("Received Desired System: " + desiredsystem);

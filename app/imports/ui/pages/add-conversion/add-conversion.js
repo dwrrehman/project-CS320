@@ -77,12 +77,12 @@ Template.add_conversion.events({
       failure = true;
     }
     if (compoundflag){
-      if (compoundunits[to].type !== compoundunits[from].type){
+      if (compoundunits[to].GivenType !== compoundunits[from].GivenType){
         alert('You are defining a conversion between units that have different types!');
         failure = true;
       }
     }else if (baseflag){
-      if (baseunits[to].type !== baseunits[from].type){
+      if (baseunits[to].GivenType !== baseunits[from].GivenType){
         alert('You are defining a conversion between units that have different types!');
         failure = true;
       }

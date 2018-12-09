@@ -12,7 +12,7 @@ import '../../ui/pages/add-compound/add-compound.js';
 import '../../ui/pages/edit-compound/edit-compound.js';
 import '../../ui/pages/list/list.js';
 import '../../ui/pages/not-found/not-found.js';
-
+import '../../ui/pages/conversionGraph/graph';
 // Set up all routes in the app
 FlowRouter.route('/', {
   name: 'App.home',
@@ -60,6 +60,12 @@ FlowRouter.route('/list', {
   name: 'App.list',
   action() {
     BlazeLayout.render('App_body', { main: 'list' });
+  },
+});
+FlowRouter.route('/list-conversions', {
+  name: 'App.list_conversions',
+  action() {
+    BlazeLayout.render('App_body', { main: 'list_conversions' });
   },
 });
 

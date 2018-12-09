@@ -15,20 +15,6 @@ conversions.allow({
 });
 
 export const ConversionSchema = new SimpleSchema({
-  type: {
-    label: 'Type',
-    type: String,
-    autoform: {
-      placeholder: 'Type',
-    },
-  },
-  system: {
-    label: 'System',
-    type: String,
-    autoform: {
-      placeholder: 'System Name',
-    },
-  },
   toUnit: {
     label: 'ToUnit',
     type: String,

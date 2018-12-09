@@ -3,13 +3,17 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { conversions } from '../../../api/conversion/conversion.js';
 import { Systems } from '../../../api/systems/systems.js';
-
+import { BaseUnits } from '../../../api/base/base';
+import { compoundUnits } from '../../../api/compound/compound';
+import { Base } from '../../../../client/base';
 import './add-conversion.html';
 import { baseunits, compoundunits } from '../../../../client/base';
 
 Template.add_conversion.onCreated(function addOnCreated() {
   Meteor.subscribe('Conversion');
   Meteor.subscribe('Systems');
+  Meteor.subscribe('BaseUnits');
+  Meteor.subscribe('CompoundUnits');
 });
 
 /* eslint-disable no-unused-vars */
@@ -21,18 +25,25 @@ Template.add_conversion.helpers({
   systemsCollection() {
     return Systems.find();
   },
+  baseUnitsCollection(){
+    BaseUnits.find();
+  },
+  compoundUnitsCollection(){
+    return compoundUnits.find();
+  },
+  unitsCollection(){
+    return compoundUnits.find().fetch().concat(BaseUnits.find().fetch());
+  },
 });
 
 Template.add_conversion.events({
   'submit .new_conversion'(event) {
     event.preventDefault();
 
-    const type = event.target.type.value;
-    const system = event.target.system.value;
     const to = event.target.to_unit.value;
     const from = event.target.from_unit.value;
-    const factor = event.target.factor.value;
-    const shift = event.target.shift_amount.value;
+    let factor = event.target.factor.value;
+    let shift = event.target.shift_amount.value;
     let baseflag = false;
     let compoundflag = false;
     let failure = false;
@@ -66,20 +77,22 @@ Template.add_conversion.events({
       failure = true;
     }
     if (compoundflag){
-      if (compoundunits[to].type !== compoundunits[from]){
-        alert('The units you are defining a conversion between have different types!');
+      if (compoundunits[to].type !== compoundunits[from].type){
+        alert('You are defining a conversion between units that have different types!');
         failure = true;
       }
     }else if (baseflag){
-      if (baseunits[to].type !== baseunits[from]){
-        alert('The units you are defining a conversion between have different types!');
+      if (baseunits[to].type !== baseunits[from].type){
+        alert('You are defining a conversion between units that have different types!');
         failure = true;
       }
     }
+    factor = Base.Solve(factor).quantity;
+    shift = Base.Solve(shift).quantity;
+    console.log(factor);
+    console.log(shift);
     if (!failure) {
       conversions.insert({
-        type: type,
-        system: system,
         toUnit: to,
         fromUnit: from,
         factor: factor,

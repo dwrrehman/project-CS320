@@ -433,8 +433,7 @@ function getAbstractConversion(systems, desiredSystemName, abstractCompound) {
         }
         return [currentBaseConversion[1], currentBaseConversion[2], new AbstractCompound(newUnitPowerList)];
       }
-      conversion *= currentBaseConversion[1];
-      shift += currentBaseConversion[2];
+      conversion *= currentBaseConversion[1] ** currentPower;
     } else { // Means currentUnit is a compound unit
       currentCompoundConversion = convertComp(currentToUnit, currentUnit, 1.0);
       if (currentCompoundConversion.invalid || (currentCompoundConversion.isShift && keys.length > 0)) {
@@ -442,10 +441,13 @@ function getAbstractConversion(systems, desiredSystemName, abstractCompound) {
         return [1, 0, undefined];
       }
       if (!currentCompoundConversion.isShift) {
-        conversion *= currentCompoundConversion[0];
-      } else {
+        conversion *= currentCompoundConversion[0] ** currentPower;
+      } else if (currentPower === 1){
         conversion *= currentCompoundConversion[1].conversions[0].factor;
         shift += currentCompoundConversion.conversions[0].shift;
+      } else {
+        console.log('Compound conversion with a shift, oh dear......');
+        return [1, 0, undefined];
       }
       newUnitPowerList.push(new UnitPower(currentToUnit, currentPower));
     }

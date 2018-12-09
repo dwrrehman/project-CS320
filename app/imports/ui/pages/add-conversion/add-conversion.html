@@ -3,14 +3,18 @@
 
     <!-- <script></script> -->
     <form class="new_conversion">
-      <input name="from_unit" style="font-size: 20px; width: 80px; height: 50px;" placeholder="From"><select class="cselect" name="system" style="font-size: 15px; background-color: orange; width: 100px; height: 51px;">
-        {{#each sys in systemsCollection}}
-          <option value={{sys.name}}><b>{{sys.name}}</b></option>
+      <p>From:</p>
+      <select class="cselect" name="from_unit" style="font-size: 15px; background-color: orange; width: 100px; height: 51px;">
+        {{#each unit in unitsCollection}}
+          <option value={{unit.abbreviation}}><b>{{unit.abbreviation}}</b></option>
         {{/each}}
       </select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input name="to_unit" style="font-size: 20px; width: 80px;height: 50px;" placeholder="To"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input name="type" style="font-size: 20px; width: 80px; height: 50px;" placeholder="Type"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <hr>
+      <p>To:</p>
+      <select class="cselect" name="to_unit" style="font-size: 15px; background-color: orange; width: 100px; height: 51px; margin-right: 60px;">
+        {{#each unit in unitsCollection}}
+          <option value={{unit.abbreviation}}><b>{{unit.abbreviation}}</b></option>
+        {{/each}}
+      </select>
       <input name="factor" style="font-size: 20px; width: 80px; height: 50px;" placeholder="Factor"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <input name="shift_amount" style="font-size: 20px; width: 80px; height: 50px;" placeholder="Shift"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       

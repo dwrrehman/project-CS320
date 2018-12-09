@@ -442,7 +442,7 @@ function getAbstractConversion(systems, desiredSystemName, abstractCompound) {
       }
       if (!currentCompoundConversion.isShift) {
         conversion *= currentCompoundConversion[0] ** currentPower;
-      } else if (currentPower === 1){
+      } else if (currentPower === 1) {
         conversion *= currentCompoundConversion[1].conversions[0].factor;
         shift += currentCompoundConversion.conversions[0].shift;
       } else {
@@ -636,8 +636,9 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
     }
     if (desiredSystemName !== undefined && desiredSystemName !== '') {
       val1NewAbstract = getAbstractConversion(systems, desiredSystemName, val1.units);
-      if (val1NewAbstract[2] === undefined) {
-        newval = solve(new Expression(expressionSave), systems, baseUnits, compoundUnits);
+      if (val1NewAbstract[2] === undefined) { // Failed to get an abstract conversion.
+        newval = solve(new Expression(expressionSave), systems, baseUnits, compoundUnits); // Solve without converting
+        // Convert afterwards.
         newabstract = getAbstractConversion(systems, desiredSystemName, newval.units);
         if (newabstract[2] !== undefined) {
           return new Value(newval.quantity * newabstract[0] + newabstract[1], newabstract[2]);
@@ -649,7 +650,7 @@ function solve(expression, systems, baseUnits, compoundUnits, desiredSystemName)
         return val1;
       }
       val2NewAbstract = getAbstractConversion(systems, desiredSystemName, val2.units);
-      if (val2NewAbstract[2] === undefined) {
+      if (val2NewAbstract[2] === undefined) { // Failed to get an abstract conversion
         newval = solve(new Expression(expressionSave), systems, baseUnits, compoundUnits);
         newabstract = getAbstractConversion(systems, desiredSystemName, newval.units);
         if (newabstract[2] !== undefined) {
@@ -892,8 +893,8 @@ export const Base = {
       if (baseunits[i.fromUnit] !== undefined) {
         newConv = new UnitConversions(baseunits[i.toUnit], baseunits[i.fromUnit], parseFloat(i.shift), parseFloat(i.factor));
         newConvInv = new UnitConversions(baseunits[i.fromUnit], baseunits[i.toUnit], -parseFloat(i.shift) / (parseFloat(i.factor)), 1.0 / parseFloat(i.factor));
-        baseunits[i.fromUnit].system.add(newConv, i.type);
-        baseunits[i.toUnit].system.add(newConvInv, i.type);
+        baseunits[i.fromUnit].system.add(newConv, baseunits[i.fromUnit].GivenType);
+        baseunits[i.toUnit].system.add(newConvInv, baseunits[i.toUnit].GivenType);
       } else if (compoundunits[i.fromUnit] !== undefined) {
         convertComp(compoundunits[i.toUnit], compoundunits[i.fromUnit], 1.0);
       } else {

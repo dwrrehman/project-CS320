@@ -3,6 +3,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Template } from 'meteor/templating';
 import { BaseUnits } from '../../../api/base/base.js';
 import { Systems } from '../../../api/systems/systems.js';
+import { baseunits, compoundunits } from '../../../../client/base';
 
 import './add-unit.html';
 import '../../stylesheets/add.css';
@@ -10,6 +11,7 @@ import '../../stylesheets/add.css';
 Template.add_unit.onCreated(function addOnCreated() {
   Meteor.subscribe('BaseUnits');
   Meteor.subscribe('Systems');
+  Meteor.subscribe('CompoundUnits');
 });
 
 
@@ -33,15 +35,17 @@ Template.add_unit.events({
     const desc = event.target.description_text.value;
     const type = event.target.type.value;
     const system = event.target.to_system.value;
-
-    BaseUnits.insert({
-      name: name,
-      abbreviation: abbr,
-      description: desc,
-      type: type,
-      system: system,
-    });
-
-    FlowRouter.go('App.home');
+    if (baseunits[abbr] === undefined && compoundunits[abbr] === undefined) {
+      BaseUnits.insert({
+        name: name,
+        abbreviation: abbr,
+        description: desc,
+        type: type,
+        system: system,
+      });
+      FlowRouter.go('App.home');
+    } else {
+      alert('Unit with that abbreviation already exists');
+    }
   },
 });

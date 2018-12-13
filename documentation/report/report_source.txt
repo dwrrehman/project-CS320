@@ -1,0 +1,70 @@
+Final Report Source Textfile
+
+
+1 Introduction
+<TO DO: Please provide a brief introduction to your project.>
+
+1.1 Project Overview - < A brief description of the project.
+TO DO: Write 1-2 paragraphs describing the project. >
+
+1.2 Definitions, Acronyms and Abbreviations - <Define all the terms necessary to properly interpret the report, including acronyms and abbreviations.
+TO DO: Please provide a list of all abbreviations and acronyms used in this document sorted in alphabetical order.>
+
+1.3 References and Acknowledgments - <List any other documents or Web addresses to which this document refers. These may include user interface style guides, contracts, standards, system requirements specifications, use case documents, or a vision and scope document. 
+TO DO: Use the standard IEEE citation guide for this section.>
+
+
+
+2 Design
+
+2.1 System Modeling - < Update your UML diagrams in milestone 2, to reflect the real implementation of this software. 
+TO DO: Provide an updated version of the UML diagrams, including use case diagrams, sequence (or state) diagrams, activities diagrams, and class diagrams. If you don’t have an updated version, just mention: “our implementation strictly follows the design document (milestone 2)”. >
+
+2.2 Interface Design - <Provide several screenshots to illustrate your interface design. 
+TO DO: For each subsystem, pick one or two representative screenshots and paste here.>
+
+
+
+3 Implementation
+
+3.1 Development Environment - <Describe the development environment you were using for the project.
+TO DO: List the programming languages, IDEs, tools, etc.>
+
+3.2 Task Distribution - <Describe how the implementation tasks are distributed among team members.    TO DO: For each team member, describe his/her main implementation tasks in this project.
+If this is a one-person project, mention: “all the work presented here is done by *** (your name).”> 
+
+3.3 Challenges - <This section is optional. Describe the challenges in the implementation, if there are any, and how you dealt with them.    	
+TO DO: If you don’t have anything to fill in, just leave this section blank.> 
+
+
+4 Testing
+
+<This section is a summary of your testing report>
+
+4.1 Testing Plan - <Describe your testing plan for the project. 
+TODO: Give a list of items or functions you want to test, and also a schedule for performing the testing.>
+
+4.2 Tests for Functional Requirements - <Describe your test results for the functional requirements.
+TODO: Provide a list of use cases or functions you have tested, as well as the testing results (whether or not the system passed the tests).>
+
+4.3 Tests for Non-functional Requirements - <Similar to the Section 4.2, but this section is for the non-functional requirements. >
+
+4.4 Hardware and Software Requirements - <Describe the hardware and software requirements for performing the tests. > 
+
+
+
+5 Analysis
+
+<In this Section you need to analyze the effort that has been put on this project.
+TODO: Describe how many hours (approximately) each team member spent on the project, for each milestone, which milestone takes the most effort and why. >
+
+
+
+6 Conclusion
+
+<Conclude the document with what you have learned through working on the project.>
+
+
+
+Appendix A Group Log
+< Describe how frequently the group members meet during the semester, and how effective the communication is. This is optional for one-person projects.>

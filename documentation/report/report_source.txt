@@ -2,10 +2,14 @@ Final Report Source Textfile
 
 
 1 Introduction
-<TO DO: Please provide a brief introduction to your project.>
+The Calculation Utility is a web app that allows the user to perform basic arithmetic, define basic and complex units, and perform unit conversions. By storing the units in a database it allows users to view and edit the units they've defined.
 
 1.1 Project Overview - < A brief description of the project.
 TO DO: Write 1-2 paragraphs describing the project. >
+
+The project has two main features. The first is a unit converter, which converts units of the same type (e.g. length or mass) from one 'unit system' to another. Users define base units by entering information about the unit, the unit type, and the unit system. Once the user has multiple units of the same type, they can define a conversion factor between the two units. For example, the user could define 'meter' as a length unit in the metric system, and 'foot' as a length unit in the imperial system. They can then define a conversion between the two, in this case 1 meter = 3.28084 feet. When the user enters '1m' and switches the system to imperial, the app will display '3.28084ft'. Users can also define complex units in terms of existing units. The definition is just a string that the program parses. For example, Newtons would be defined as 'kg*m*s^-2'. Assuming all required base units and conversions are defined in each system, the user can then convert Newtons to the Imperial equivalent.
+
+The second feature is a calculator. The UI follows the format of a basic calculator, and allows all standard arithmetic operations. In its current stage, the UI also presents a variety of more complex functions, such as sine, cosine, and tangent, but these are not functional. The calculator is integrated with the unit converter, and can perform calculations with units. For example, entering '1m + 1ft' would produce '1.3048m'. This also works with complex units. The calculator also includes buttons for adding new units, systems, and conversions, and for displaying all defined units.
 
 1.2 Definitions, Acronyms and Abbreviations - <Define all the terms necessary to properly interpret the report, including acronyms and abbreviations.
 TO DO: Please provide a list of all abbreviations and acronyms used in this document sorted in alphabetical order.>

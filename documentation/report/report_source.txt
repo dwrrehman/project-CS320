@@ -34,8 +34,18 @@ TO DO: For each subsystem, pick one or two representative screenshots and paste 
 3.1 Development Environment - <Describe the development environment you were using for the project.
 TO DO: List the programming languages, IDEs, tools, etc.>
 
+Initial mockups of the UI components were developed with pure HTML and CSS, and the unit conversion algorithms were written in Javascript. To develop this into a functional application we used Meteor, a web app framework. Meteor uses Javascript, and integrates with MongoDB and Blaze for database and rendering support. Development took place in JetBrain's IntelliJ IDEA IDE.
+
 3.2 Task Distribution - <Describe how the implementation tasks are distributed among team members.    TO DO: For each team member, describe his/her main implementation tasks in this project.
 If this is a one-person project, mention: “all the work presented here is done by *** (your name).”> 
+
+We didn't outline and follow strict responsibilities during development, so many aspects of the project likely have contributions from all members, but in general the work was divided as follows:
+
+Jake Palmer: Created the Meteor project, and integrated the UI mockup with Meteor, Blaze, and FlowRouter. Created databases with schemas for storing units. Implemented functionality to add and edit units in the database.
+
+Andrew Oakes:
+
+Daniel Rehman:
 
 3.3 Challenges - <This section is optional. Describe the challenges in the implementation, if there are any, and how you dealt with them.    	
 TO DO: If you don’t have anything to fill in, just leave this section blank.> 

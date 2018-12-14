@@ -42,9 +42,6 @@ subsystems:
 
 
 
-
-
-
 3 Implementation
 
 3.1 Development Environment - <Describe the development environment you were using for the project.

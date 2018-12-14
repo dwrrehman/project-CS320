@@ -39,7 +39,7 @@ Initial mockups of the UI components were developed with pure HTML and CSS, and 
 3.2 Task Distribution - <Describe how the implementation tasks are distributed among team members.    TO DO: For each team member, describe his/her main implementation tasks in this project.
 If this is a one-person project, mention: “all the work presented here is done by *** (your name).”> 
 
-We didn't outline and follow strict responsibilities during development, so many aspects of the project likely have contributions from all members, but in general the work was divided as follows:
+We didn't outline and follow strict responsibilities during development, so many aspects of the project likely have contributions from all members. In general the work was divided as follows:
 
 Jake Palmer: Created the Meteor project, and integrated the UI mockup with Meteor, Blaze, and FlowRouter. Created databases with schemas for storing units. Implemented functionality to add and edit units in the database.
 
@@ -82,3 +82,7 @@ TODO: Describe how many hours (approximately) each team member spent on the proj
 
 Appendix A Group Log
 < Describe how frequently the group members meet during the semester, and how effective the communication is. This is optional for one-person projects.>
+
+We formed our group in September, and begun discussing ideas for the project. In early October we decided to create a customizable unit converter, and began discussing how the system would work and look. Through October and November we met up about once a week and worked on the unit conversion system. Meetings became less frequent in November, but after Thanksgiving break we refocused and worked together several times.
+
+Group meetings were always productive, and we communicated well with one another.

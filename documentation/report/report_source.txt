@@ -61,7 +61,7 @@ We didn't outline and follow strict responsibilities during development, so many
 Jake Palmer: Created the Meteor project, and integrated the UI mockup with Meteor, Blaze, and FlowRouter. Created databases with schemas for storing units. Implemented functionality to add and edit units in the database.
 
 
-Andrew Oakes:
+Andrew Oakes: Created the complex expression parser/solver. Translated the database information into javascript objects for use in parser/solver and unit conversion algorithms. Made an abstract compound conversion algorithm so unnamed unit combinations could be converted.
 
 
 

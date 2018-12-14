@@ -69,7 +69,9 @@ Daniel Rehman: Created the the UI design and app layout, the CSS for the UI, and
 TO DO: If you don’t have anything to fill in, just leave this section blank.> 
 
 One challenge we faced was designing an easy to use user interface. We overcame this challenge by discussing ideas and solutions at each group meeting, and testing out different approaches. 
-Another challenge was integrating the unit conversion algorithms we had developed with Meteor and MongoDB. Our current solution is messy, and we are still working on completely solving this issue. The most important step in overcoming this challenge is simply learning more about how to use Meteor and MongoDB.
+Another challenge was integrating the unit conversion algorithms we had developed with Meteor and MongoDB. Our current solution is messy, and we are still working on completely solving this issue. The most important step in overcoming this challenge is simply learning more about how to use Meteor and MongoDB. 
+
+The development of the base unit conversion algorithm was also very challenging. Our intent was to make it figure out transitions by following paths through a "transition graph" of sorts. This turned out to be pretty tricky, but after a few meetings discussing the best approach, we managed to construct a working algorithm that could figure out transitions that were not explicitely defined by the user. However, the edge case of unit conversions with shifts still caused problems until a while later(i.e. fahrenheit to celsius).  
 
 4 Testing
 

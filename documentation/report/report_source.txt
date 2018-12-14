@@ -60,10 +60,7 @@ We didn't outline and follow strict responsibilities during development, so many
 
 Jake Palmer: Created the Meteor project, and integrated the UI mockup with Meteor, Blaze, and FlowRouter. Created databases with schemas for storing units. Implemented functionality to add and edit units in the database.
 
-
 Andrew Oakes: Created the complex expression parser/solver. Translated the database information into javascript objects for use in parser/solver and unit conversion algorithms. Made an abstract compound conversion algorithm so unnamed unit combinations could be converted.
-
-
 
 Daniel Rehman: Created the the UI design and app layout, the CSS for the UI, and helped connect the UI to the functionality. Also helped develop the algorithms and datastructures for the functionality.
 
@@ -124,7 +121,14 @@ Completed Tests:
 
 4.3 Tests for Non-functional Requirements - <Similar to the Section 4.2, but this section is for the non-functional requirements. >
 
+
+
+
 4.4 Hardware and Software Requirements - <Describe the hardware and software requirements for performing the tests. > 
+
+The hardware requirements for performing these set of tests, were simply to have a running computer or laptop, with a screen and keyboard and mouse, and with sufficent power. 
+
+however, the software requirements, were for the computer to have access to a unix terminal, have git, a sufficently modern web browser with javascript, have meteor installed, have a series of required node module packages installed, as well as a text editor to make changes to the source code.
 
 
 
@@ -180,21 +184,10 @@ In addition, we also learned about how development processes, such as Agile deve
 
 
 
-
-
-]
-
-
 Appendix A Group Log
 < Describe how frequently the group members meet during the semester, and how effective the communication is. This is optional for one-person projects.>
-<<<<<<< HEAD
-=======
 
 We formed our group in September, and begun discussing ideas for the project. In early October we decided to create a customizable unit converter, and began discussing how the system would work and look. Through October and November we met up about once a week and worked on the unit conversion system. Meetings became less frequent in November, but after Thanksgiving break we refocused and worked together several times to eventually finish the application to the specifications.
 
 Group meetings were always productive, and we communicated well with one another.
 
-
-
-
->>>>>>> bcfed07e01fcf2a08914e7c10a35c482377964d6

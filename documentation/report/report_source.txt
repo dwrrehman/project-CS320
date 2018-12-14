@@ -103,7 +103,7 @@ Milestone 1:       ( Project's Conception ... SRS Document ]
 Approx. Number of Hours:	
 - Andrew:
 - Jake:
-- Daniel:
+- Daniel: ~16h
 
 
 
@@ -112,10 +112,10 @@ Approx. Number of Hours:
 Milestone 2: 	   ( SRS Document ... SDD Document ]
 
 
-Approx. Number of Hours:	
+Approx. Number of Hours:
 - Andrew:
 - Jake:
-- Daniel:
+- Daniel: ~10h
 
 
 
@@ -125,9 +125,9 @@ Milestone 3:	   ( SDD document ... Final Report Document )
 
 
 Approx. Number of Hours:	
-- Andrew:
+- Andrew: 
 - Jake:
-- Daniel:
+- Daniel: ~20h
 
 
 

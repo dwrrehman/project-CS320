@@ -100,7 +100,10 @@ TODO: Describe how many hours (approximately) each team member spent on the proj
 
 Milestone 1:       ( Project's Conception ... SRS Document ]
 
-
+Approx. Number of Hours:	
+- Andrew:
+- Jake:
+- Daniel:
 
 
 
@@ -109,7 +112,10 @@ Milestone 1:       ( Project's Conception ... SRS Document ]
 Milestone 2: 	   ( SRS Document ... SDD Document ]
 
 
-
+Approx. Number of Hours:	
+- Andrew:
+- Jake:
+- Daniel:
 
 
 
@@ -118,7 +124,10 @@ Milestone 2: 	   ( SRS Document ... SDD Document ]
 Milestone 3:	   ( SDD document ... Final Report Document )
 
 
-
+Approx. Number of Hours:	
+- Andrew:
+- Jake:
+- Daniel:
 
 
 

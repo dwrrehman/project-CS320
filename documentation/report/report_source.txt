@@ -120,6 +120,7 @@ Completed Tests:
 
 
 4.3 Tests for Non-functional Requirements - <Similar to the Section 4.2, but this section is for the non-functional requirements. >
+    At the moment our Non-functional requirements are a mess. For the most part we didn't have time to worry about performance since our primary concern was getting it functional before the deadline. The one real Non-functional requirement test we used was ES-lint inspections, but we were not super consistant about editors, so that test would completely fail currently.
 
 
 
@@ -142,7 +143,7 @@ TODO: Describe how many hours (approximately) each team member spent on the proj
 Milestone 1:       ( Project's Conception ... SRS Document ]
 
 Approx. Number of Hours:	
-- Andrew: 
+- Andrew: ~3h
 - Jake:
 - Daniel: ~16h
 
@@ -150,7 +151,7 @@ Approx. Number of Hours:
 Milestone 2: 	   ( SRS Document ... SDD Document ]
 
 Approx. Number of Hours:
-- Andrew: 
+- Andrew: ~10h
 - Jake:
 - Daniel: ~10h
 
@@ -158,7 +159,7 @@ Approx. Number of Hours:
 Milestone 3:	   ( SDD document ... Final Report Document )
 
 Approx. Number of Hours:	
-- Andrew: 
+- Andrew: ~40h
 - Jake:
 - Daniel: ~20h
 

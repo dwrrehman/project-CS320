@@ -863,6 +863,7 @@ const shown_welcome_message = false;
 
 export const Base = {
 
+  // This is called each time the calculator is created, and connects the database to the conversion algorithms
   Init() {
     Meteor.subscribe('Conversion');
     Meteor.subscribe('Systems');

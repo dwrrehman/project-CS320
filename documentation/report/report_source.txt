@@ -81,9 +81,13 @@ TO DO: If you don’t have anything to fill in, just leave this section blank.>
 
 4.1 Testing Plan - <Describe your testing plan for the project. 
 TODO: Give a list of items or functions you want to test, and also a schedule for performing the testing.>
+    There are three main parts of the project which require the majority of testing: The database, the user interface, and the conversion utilites.  The conversion utilites, and the database code should be tested thoroughly while they are being developed (TDD or something similar), because each component tends to rely upon previous components to function. If something is found to not work for some edge case mid development, and it isn't due to the current code being developed, it could be a pain to debug. However, the interface can be tested and debugged fairly easily at any point (or so I think). Each of these larger components break into many small components. The database code allows the adding of base units, compound units, conversions between units, and systems. The database code also allows for editing of units that already exist. All of these should be tested. The conversion utilites include code for converting between basic units defined by the user, converting between compound units, converting from one system of units to another system of units, and parsing and solving mathematical expressions which contain unit abbreviaions and powers. The user interface should be tested for possible user inputs on each page, making sure the interface responds in the expected way.
 
 4.2 Tests for Functional Requirements - <Describe your test results for the functional requirements.
 TODO: Provide a list of use cases or functions you have tested, as well as the testing results (whether or not the system passed the tests).>
+Completed Tests - Database: adding units to the database - SUCCESS  , adding conversions to the database - SUCCESS, adding systems to the database - SUCCESS, editing existing units - SUCCESS, Deleting units from the database - FAILED  
+                - UI: Submitting new base units - SUCCESS, compound units - SUCCESS, conversions with invalid, duplicate, or valid data and verifying that the page responds correctly - SUCCESS, Editing a unit through the interface - SUCCESS, Deleting a unit through the interface - SUCCESS, Not displaying deleted database entries - FAILED 
+                - Conversion Utilites: 
 
 4.3 Tests for Non-functional Requirements - <Similar to the Section 4.2, but this section is for the non-functional requirements. >
 
@@ -158,6 +162,8 @@ In addition, we also learned about how development processes, such as Agile deve
 
 Appendix A Group Log
 < Describe how frequently the group members meet during the semester, and how effective the communication is. This is optional for one-person projects.>
+<<<<<<< HEAD
+=======
 
 We formed our group in September, and begun discussing ideas for the project. In early October we decided to create a customizable unit converter, and began discussing how the system would work and look. Through October and November we met up about once a week and worked on the unit conversion system. Meetings became less frequent in November, but after Thanksgiving break we refocused and worked together several times to eventually finish the application to the specifications.
 
@@ -166,3 +172,4 @@ Group meetings were always productive, and we communicated well with one another
 
 
 
+>>>>>>> bcfed07e01fcf2a08914e7c10a35c482377964d6

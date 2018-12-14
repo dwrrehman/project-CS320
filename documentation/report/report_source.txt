@@ -57,11 +57,19 @@ If this is a one-person project, mention: “all the work presented here is done
 
 We didn't outline and follow strict responsibilities during development, so many aspects of the project likely have contributions from all members. In general the work was divided as follows:
 
+
 Jake Palmer: Created the Meteor project, and integrated the UI mockup with Meteor, Blaze, and FlowRouter. Created databases with schemas for storing units. Implemented functionality to add and edit units in the database.
+
 
 Andrew Oakes:
 
-Daniel Rehman:
+
+
+Daniel Rehman: Created the the UI design and app layout, the CSS for the UI, and helped connect the UI to the functionality. Also helped develop the algorithms and datastructures for the functionality.
+
+
+
+
 
 3.3 Challenges - <This section is optional. Describe the challenges in the implementation, if there are any, and how you dealt with them.    	
 TO DO: If you don’t have anything to fill in, just leave this section blank.> 
@@ -90,15 +98,40 @@ TODO: Describe how many hours (approximately) each team member spent on the proj
 
 
 
+
+
+
+
+
+
+
 6 Conclusion
 
 <Conclude the document with what you have learned through working on the project.>
+
+Through the design and development process of this project, we have came across a plethora of different types of challenges, ranging from algorithmic challenges, to UI design challenges, to even third-party compatability code architecture challenges (namely, integrating meteor into our project). in all of these challenges, we worked as a team to figure out the root of the problem, and then collaboratively develop a solution that pulled from each of our experiences as developers.
+
+One of the most important things we learned while completing this project, despite learning an immense amount about the meteor API and web application design in general, was the ability to accurately convey a complex implemention idea or solution to another developer. This skill alone, maybe, allowed us to retain the cohesiveness in our application development, because we all knew exactly where the application was, and where it was going.
+
+In addition, we also learned about how development processes, such as Agile development, are actually done in practice. This gave us real experience of what development may be like in the work place, thus preparing us for any other complex application development we may do in the future.
+
+
+
+
+
+
+
+
 
 
 
 Appendix A Group Log
 < Describe how frequently the group members meet during the semester, and how effective the communication is. This is optional for one-person projects.>
 
-We formed our group in September, and begun discussing ideas for the project. In early October we decided to create a customizable unit converter, and began discussing how the system would work and look. Through October and November we met up about once a week and worked on the unit conversion system. Meetings became less frequent in November, but after Thanksgiving break we refocused and worked together several times.
+We formed our group in September, and begun discussing ideas for the project. In early October we decided to create a customizable unit converter, and began discussing how the system would work and look. Through October and November we met up about once a week and worked on the unit conversion system. Meetings became less frequent in November, but after Thanksgiving break we refocused and worked together several times to eventually finish the application to the specifications.
 
 Group meetings were always productive, and we communicated well with one another.
+
+
+
+

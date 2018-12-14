@@ -71,7 +71,7 @@ TO DO: If you don’t have anything to fill in, just leave this section blank.>
 One challenge we faced was designing an easy to use user interface. We overcame this challenge by discussing ideas and solutions at each group meeting, and testing out different approaches. 
 Another challenge was integrating the unit conversion algorithms we had developed with Meteor and MongoDB. Our current solution is messy, and we are still working on completely solving this issue. The most important step in overcoming this challenge is simply learning more about how to use Meteor and MongoDB. 
 
-The development of the base unit conversion algorithm was also very challenging. Our intent was to make it figure out transitions by following paths through a "transition graph" of sorts. This turned out to be pretty tricky, but after a few meetings discussing the best approach, we managed to construct a working algorithm that could figure out transitions that were not explicitely defined by the user. However, the edge case of unit conversions with shifts still caused problems until a while later(i.e. fahrenheit to celsius).  
+The development of the base unit conversion algorithm was also very challenging. Our intent was to make it figure out transitions by following paths through a "transition graph" of sorts. This turned out to be pretty tricky, but after a few meetings discussing the best approach, we managed to construct a working algorithm that could figure out transitions that were not explicitly defined by the user. However, the edge case of unit conversions with shifts still caused problems until a while later(i.e. Fahrenheit to celsius).  
 
 4 Testing
 
@@ -80,9 +80,9 @@ The development of the base unit conversion algorithm was also very challenging.
 4.1 Testing Plan - <Describe your testing plan for the project. 
 TODO: Give a list of items or functions you want to test, and also a schedule for performing the testing.>
 
-There are three main parts of the project which require the majority of testing: The database, the user interface, and the conversion utilites.  The conversion utilites, and the database code should be tested thoroughly while they are being developed (TDD or something similar), because each component tends to rely upon previous components to function. If something is found to not work for some edge case mid development, and it isn't due to the current code being developed, it could be a pain to debug. However, the interface can be tested and debugged fairly easily at any point (or so I think). 
+There are three main parts of the project which require the majority of testing: The database, the user interface, and the conversion utilities.  The conversion utilities, and the database code should be tested thoroughly while they are being developed (TDD or something similar), because each component tends to rely upon previous components to function. If something is found to not work for some edge case mid development, and it isn't due to the current code being developed, it could be a pain to debug. However, the interface can be tested and debugged fairly easily at any point (or so I think). 
 
-Each of these larger components break into many small components. The database code allows the adding of base units, compound units, conversions between units, and systems. The database code also allows for editing of units that already exist. All of these should be tested. The conversion utilites include code for converting between basic units defined by the user, converting between compound units, converting from one system of units to another system of units, and parsing and solving mathematical expressions which contain unit abbreviaions and powers. The user interface should be tested for possible user inputs on each page, making sure the interface responds in the expected way.
+Each of these larger components break into many small components. The database code allows the adding of base units, compound units, conversions between units, and systems. The database code also allows for editing of units that already exist. All of these should be tested. The conversion utilities include code for converting between basic units defined by the user, converting between compound units, converting from one system of units to another system of units, and parsing and solving mathematical expressions which contain unit abbreviations and powers. The user interface should be tested for possible user inputs on each page, making sure the interface responds in the expected way.
 
 
 
@@ -104,12 +104,12 @@ Completed Tests:
 - UI: 
 	- Submitting new base units -> SUCCESS
 	- compound units -> SUCCESS
-	- conversions with invalid,duplicate, or valid data and verifying that the page responds correctly -> SUCCESS
+	- conversions with invalid, duplicate, or valid data and verifying that the page responds correctly -> SUCCESS
 	- editing a unit through the interface -> SUCCESS
 	- deleting a unit through the interface -> SUCCESS
 	- Not displaying deleted database entries -> FAILED 
 
-- Conversion Utilites:
+- Conversion Utilities:
     - Converting to a base unit with a defined path -> SUCCESS
     - Converting to a base unit with an undefined but reachable path -> SUCCESS
     - Converting between compound units with a defined path -> SUCCESS
@@ -121,16 +121,16 @@ Completed Tests:
 
 
 4.3 Tests for Non-functional Requirements - <Similar to the Section 4.2, but this section is for the non-functional requirements. >
-    At the moment our Non-functional requirements are a mess. For the most part we didn't have time to worry about performance since our primary concern was getting it functional before the deadline. The one real Non-functional requirement test we used was ES-lint inspections, but we were not super consistant about editors, so that test would completely fail currently.
+    At the moment our Non-functional requirements are a mess. For the most part we didn't have time to worry about performance since our primary concern was getting it functional before the deadline. The one real Non-functional requirement test we used was ES-lint inspections, but we were not super consistent about editors, so that test would completely fail currently.
 
 
 
 
 4.4 Hardware and Software Requirements - <Describe the hardware and software requirements for performing the tests. > 
 
-The hardware requirements for performing these set of tests, were simply to have a running computer or laptop, with a screen and keyboard and mouse, and with sufficent power. 
+The hardware requirements for performing these set of tests, were simply to have a running computer or laptop, with a screen and keyboard and mouse, and with sufficient power. 
 
-however, the software requirements, were for the computer to have access to a unix terminal, have git, a sufficently modern web browser with javascript, have meteor installed, have a series of required node module packages installed, as well as a text editor to make changes to the source code.
+However, the software requirements, were for the computer to have access to a unix terminal, have git, a sufficiently modern web browser with javascript, have meteor installed, have a series of required node module packages installed, as well as a text editor to make changes to the source code.
 
 
 
@@ -141,7 +141,7 @@ TODO: Describe how many hours (approximately) each team member spent on the proj
 
 
 
-Milestone 1:       ( Project's Conception ... SRS Document ]
+Milestone 1:       ( Project's Conception ... SRS Document )
 
 Approx. Number of Hours:	
 - Andrew: ~3h
@@ -149,7 +149,7 @@ Approx. Number of Hours:
 - Daniel: ~16h
 
 
-Milestone 2: 	   ( SRS Document ... SDD Document ]
+Milestone 2: 	   ( SRS Document ... SDD Document )
 
 Approx. Number of Hours:
 - Andrew: ~10h
@@ -166,7 +166,7 @@ Approx. Number of Hours:
 
 
 
-Judging from the amount of time spent on each milestone, the milestone that took the most effort would probably be the 3rd milestone, from the time of submitting the SDD document,to the time of writing the final report for the project. this milestone was the most packed with functionality implementations, UI CSS tweaks, and meteor debugging sessions.
+Judging from the amount of time spent on each milestone, the milestone that took the most effort would probably be the 3rd milestone, from the time of submitting the SDD document, to the time of writing the final report for the project. this milestone was the most packed with functionality implementations, UI CSS tweaks, and meteor debugging sessions.
 
 
 
@@ -175,9 +175,9 @@ Judging from the amount of time spent on each milestone, the milestone that took
 
 <Conclude the document with what you have learned through working on the project.>
 
-Through the design and development process of this project, we have came across a plethora of different types of challenges, ranging from algorithmic challenges, to UI design challenges, to even third-party compatability code architecture challenges (namely, integrating meteor into our project). in all of these challenges, we worked as a team to figure out the root of the problem, and then collaboratively develop a solution that pulled from each of our experiences as developers.
+Through the design and development process of this project, we have came across a plethora of different types of challenges, ranging from algorithmic challenges, to UI design challenges, to even third-party compatibility code architecture challenges (namely, integrating meteor into our project). in all of these challenges, we worked as a team to figure out the root of the problem, and then collaboratively develop a solution that pulled from each of our experiences as developers.
 
-One of the most important things we learned while completing this project, despite learning an immense amount about the meteor API and web application design in general, was the ability to accurately convey a complex implemention idea or solution to another developer. This skill alone, maybe, allowed us to retain the cohesiveness in our application development, because we all knew exactly where the application was, and where it was going.
+One of the most important things we learned while completing this project, despite learning an immense amount about the meteor API and web application design in general, was the ability to accurately convey a complex implementation idea or solution to another developer. This skill alone, maybe, allowed us to retain the cohesiveness in our application development, because we all knew exactly where the application was, and where it was going.
 
 In addition, we also learned about how development processes, such as Agile development, are actually done in practice. This gave us real experience of what development may be like in the work place, thus preparing us for any other complex application development we may do in the future.
 

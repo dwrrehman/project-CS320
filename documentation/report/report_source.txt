@@ -121,7 +121,9 @@ Completed Tests:
 
 4.4 Hardware and Software Requirements - <Describe the hardware and software requirements for performing the tests. > 
 
-The hardware requirements for performing these set of tests, were simply to have a running computer or laptop, with a screen and keyboard and mouse, and with sufficent power. however, the software requirements, were for the computer to have access to a unix terminal, have git, a sufficently modern web browser with javascript, have meteor installed, have a series of required node module packages installed, as well as a text editor to make changes to the source code.
+The hardware requirements for performing these set of tests, were simply to have a running computer or laptop, with a screen and keyboard and mouse, and with sufficent power. 
+
+however, the software requirements, were for the computer to have access to a unix terminal, have git, a sufficently modern web browser with javascript, have meteor installed, have a series of required node module packages installed, as well as a text editor to make changes to the source code.
 
 
 

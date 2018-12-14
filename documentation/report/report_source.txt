@@ -101,7 +101,7 @@ TODO: Describe how many hours (approximately) each team member spent on the proj
 Milestone 1:       ( Project's Conception ... SRS Document ]
 
 Approx. Number of Hours:	
-- Andrew:
+- Andrew: 
 - Jake:
 - Daniel: ~16h
 
@@ -113,7 +113,7 @@ Milestone 2: 	   ( SRS Document ... SDD Document ]
 
 
 Approx. Number of Hours:
-- Andrew:
+- Andrew: 
 - Jake:
 - Daniel: ~10h
 
@@ -131,10 +131,7 @@ Approx. Number of Hours:
 
 
 
-
-
-
-
+judging from the amount of time spent on each milestone, the milestone that took the most effort would probably be the 3rd milestone, from the time of submitting the SDD document,to the time of writing the final report for the project. this milestone was the most packed with functionality implementations, UI CSS tweaks, and meteor debugging sessions.
 
 
 
@@ -156,7 +153,7 @@ In addition, we also learned about how development processes, such as Agile deve
 
 
 
-
+]
 
 
 Appendix A Group Log

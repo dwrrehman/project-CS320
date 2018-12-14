@@ -68,6 +68,8 @@ Daniel Rehman: Created the the UI design and app layout, the CSS for the UI, and
 3.3 Challenges - <This section is optional. Describe the challenges in the implementation, if there are any, and how you dealt with them.    	
 TO DO: If you don’t have anything to fill in, just leave this section blank.> 
 
+One challenge we faced was designing an easy to use user interface. We overcame this challenge by discussing ideas and solutions at each group meeting, and testing out different approaches. 
+Another challenge was integrating the unit conversion algorithms we had developed with Meteor and MongoDB. Our current solution is messy, and we are still working on completely solving this issue. The most important step in overcoming this challenge is simply learning more about how to use Meteor and MongoDB.
 
 4 Testing
 

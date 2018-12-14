@@ -2,10 +2,14 @@ Final Report Source Textfile
 
 
 1 Introduction
-<TO DO: Please provide a brief introduction to your project.>
+The Calculation Utility is a web app that allows the user to perform basic arithmetic, define basic and complex units, and perform unit conversions. By storing the units in a database it allows users to view and edit the units they've defined.
 
 1.1 Project Overview - < A brief description of the project.
 TO DO: Write 1-2 paragraphs describing the project. >
+
+The project has two main features. The first is a unit converter, which converts units of the same type (e.g. length or mass) from one 'unit system' to another. Users define base units by entering information about the unit, the unit type, and the unit system. Once the user has multiple units of the same type, they can define a conversion factor between the two units. For example, the user could define 'meter' as a length unit in the metric system, and 'foot' as a length unit in the imperial system. They can then define a conversion between the two, in this case 1 meter = 3.28084 feet. When the user enters '1m' and switches the system to imperial, the app will display '3.28084ft'. Users can also define complex units in terms of existing units. The definition is just a string that the program parses. For example, Newtons would be defined as 'kg*m*s^-2'. Assuming all required base units and conversions are defined in each system, the user can then convert Newtons to the Imperial equivalent.
+
+The second feature is a calculator. The UI follows the format of a basic calculator, and allows all standard arithmetic operations. In its current stage, the UI also presents a variety of more complex functions, such as sine, cosine, and tangent, but these are not functional. The calculator is integrated with the unit converter, and can perform calculations with units. For example, entering '1m + 1ft' would produce '1.3048m'. This also works with complex units. The calculator also includes buttons for adding new units, systems, and conversions, and for displaying all defined units.
 
 1.2 Definitions, Acronyms and Abbreviations - <Define all the terms necessary to properly interpret the report, including acronyms and abbreviations.
 TO DO: Please provide a list of all abbreviations and acronyms used in this document sorted in alphabetical order.>
@@ -24,14 +28,48 @@ TO DO: Provide an updated version of the UML diagrams, including use case diagra
 TO DO: For each subsystem, pick one or two representative screenshots and paste here.>
 
 
+<insert the 8 screenshots located at "report/ui/" for the content under each subtitle given below>
+
+subsystems:
+1. the calculator  (2 images)
+2. listing units (1 image)
+3. adding new base units  (1 image)
+3. adding compound base units  (1 image)
+4. editing existing base units (1 image)
+5. editing existing compound units (1 image)
+6. adding conversion (1 image)
+7. adding new system (1 image)
+
+
+
+
+
 
 3 Implementation
 
 3.1 Development Environment - <Describe the development environment you were using for the project.
 TO DO: List the programming languages, IDEs, tools, etc.>
 
+Initial mockups of the UI components were developed with pure HTML and CSS, and the unit conversion algorithms were written in Javascript. To develop this into a functional application we used Meteor, a web app framework. Meteor uses Javascript, and integrates with MongoDB and Blaze for database and rendering support. Development took place in JetBrain's IntelliJ IDEA IDE.
+
 3.2 Task Distribution - <Describe how the implementation tasks are distributed among team members.    TO DO: For each team member, describe his/her main implementation tasks in this project.
 If this is a one-person project, mention: “all the work presented here is done by *** (your name).”> 
+
+We didn't outline and follow strict responsibilities during development, so many aspects of the project likely have contributions from all members. In general the work was divided as follows:
+
+
+Jake Palmer: Created the Meteor project, and integrated the UI mockup with Meteor, Blaze, and FlowRouter. Created databases with schemas for storing units. Implemented functionality to add and edit units in the database.
+
+
+Andrew Oakes:
+
+
+
+Daniel Rehman: Created the the UI design and app layout, the CSS for the UI, and helped connect the UI to the functionality. Also helped develop the algorithms and datastructures for the functionality.
+
+
+
+
 
 3.3 Challenges - <This section is optional. Describe the challenges in the implementation, if there are any, and how you dealt with them.    	
 TO DO: If you don’t have anything to fill in, just leave this section blank.> 
@@ -64,11 +102,77 @@ TODO: Describe how many hours (approximately) each team member spent on the proj
 
 
 
+Milestone 1:       ( Project's Conception ... SRS Document ]
+
+Approx. Number of Hours:	
+- Andrew:
+- Jake:
+- Daniel: ~16h
+
+
+
+
+
+Milestone 2: 	   ( SRS Document ... SDD Document ]
+
+
+Approx. Number of Hours:
+- Andrew:
+- Jake:
+- Daniel: ~10h
+
+
+
+
+
+Milestone 3:	   ( SDD document ... Final Report Document )
+
+
+Approx. Number of Hours:	
+- Andrew: 
+- Jake:
+- Daniel: ~20h
+
+
+
+
+
+
+
+
+
+
+
 6 Conclusion
 
 <Conclude the document with what you have learned through working on the project.>
+
+Through the design and development process of this project, we have came across a plethora of different types of challenges, ranging from algorithmic challenges, to UI design challenges, to even third-party compatability code architecture challenges (namely, integrating meteor into our project). in all of these challenges, we worked as a team to figure out the root of the problem, and then collaboratively develop a solution that pulled from each of our experiences as developers.
+
+One of the most important things we learned while completing this project, despite learning an immense amount about the meteor API and web application design in general, was the ability to accurately convey a complex implemention idea or solution to another developer. This skill alone, maybe, allowed us to retain the cohesiveness in our application development, because we all knew exactly where the application was, and where it was going.
+
+In addition, we also learned about how development processes, such as Agile development, are actually done in practice. This gave us real experience of what development may be like in the work place, thus preparing us for any other complex application development we may do in the future.
+
+
+
+
+
+
+
+
 
 
 
 Appendix A Group Log
 < Describe how frequently the group members meet during the semester, and how effective the communication is. This is optional for one-person projects.>
+<<<<<<< HEAD
+=======
+
+We formed our group in September, and begun discussing ideas for the project. In early October we decided to create a customizable unit converter, and began discussing how the system would work and look. Through October and November we met up about once a week and worked on the unit conversion system. Meetings became less frequent in November, but after Thanksgiving break we refocused and worked together several times to eventually finish the application to the specifications.
+
+Group meetings were always productive, and we communicated well with one another.
+
+
+
+
+>>>>>>> bcfed07e01fcf2a08914e7c10a35c482377964d6

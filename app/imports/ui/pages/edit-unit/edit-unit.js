@@ -50,7 +50,7 @@ Template.edit_unit.events({
     FlowRouter.go('App.list');
   },
   'delete .edit_unit'(event) {
-    BaseUnits.remove({ _id: FlowRouter.getParam('_.id') });
+    BaseUnits.remove({ _id: FlowRouter.getParam('_id') });
     FlowRouter.go('App.home');
   },
 });

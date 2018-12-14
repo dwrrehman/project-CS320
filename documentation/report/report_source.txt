@@ -28,6 +28,22 @@ TO DO: Provide an updated version of the UML diagrams, including use case diagra
 TO DO: For each subsystem, pick one or two representative screenshots and paste here.>
 
 
+<insert the 8 screenshots located at "report/ui/" for the content under each subtitle given below>
+
+subsystems:
+1. the calculator  (2 images)
+2. listing units (1 image)
+3. adding new base units  (1 image)
+3. adding compound base units  (1 image)
+4. editing existing base units (1 image)
+5. editing existing compound units (1 image)
+6. adding conversion (1 image)
+7. adding new system (1 image)
+
+
+
+
+
 
 3 Implementation
 

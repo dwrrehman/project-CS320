@@ -111,8 +111,13 @@ Completed Tests:
 	- deleting a unit through the interface -> SUCCESS
 	- Not displaying deleted database entries -> FAILED 
 
-- Conversion Utilites: 
-
+- Conversion Utilites:
+    - Converting to a base unit with a defined path -> SUCCESS
+    - Converting to a base unit with an undefined but reachable path -> SUCCESS
+    - Converting between compound units with a defined path -> SUCCESS
+    - Converting between compound units without a defined path, but each base unit has a defined or reachable conversion -> SUCCESS 
+    - Converting from a compound to an abstract compound when there is no parallel in the desired system -> SUCCESS
+    - Translating database information into local objects -> SUCCESS
 
 
 

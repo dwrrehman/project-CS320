@@ -83,10 +83,13 @@ class AbstractCompound { // Allows for easy arithmetic with any combination of u
 
   add(unitPower) {
     if (this.powMap[unitPower.unit.abbreviation] === undefined) {
+      console.log('does not exist yet.');
       this.powMap[unitPower.unit.abbreviation] = unitPower.power;
       this.unitMap[unitPower.unit.abbreviation] = unitPower.unit;
     } else {
       this.powMap[unitPower.unit.abbreviation] += unitPower.power;
+      console.log('adding to power');
+      console.log(unitPower.power);
       if (this.powMap[unitPower.unit.abbreviation] === 0) {
         delete this.powMap[unitPower.unit.abbreviation];
         delete this.unitMap[unitPower.unit.abbreviation];
@@ -125,8 +128,12 @@ class AbstractCompound { // Allows for easy arithmetic with any combination of u
     let key;
     for (let i = 0; i < keys.length; i++) {
       key = keys[i];
-      str += (`${key}^${this.powMap[key]}`);
+      if (key !== 'undefined') {
+        str += (`${key}^${this.powMap[key]}`);
+      }
     }
+    console.log('New string.....');
+    console.log(str);
     return str;
   }
 }
@@ -254,7 +261,7 @@ class Value {
     let key;
     for (let i = 0; i < keys.length; i++) {
       key = keys[i];
-      this.units.add(new UnitPower(key, -val.units[key]));
+      this.units.add(new UnitPower(val.units.unitMap[key], -val.units.powMap[key]));
     }
   }
 
